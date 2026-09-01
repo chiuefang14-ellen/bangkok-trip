@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🔆 第一次去曼谷泰好玩旅行團 隨身手冊</title>
+  <!-- Google Fonts & Tailwind & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Firebase SDK (v8 Compat 版本) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <style>
+    body { font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    .tab-active { border-bottom: 3px solid #0d9488; color: #0d9488; font-weight: 800; background-color: #f0fdfa; }
+    .sub-pill-active { background-color: #0d9488; color: #ffffff; font-weight: 700; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 pb-24 antialiased">
+
+  <!-- 頂部 Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-xl mx-auto p-4 flex justify-between items-center">
+      <div>
+        <div class="flex items-center gap-1.5 mb-1">
+          <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded-full">2026/09/16 - 09/19</span>
+          <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">26人團體自由行</span>
+        </div>
+        <h1 class="text-lg font-black text-slate-900">第一次去曼谷泰好玩旅行團 隨身手冊</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主導覽 5 大分頁 Tab -->
+  <nav class="bg-white border-b border-slate-200 sticky top-[69px] z-30 shadow-xs">
+    <div class="max-w-xl mx-auto flex overflow-x-auto hide-scrollbar text-xs font-medium text-slate-600">
+      <button onclick="switchMainTab('overview')" id="main-tab-overview" class="main-tab-btn tab-active flex-1 py-3 px-2.5 text-center whitespace-nowrap">
+        <i data-lucide="compass" class="w-3.5 h-3.5 inline mr-1"></i>行程總覽
+      </button>
+      <button onclick="switchMainTab('itinerary')" id="main-tab-itinerary" class="main-tab-btn flex-1 py-3 px-2.5 text-center whitespace-nowrap">
+        <i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1"></i>每日行程
+      </button>
+      <button onclick="switchMainTab('thai')" id="main-tab-thai" class="main-tab-btn flex-1 py-3 px-2.5 text-center whitespace-nowrap">
+        <i data-lucide="languages" class="w-3.5 h-3.5 inline mr-1"></i>保命泰語
+      </button>
+      <button onclick="switchMainTab('shopping')" id="main-tab-shopping" class="main-tab-btn flex-1 py-3 px-2.5 text-center whitespace-nowrap">
+        <i data-lucide="shopping-bag" class="w-3.5 h-3.5 inline mr-1"></i>必買清單
+      </button>
+      <button onclick="switchMainTab('accounting')" id="main-tab-accounting" class="main-tab-btn flex-1 py-3 px-2.5 text-center whitespace-nowrap">
+        <i data-lucide="calculator" class="w-3.5 h-3.5 inline mr-1"></i>記帳分帳
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主內容容器 -->
+  <main class="max-w-xl mx-auto p-4 space-y-4">
+
+    <!-- ==================== 1. 行程總覽 ==================== -->
+    <section id="view-overview" class="main-view space-y-4">
+      
+      <!-- 承諾切結書 -->
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-3.5 shadow-sm">
+        <label class="flex items-start gap-2.5 cursor-pointer">
+          <input type="checkbox" id="pledge-check" onchange="togglePledge(this)" class="mt-1 w-4 h-4 rounded text-amber-600 focus:ring-amber-500 accent-amber-600">
+          <span class="text-xs font-bold text-amber-900 leading-relaxed">
+            我同意依照此手冊之行程安排行動，旅途中絕不擺臭臉、不當跟風巨嬰、亦無異議
+          </span>
+        </label>
+      </div>
+
+      <!-- 核心數字卡 -->
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+          <div class="text-[10px] text-slate-400 font-bold">預估總支出</div>
+          <div class="text-base font-black text-amber-600 mt-0.5">~10,780 ฿</div>
+          <div class="text-[9px] text-emerald-600 font-medium">預算餘裕 4,220 ฿</div>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+          <div class="text-[10px] text-slate-400 font-bold">泰銖現金準備</div>
+          <div class="text-base font-black text-slate-800 mt-0.5">12k–15k ฿</div>
+          <div class="text-[9px] text-slate-500">另備台幣1.5萬備查</div>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+          <div class="text-[10px] text-slate-400 font-bold">K79 換匯所</div>
+          <div class="text-base font-black text-slate-800 mt-0.5">On Nut 1號</div>
+          <div class="text-[9px] text-slate-500">飯店巷口超划算</div>
+        </div>
+      </div>
+
+      <!-- 行前重要提醒：旅平險 ＆ eSIM (已去除重複符號) -->
+      <div class="bg-gradient-to-br from-indigo-50 to-sky-50 border border-indigo-200 rounded-2xl p-4 text-xs space-y-2.5 shadow-sm text-indigo-950">
+        <div class="font-bold text-sm text-indigo-900 flex items-center gap-1.5">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-indigo-600"></i>
+          行前重要提醒：旅平險 ＆ eSIM
+        </div>
+        <div class="space-y-2 text-[11.5px] leading-relaxed text-slate-700">
+          <div class="p-2.5 bg-white/80 rounded-xl border border-indigo-100 space-y-1">
+            <strong class="text-indigo-900 block">
+              1. 請務必自行加保「海外旅平險 ＋ 突發疾病醫療」
+            </strong>
+            <p class="text-slate-600">
+              旅行社自由行團體通常僅投保基礎法定「<strong>旅責險</strong>」（僅理賠重大意外責任，<strong>不包含個人生病、水土不服急性腸胃炎就醫與行李延誤</strong>）。泰國私立國際醫院急診看診動輒數千至上萬泰銖，強烈建議出發前線上保好「海外突發疾病醫療 ＋ 不便險」（4 天保費約 NT$ 300～600）。
+            </p>
+          </div>
+          <div class="p-2.5 bg-white/80 rounded-xl border border-indigo-100 space-y-1">
+            <strong class="text-indigo-900 block">
+              2. 泰國 5G eSIM 上網準備
+            </strong>
+            <p class="text-slate-600">
+              建議出發前於 Klook / KKday 買好 <strong>泰國 5G Tourist eSIM</strong>（推薦 AIS 或 TrueMove）。出發前 1 天在台灣連 Wi-Fi 先掃描 QR Code 安裝，<strong>飛機降落曼谷後開啟數據漫遊</strong>即可秒速上網！
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 行前必備檢查清單 -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2.5 text-xs shadow-sm">
+        <div class="font-bold text-slate-800 flex items-center justify-between">
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="check-square" class="w-4 h-4 text-teal-600"></i>
+            行前必備檢查清單
+          </span>
+          <span class="text-[10px] text-slate-400 font-normal">出發前確認勾選</span>
+        </div>
+        <div class="space-y-1.5 text-slate-600">
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 投保個人海外旅平險（含海外突發疾病醫療＋不便險）</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 購買並安裝好泰國 5G eSIM / 網卡</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 護照（效期6個月以上）+ 電子機票列印</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 出發前72小時填妥 TDAC 電子入境卡</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 台幣千元現鈔（備查 2 萬銖等值外幣現鈔）</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 手機下載 Grab & Bolt 叫車 App 綁定信用卡</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> Day 2 寺廟服裝（有袖上衣 + 過膝長褲/長裙）</label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 常備個人藥品（止痛、腸胃藥、防蚊液、電解質）</label>
+        </div>
+      </div>
+
+      <!-- 不可變動之約定行程 (已去除重複符號) -->
+      <div class="p-3.5 bg-rose-50 border border-rose-200 rounded-2xl text-xs space-y-1.5 text-rose-950">
+        <div class="font-bold flex items-center gap-1.5 text-rose-800">
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-rose-600"></i>
+          團體不可變動之約定行程
+        </div>
+        <ul class="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
+          <li><strong>Day 1 17:00</strong>：Asiatique 碼頭夜市 26人合菜聚餐（6號倉庫 Peppery Thai Bistro，最晚 15:40 須於 Siam 出發趕船）</li>
+          <li><strong>Day 2 07:45</strong>：Klook 曼谷經典地標一日遊（大皇宮/玉佛寺/臥佛寺/鄭王廟，已購票，嚴禁無袖短褲）</li>
+        </ul>
+      </div>
+
+      <!-- 交通卡與支付準備 (已去除重複符號) -->
+      <div class="p-3.5 bg-teal-50 border border-teal-200 rounded-2xl text-xs space-y-1.5 text-teal-950">
+        <div class="font-bold flex items-center gap-1.5 text-teal-800">
+          <i data-lucide="credit-card" class="w-3.5 h-3.5 text-teal-600"></i>
+          交通卡與支付準備
+        </div>
+        <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600 leading-relaxed">
+          <li><strong>BTS 空鐵</strong>：無法刷國外信用卡，售票機用紙鈔買單程票，或買一張兔子卡（Rabbit Card）。</li>
+          <li><strong>MRT 地鐵</strong>：直接感應 Visa / Mastercard 晶片信用卡或 Apple Pay 過閘門。</li>
+          <li><strong>Grab / Bolt 叫車</strong>：App 內綁定信用卡扣款免找零，亦可備百元/50元鈔票付現。</li>
+          <li><strong>渡輪接駁</strong>：Asiatique 接駁船免費；ICONSIAM 藍色觀光渡輪單程 30 THB 現金。</li>
+        </ul>
+      </div>
+
+      <!-- 飯店與重要窗口 -->
+      <div class="p-3.5 bg-white border border-slate-200 rounded-2xl text-xs space-y-2">
+        <div class="font-bold text-slate-800 flex items-center gap-1.5">
+          <i data-lucide="hotel" class="w-3.5 h-3.5 text-teal-600"></i>
+          入住飯店與緊急聯絡
+        </div>
+        <div class="text-[11px] text-slate-600 space-y-1">
+          <div>🏨 <strong>Cross Vibe Bangkok Sukhumvit</strong>（BTS On Nut 站 1 號出口步行 5 分鐘）</div>
+          <div>✈️ <strong>華航班機</strong>：去程 CI833 (07:00-09:45) / 回程 CI836 (17:30-22:05)</div>
+          <div>📞 送機人員：蔣哥 0963-833-001 ｜ 團體代表人：陳俐融 0962-021-896</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. 每日行程 ==================== -->
+    <section id="view-itinerary" class="main-view hidden space-y-3">
+      
+      <!-- Day 選擇器 -->
+      <div class="flex gap-1.5 p-1 bg-slate-200 rounded-xl text-xs">
+        <button onclick="switchDay('d1')" id="sub-day-d1" class="day-pill sub-pill-active flex-1 py-2 rounded-lg text-center font-bold">Day 1 (三)</button>
+        <button onclick="switchDay('d2')" id="sub-day-d2" class="day-pill bg-white text-slate-700 flex-1 py-2 rounded-lg text-center font-medium">Day 2 (四)</button>
+        <button onclick="switchDay('d3')" id="sub-day-d3" class="day-pill bg-white text-slate-700 flex-1 py-2 rounded-lg text-center font-medium">Day 3 (五)</button>
+        <button onclick="switchDay('d4')" id="sub-day-d4" class="day-pill bg-white text-slate-700 flex-1 py-2 rounded-lg text-center font-medium">Day 4 (六)</button>
+      </div>
+
+      <!-- DAY 1 -->
+      <div id="day-pane-d1" class="day-pane space-y-2.5">
+        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-200 text-xs">
+          <span class="font-bold text-slate-800">9/16 (三) 抵達・Siam分流逛街按摩・碼頭夜市聚餐</span>
+        </div>
+
+        <div class="space-y-2">
+          
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">09:45</span>
+                <span class="text-xs font-bold text-slate-800">抵達 BKK 機場 ➔ 專車前往飯店寄放行李</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：B號門綠色通道集合，專屬遊覽車直達飯店（車程35分）</div>
+            </div>
+            <button onclick="openModal('d1_hotel')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">詳情</button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">12:00</span>
+                <span class="text-xs font-bold text-slate-800">Siam Paragon 美食街海南雞飯午餐</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：BTS On Nut 直達 Siam 站（淺綠線 15 分鐘免轉車）</div>
+            </div>
+            <button onclick="openModal('d1_lunch')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">詳情</button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-teal-300 bg-teal-50/40 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded">13:00</span>
+                <span class="text-xs font-bold text-slate-900">午後分流：逛街組 (garcon dept) vs 按摩組 (Nikko)</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：Siam Paragon 走空橋 2 分鐘進南側 Siam Square</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d1_split')" class="text-xs bg-teal-600 text-white font-bold px-2 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d1_siam')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+          <div class="bg-rose-50 p-3 rounded-xl border border-rose-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-rose-600 text-white px-1.5 py-0.5 rounded">15:40</span>
+                <span class="text-xs font-bold text-rose-900">BTS Siam 集合 ➔ 搭免費接駁船前往碼頭</span>
+              </div>
+              <div class="text-[11px] text-rose-700">🚦 交通：BTS Siam 轉深綠線至 Saphan Taksin ➔ 2號出口搭免費船</div>
+            </div>
+            <button onclick="openModal('d1_boat')" class="text-xs bg-rose-600 text-white font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">趕船指南</button>
+          </div>
+
+          <div class="bg-rose-50 p-3 rounded-xl border border-rose-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-rose-600 text-white px-1.5 py-0.5 rounded">17:00</span>
+                <span class="text-xs font-bold text-rose-900">Asiatique 碼頭夜市 26 人合菜聚餐</span>
+              </div>
+              <div class="text-[11px] text-rose-700">🚦 交通：碼頭下船直走進入 6 號倉庫（Peppery Thai Bistro）</div>
+            </div>
+            <button onclick="openModal('d1_dinner')" class="text-xs bg-rose-600 text-white font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">合菜詳情</button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">19:00</span>
+                <span class="text-xs font-bold text-slate-800">碼頭自由逛街 ✕ Sky Flyer 高空鞦韆 ➔ 返程</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：接駁船回中央碼頭轉 BTS，或 26 人分車叫 Grab 回飯店</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d1_night')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d1_asiatique')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2.5 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DAY 2 -->
+      <div id="day-pane-d2" class="day-pane hidden space-y-2.5">
+        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-200 text-xs">
+          <span class="font-bold text-slate-800">9/17 (四) Klook寺廟遊・水上市集・DIORA 頂級SPA</span>
+        </div>
+
+        <div class="space-y-2">
+          
+          <div class="bg-rose-50 p-3 rounded-xl border border-rose-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-rose-600 text-white px-1.5 py-0.5 rounded">07:45</span>
+                <span class="text-xs font-bold text-rose-900">Klook 曼谷經典地標一日遊（大皇宮/寺廟群）</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-rose-700">🚦 交通：BTS 前往指定集合點，冷氣專車全程接送遊覽</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d2_klook')" class="text-xs bg-rose-600 text-white font-bold px-2 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d2_klook')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">16:30</span>
+                <span class="text-xs font-bold text-slate-800">渡輪直達 ICONSIAM ➔ SOOKSIAM 水上市集邊吃邊逛</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：河畔碼頭搭藍色觀光船直達 ICONSIAM 專屬碼頭（30B）</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d2_iconsiam')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d2_iconsiam')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2.5 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+          <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded">19:45</span>
+                <span class="text-xs font-bold text-teal-950">DIORA Luxe Sukhumvit 120 分鐘頂級全身 SPA</span>
+              </div>
+              <div class="text-[11px] text-teal-700">🚦 交通：金色線轉 BTS 至 Phrom Phong 站，步行或搭車至 Soi 22</div>
+            </div>
+            <button onclick="openModal('d2_diora')" class="text-xs bg-teal-600 text-white font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">SPA 詳情</button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded">22:15</span>
+                <span class="text-xs font-bold text-slate-800">輕鬆返回 Cross Vibe 飯店休息</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：巷口叫 Grab 10 分鐘，或 BTS Phrom Phong 搭 3 站回 On Nut</div>
+            </div>
+            <button onclick="openModal('d2_return')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">詳情</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DAY 3 -->
+      <div id="day-pane-d3" class="day-pane hidden space-y-2.5">
+        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-200 text-xs">
+          <span class="font-bold text-slate-800">9/18 (五) 航站百貨・肩頸舒壓・松瓦路夕陽散策・ABar酒吧</span>
+        </div>
+
+        <div class="space-y-2">
+          
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">10:30–14:00</span>
+                <span class="text-xs font-bold text-slate-800">Terminal 21 Asok 吹冷氣採買 ＋ Have a Zeed 午餐</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：BTS On Nut 直達 BTS Asok 站（停留 3.5 小時超悠閒）</div>
+            </div>
+            <button onclick="openModal('d3_t21')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">採買/午餐</button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">14:30–16:00</span>
+                <span class="text-xs font-bold text-slate-800">Samatha 泰式按摩（午後避暑 Office Syndrome 專門）</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：搭 Grab 或 MRT 至華藍蓬站附近（90分鐘無痛肩頸放鬆）</div>
+            </div>
+            <button onclick="openModal('d3_samatha')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">預約資訊</button>
+          </div>
+
+          <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded">16:30–19:30</span>
+                <span class="text-xs font-bold text-teal-950">松瓦路（Song Wat Road）黃金夕陽老街慢活散策</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-teal-700">🚦 交通：按摩後步行或短程 Grab 3 分鐘即達石龍軍松瓦路</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d3_songwat')" class="text-xs bg-teal-600 text-white font-bold px-2 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d3_songwat')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">21:00</span>
+                <span class="text-xs font-bold text-slate-800">ABar Rooftop 38 樓英倫花園高空酒吧小酌</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：搭車至 Sukhumvit Soi 22 萬豪侯爵飯店 38 樓</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d3_abar')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d3_abar')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2.5 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DAY 4 -->
+      <div id="day-pane-d4" class="day-pane hidden space-y-2.5">
+        <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-200 text-xs">
+          <span class="font-bold text-slate-800">9/19 (六) 冠軍咖啡・森林秘境・退房返台</span>
+        </div>
+
+        <div class="space-y-2">
+          
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">08:30</span>
+                <span class="text-xs font-bold text-slate-800">Factory Coffee 冠軍咖啡（Grab 外送直送飯店）</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 方式：免跨城排隊，直接手機 App 叫外送到飯店大廳享用</div>
+            </div>
+            <button onclick="openModal('d4_factory')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">推薦餐點</button>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">09:30</span>
+                <span class="text-xs font-bold text-slate-800">The Wood Land 森林系露天咖啡館散步</span>
+                <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">☔ 備有雨備</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：從 Cross Vibe 飯店步行僅 5 分鐘（52巷）</div>
+            </div>
+            <div class="flex gap-1.5 shrink-0 ml-2">
+              <button onclick="openModal('d4_woodland')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg">詳情</button>
+              <button onclick="openModal('rain_d4_woodland')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-2.5 py-1.5 rounded-lg">☔ 雨備</button>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded">13:30</span>
+                <span class="text-xs font-bold text-slate-800">出發前往 BKK 機場 ➔ 退稅託運 ➔ 返台</span>
+              </div>
+              <div class="text-[11px] text-slate-500">🚦 交通：Grab / Bolt 叫廂型車（35分）➔ 搭乘 CI836 (17:30起飛)</div>
+            </div>
+            <button onclick="openModal('d4_airport')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-lg shrink-0 ml-2">退稅SOP</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 3. 保命泰語 ==================== -->
+    <section id="view-thai" class="main-view hidden space-y-3">
+      
+      <!-- 子分頁切換 -->
+      <div class="flex gap-2 p-1 bg-slate-200 rounded-xl text-xs">
+        <button onclick="switchThaiSub('drivers')" id="thai-sub-drivers" class="thai-pill sub-pill-active flex-1 py-2 rounded-lg text-center font-bold">🚕 司機專用字卡</button>
+        <button onclick="switchThaiSub('foodwords')" id="thai-sub-foodwords" class="thai-pill bg-white text-slate-700 flex-1 py-2 rounded-lg text-center font-medium">🍜 點餐保命指南</button>
+      </div>
+
+      <!-- 子頁 A: 司機字卡 -->
+      <div id="thai-pane-drivers" class="thai-pane space-y-2.5">
+        <div class="text-xs text-slate-500 px-1">點擊任一泰文字框即可「一鍵複製」，或點右側「地圖」直接導航！</div>
+        
+        <div class="space-y-2">
+          
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>🏨 飯店 Cross Vibe Bangkok Sukhumvit</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('โรงแรมครอส ไวบ์ กรุงเทพ สุขุมวิท (ซอยสุขุมวิท 52 ติด BTS อ่อนนุช)')">
+              โรงแรมครอส ไวบ์ กรุงเทพ สุขุมวิท (ซอยสุขุมวิท 52 ติด BTS อ่อนนุช)
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>💆 Nikko Thai Massage（Siam 5巷）</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Nikko+Thai+Massage+Siam+Square+Soi+5" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('สยามสแควร์ ซอย 5 (ร้าน นิกโกะ มาสซาจ)')">
+              สยามสแควร์ ซอย 5 (ร้าน นิกโกะ มาสซาจ)
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>🍽️ Asiatique 碼頭夜市（6號倉庫合菜）</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Peppery+Thai+Bistro+Asiatique" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('เอเชียทีค เดอะ ริเวอร์ฟร้อนท์ (โกดัง 6 ร้าน Peppery Thai Bistro)')">
+              เอเชียทีค เดอะ ริเวอร์ฟร้อนท์ (โกดัง 6 ร้าน Peppery Thai Bistro)
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>🏰 ICONSIAM（SOOKSIAM水上市場）</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=ICONSIAM" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('ห้างสรรพสินค้า ไอคอนสยาม (ถนนเจริญนคร)')">
+              ห้างสรรพสินค้า ไอคอนสยาม (ถนนเจริญนคร)
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>💆 DIORA Luxe Sukhumvit（Soi 22）</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=DIORA+Luxe+Sukhumvit" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('ดีโอร่า ลักซ์ สุขุมวิท (ซอยสุขุมวิท 22)')">
+              ดีโอร่า ลักซ์ สุขุมวิท (ซอยสุขุมวิท 22)
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>☕ Pista& 開心果咖啡（松瓦路 Song Wat）</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=Pista%26+Song+Wat" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('พิสต้าแอนด์ (ถนนทรงวาด)')">
+              พิสต้าแอนด์ (ถนนทรงวาด)
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>🍸 ABar Rooftop（萬豪侯爵 38F）</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=ABar+Rooftop" target="_blank" class="text-teal-600 bg-teal-50 px-2 py-0.5 rounded text-[10px]">地圖 ↗</a>
+            </div>
+            <div class="bg-slate-50 border border-dashed border-slate-300 p-2 rounded-lg text-xs font-bold text-teal-800 cursor-pointer" onclick="copyText('โรงแรมแบงค็อก แมริออท มาร์คีส์ ควีนส์ปาร์ค (ซอยสุขุมวิท 22 ชั้น 38)')">
+              โรงแรมแบงค็อก แมริออท มาร์คีส์ ควีนส์ปาร์ค (ซอยสุขุมวิท 22 ชั้น 38)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 子頁 B: 點餐保命 -->
+      <div id="thai-pane-foodwords" class="thai-pane hidden space-y-2.5">
+        
+        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-xs text-emerald-950 space-y-1">
+          <div class="font-bold flex items-center gap-1.5 text-emerald-800">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+            無辣無青菜・友善推薦餐點
+          </div>
+          <div class="text-[11px] text-slate-600 space-y-0.5 pt-1">
+            <div>✨ <strong>泰式蟹肉煎蛋</strong>：外酥內嫩全蛋白質無蔬菜。</div>
+            <div>✨ <strong>黃咖哩炒海鮮</strong>：滑蛋濃郁甜香超下飯（出示不辣）。</div>
+            <div>✨ <strong>泰式烤豬頸肉</strong>：鹹甜軟嫩原味，沾醬分開裝。</div>
+            <div>✨ <strong>Thong Smith 船麵</strong>：選 Level 0 不辣、不加空心菜/豆芽/香菜。</div>
+            <div>✨ <strong>Siam Paragon 海南雞飯</strong>：滑嫩白切雞配雞油飯。</div>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 text-xs">
+          
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center cursor-pointer" onclick="copyText('ไม่เผ็ด')">
+            <div>
+              <div class="font-bold text-slate-800">不要辣 (No Spicy)</div>
+              <div class="text-[10px] text-slate-400">讀音: Mai Phet</div>
+            </div>
+            <span class="text-base font-black text-rose-600">ไม่เผ็ด</span>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center cursor-pointer" onclick="copyText('ไม่ใส่ผักชี')">
+            <div>
+              <div class="font-bold text-slate-800">不要香菜 (No Coriander)</div>
+              <div class="text-[10px] text-slate-400">讀音: Mai Sai Phakchi</div>
+            </div>
+            <span class="text-base font-black text-emerald-600">ไม่ใส่ผักชี</span>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center cursor-pointer" onclick="copyText('ไม่ใส่ผัก / 不ใส่ถั่วงอก')">
+            <div>
+              <div class="font-bold text-slate-800">不要青菜 / 不要豆芽 (No Veg / Sprouts)</div>
+              <div class="text-[10px] text-slate-400">讀音: Mai Sai Phak / Mai Sai Thua Ngok</div>
+            </div>
+            <span class="text-base font-black text-teal-600">ไม่ใส่ผัก / ไม่ใส่ถั่วงอก</span>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center cursor-pointer" onclick="copyText('แยกน้ำจิ้ม')">
+            <div>
+              <div class="font-bold text-slate-800">沾醬請分開裝 (Sauce on side)</div>
+              <div class="text-[10px] text-slate-400">讀音: Yaek Nam Jim</div>
+            </div>
+            <span class="text-base font-black text-amber-600">แยกน้ำจิ้ม</span>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-center cursor-pointer" onclick="copyText('เช็คบิลด้วย')">
+            <div>
+              <div class="font-bold text-slate-800">買單結帳 (Check Bill)</div>
+              <div class="text-[10px] text-slate-400">讀音: Check Bin</div>
+            </div>
+            <span class="text-base font-black text-sky-600">เช็คบิลด้วย</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==================== 4. 必買清單 ==================== -->
+    <section id="view-shopping" class="main-view hidden space-y-3">
+      
+      <!-- 曼谷精選伴手禮 -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2.5 text-xs shadow-sm">
+        <div class="font-bold text-slate-800 flex items-center justify-between">
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-amber-600"></i>
+            曼谷精選伴手禮推薦
+          </span>
+          <span class="text-[10px] text-slate-400 font-normal">點擊方框直接打勾</span>
+        </div>
+        <div class="space-y-1.5 text-slate-600">
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 手標泰茶 ChaTraMue 金罐/紅罐茶葉包</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> Doi Kham 皇家低糖芒果乾 & 蜂蜜隨身條</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> Terminal 21 3F 泰國設計師手工金工銀飾</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> garcon dept 貼紙與文創中性選品（Siam）</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> Copenn. 松瓦路小眾木質工業風室內擴香/精油</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> NaRaYa 曼谷包（Day 1 碼頭夜市）</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> 7-11 熱壓吐司、杜拜開心果巧克力系列</label>
+          <label class="flex items-center gap-2 cursor-pointer p-1.5 hover:bg-slate-50 rounded-lg"><input type="checkbox" class="rounded text-teal-600 accent-teal-600"> KARMAKAMET 香氛錦囊 / PAÑPURI 精油滾珠</label>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 5. 記帳分帳 (Firebase 即時連線版) ==================== -->
+    <section id="view-accounting" class="main-view hidden space-y-4">
+      
+      <!-- 雲端同步狀態提示 -->
+      <div id="sync-status-banner" class="bg-teal-50 border border-teal-200 text-teal-800 px-3 py-1.5 rounded-xl text-[11px] flex justify-between items-center font-bold">
+        <span class="flex items-center gap-1.5"><i data-lucide="cloud" class="w-3.5 h-3.5 text-teal-600"></i> 即時同步中 (Firebase 連線正常)</span>
+        <span class="text-[10px] text-teal-600 font-normal">全團即時同步</span>
+      </div>
+
+      <!-- 統計總覽卡 -->
+      <div class="bg-gradient-to-br from-teal-800 via-teal-900 to-slate-900 text-white p-4 rounded-2xl shadow-sm space-y-3">
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="text-[10px] text-teal-200 font-bold uppercase tracking-wider block">GROUP EXPENSES / 全團總支出</span>
+            <div class="text-2xl font-black mt-0.5" id="acc-total-thb">0 <span class="text-xs font-normal text-teal-200">THB</span></div>
+            <div class="text-xs text-teal-300" id="acc-total-twd">≈ NT$ 0</div>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-teal-200 font-medium block">記帳筆數</span>
+            <span class="text-lg font-bold" id="acc-total-count">0 筆</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-teal-700/60 flex justify-between items-center text-xs">
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] text-teal-200">參考匯率：1 THB =</span>
+            <input type="number" id="acc-rate-input" step="0.01" value="0.92" onchange="updateRate()" class="w-14 bg-white/10 text-white font-bold px-1.5 py-0.5 rounded border border-teal-500/40 text-center text-xs">
+            <span class="text-[11px] text-teal-200">TWD</span>
+          </div>
+          <button onclick="openAddExpenseModal()" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-black px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow-sm">
+            <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> 新增記帳
+          </button>
+        </div>
+      </div>
+
+      <!-- 成員管理卡 -->
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 text-xs">
+        <div class="flex justify-between items-center">
+          <span class="font-bold text-slate-800 flex items-center gap-1.5">
+            <i data-lucide="users" class="w-4 h-4 text-teal-600"></i> 分攤成員名單 (<span id="member-count">0</span>人)
+          </span>
+          <button onclick="promptAddMember()" class="text-teal-600 hover:text-teal-700 font-bold text-[11px] flex items-center gap-1">
+            <i data-lucide="user-plus" class="w-3 h-3"></i> 加成員
+          </button>
+        </div>
+        <div id="member-tags-container" class="flex flex-wrap gap-1.5">
+        </div>
+      </div>
+
+      <!-- 成員個人總支出與收支卡片 -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
+        <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="user-check" class="w-4 h-4 text-teal-600"></i> 成員個人總支出明細
+            </h3>
+            <p class="text-[10px] text-slate-400">即時統計每個人實際消費金額、代墊總額與結算狀態</p>
+          </div>
+        </div>
+
+        <div id="member-spending-cards-container" class="space-y-2">
+        </div>
+      </div>
+
+      <!-- 最小轉帳最佳化結算方案 -->
+      <div class="bg-white p-4 rounded-2xl border border-teal-200 shadow-sm space-y-3 text-xs">
+        <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+          <div>
+            <h3 class="font-black text-sm text-slate-900 flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> 最佳化結算清算方案
+            </h3>
+            <p class="text-[10px] text-slate-400">使用最小現金流演算法，將多角債務濃縮為最少轉帳次數</p>
+          </div>
+          <button onclick="copySettlementText()" class="bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center gap-1">
+            <i data-lucide="copy" class="w-3 h-3"></i> 複製清單
+          </button>
+        </div>
+
+        <div id="settlement-list" class="space-y-1.5">
+        </div>
+      </div>
+
+      <!-- 帳目明細列表 -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
+        <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+          <h3 class="font-bold text-sm text-slate-800 flex items-center gap-1.5">
+            <i data-lucide="receipt" class="w-4 h-4 text-teal-600"></i> 消費明細記錄
+          </h3>
+          <button onclick="clearAllExpenses()" class="text-slate-400 hover:text-rose-600 text-[10px]">清空重置</button>
+        </div>
+
+        <div id="expense-list-container" class="space-y-2">
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== 記帳 Modal 視窗 ==================== -->
+  <div id="expense-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5 space-y-4 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150 text-xs">
+      
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="text-base font-black text-slate-900 flex items-center gap-1.5">
+          <i data-lucide="plus-circle" class="w-4 h-4 text-teal-600"></i> 新增消費款項
+        </h3>
+        <button onclick="closeExpenseModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="expense-form" onsubmit="saveExpense(event)" class="space-y-3">
+        
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">消費品項名稱</label>
+          <input type="text" id="exp-title" placeholder="例如：Asiatique 合菜、Grab 分車、船麵" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-1 focus:ring-teal-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">金額</label>
+            <input type="number" id="exp-amount" step="any" placeholder="0" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 focus:ring-1 focus:ring-teal-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">付款幣別</label>
+            <select id="exp-currency" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:ring-1 focus:ring-teal-500 focus:outline-none">
+              <option value="THB">泰銖 (THB ฿)</option>
+              <option value="TWD">新台幣 (TWD NT$)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">誰代墊的？(付款人)</label>
+            <select id="exp-payer" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold focus:ring-1 focus:ring-teal-500 focus:outline-none">
+            </select>
+          </div>
+          <div>
+            <label class="font-bold text-slate-700 block mb-1">分類標籤</label>
+            <select id="exp-category" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-1 focus:ring-teal-500 focus:outline-none">
+              <option value="餐飲美食">🍽️ 餐飲美食</option>
+              <option value="交通分車">🚕 交通/叫車</option>
+              <option value="按摩SPA">💆 按摩/SPA</option>
+              <option value="門票體驗">🎡 門票/活動</option>
+              <option value="購物採買">🛍️ 購物/伴手禮</option>
+              <option value="其他雜支">📦 其他雜支</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-1">
+          <div class="flex justify-between items-center mb-1">
+            <label class="font-bold text-slate-700">分攤成員</label>
+            <div class="flex gap-2 text-[11px]">
+              <button type="button" onclick="selectAllBeneficiaries(true)" class="text-teal-600 underline">全選</button>
+              <button type="button" onclick="selectAllBeneficiaries(false)" class="text-slate-400 underline">全取消</button>
+            </div>
+          </div>
+          
+          <div id="exp-beneficiaries-list" class="max-h-36 overflow-y-auto bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1.5">
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-2">
+          <button type="submit" class="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-black py-2.5 rounded-xl text-center shadow-sm">
+            儲存此筆帳目
+          </button>
+          <button type="button" onclick="closeExpenseModal()" class="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl">
+            取消
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==================== 行程詳情 Modal 小視窗 ==================== -->
+  <div id="info-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-5 space-y-4 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div>
+        <span id="modal-category" class="text-[10px] font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full">景點資訊</span>
+        <h3 id="modal-title" class="text-base font-black text-slate-900 mt-1">地點名稱</h3>
+      </div>
+      <div id="modal-body" class="text-xs text-slate-600 space-y-2.5 leading-relaxed"></div>
+      <div class="pt-2 flex gap-2">
+        <a id="modal-map-link" href="#" target="_blank" class="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded-xl text-center text-xs flex items-center justify-center gap-1.5">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> 開啟 Google Maps 導航
+        </a>
+        <button onclick="closeModal()" class="px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 rounded-xl text-xs">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 提示 -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-lg opacity-0 translate-y-4 transition-all duration-200 pointer-events-none flex items-center gap-1.5">
+    <i data-lucide="check" class="w-3.5 h-3.5 text-teal-400"></i>
+    <span id="toast-text">已完成！</span>
+  </div>
+
+  <!-- ==================== JS 邏輯 ==================== -->
+  <script>
+    lucide.createIcons();
+
+    // ==================== 1. FIREBASE 雲端即時連線設定 ====================
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0o551HGvjOCZYFn_Yvb3WqiysXFdYkH4",
+      authDomain: "bkk-trip-2026-220c4.firebaseapp.com",
+      databaseURL: "https://bkk-trip-2026-220c4-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "bkk-trip-2026-220c4",
+      storageBucket: "bkk-trip-2026-220c4.firebasestorage.app",
+      messagingSenderId: "165050858045",
+      appId: "1:165050858045:web:c905b6043c177374974854",
+      measurementId: "G-1VPNQHT9QW"
+    };
+
+    let db = null;
+    let isFirebaseReady = false;
+
+    // 預設資料
+    let members = ['俐融', '方缺', '小寶', '琬婷', '小明', '阿強'];
+    let expenses = [];
+    let exchangeRate = 0.92;
+
+    try {
+      if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        isFirebaseReady = true;
+      }
+    } catch (e) {
+      console.warn("Firebase 連線初始化失敗，退回 LocalStorage 本機模式", e);
+    }
+
+    function initAccounting() {
+      const banner = document.getElementById('sync-status-banner');
+      if (isFirebaseReady && db) {
+        banner.innerHTML = `<span class="flex items-center gap-1.5"><i data-lucide="cloud" class="w-3.5 h-3.5 text-teal-600"></i> 即時同步中 (Firebase 連線正常)</span><span class="text-[10px] text-teal-600 font-normal">全團即時同步</span>`;
+        
+        db.ref('bkk_members').on('value', snap => {
+          const val = snap.val();
+          if (val) members = val;
+          renderMemberTags();
+          calculateAndRenderSettlement();
+        });
+
+        db.ref('bkk_expenses').on('value', snap => {
+          const val = snap.val();
+          expenses = val ? (Array.isArray(val) ? val : Object.values(val)) : [];
+          renderExpenseList();
+          calculateAndRenderSettlement();
+        });
+
+        db.ref('bkk_rate').on('value', snap => {
+          const val = snap.val();
+          if (val) exchangeRate = parseFloat(val);
+          document.getElementById('acc-rate-input').value = exchangeRate;
+          renderExpenseList();
+          calculateAndRenderSettlement();
+        });
+      } else {
+        banner.innerHTML = `<span class="flex items-center gap-1.5 text-amber-800"><i data-lucide="hard-drive" class="w-3.5 h-3.5 text-amber-600"></i> 本機離線模式</span>`;
+        banner.className = "bg-amber-50 border border-amber-200 text-amber-900 px-3 py-1.5 rounded-xl text-[11px] flex justify-between items-center font-bold";
+        
+        members = JSON.parse(localStorage.getItem('bkk_members')) || members;
+        expenses = JSON.parse(localStorage.getItem('bkk_expenses')) || expenses;
+        exchangeRate = parseFloat(localStorage.getItem('bkk_rate')) || exchangeRate;
+        document.getElementById('acc-rate-input').value = exchangeRate;
+        renderMemberTags();
+        renderExpenseList();
+        calculateAndRenderSettlement();
+      }
+      lucide.createIcons();
+    }
+
+    function syncMembers() {
+      if (isFirebaseReady && db) db.ref('bkk_members').set(members);
+      else localStorage.setItem('bkk_members', JSON.stringify(members));
+    }
+
+    function syncExpenses() {
+      if (isFirebaseReady && db) db.ref('bkk_expenses').set(expenses);
+      else localStorage.setItem('bkk_expenses', JSON.stringify(expenses));
+    }
+
+    function syncRate() {
+      if (isFirebaseReady && db) db.ref('bkk_rate').set(exchangeRate);
+      else localStorage.setItem('bkk_rate', exchangeRate.toString());
+    }
+
+    function updateRate() {
+      const val = parseFloat(document.getElementById('acc-rate-input').value);
+      if (val > 0) {
+        exchangeRate = val;
+        syncRate();
+        renderExpenseList();
+        calculateAndRenderSettlement();
+        showToast(`匯率已更新：1 THB = ${exchangeRate} TWD`);
+      }
+    }
+
+    function renderMemberTags() {
+      const container = document.getElementById('member-tags-container');
+      document.getElementById('member-count').innerText = members.length;
+      container.innerHTML = members.map((m, idx) => `
+        <span class="inline-flex items-center gap-1 bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-lg border border-slate-200 text-xs">
+          ${m}
+          <button onclick="removeMember(${idx})" class="text-slate-400 hover:text-rose-600 ml-0.5">×</button>
+        </span>
+      `).join('');
+    }
+
+    function promptAddMember() {
+      const name = prompt('請輸入新成員姓名或暱稱：');
+      if (name && name.trim()) {
+        const trimmed = name.trim();
+        if (!members.includes(trimmed)) {
+          members.push(trimmed);
+          syncMembers();
+          renderMemberTags();
+          calculateAndRenderSettlement();
+          showToast(`已新增成員：${trimmed}`);
+        } else {
+          alert('成員名稱已存在！');
+        }
+      }
+    }
+
+    function removeMember(idx) {
+      const m = members[idx];
+      if (confirm(`確定要刪除成員「${m}」嗎？相關帳目將保留。`)) {
+        members.splice(idx, 1);
+        syncMembers();
+        renderMemberTags();
+        calculateAndRenderSettlement();
+      }
+    }
+
+    function openAddExpenseModal() {
+      if (members.length === 0) {
+        alert('請先在上方新增至少一位成員！');
+        return;
+      }
+      const payerSelect = document.getElementById('exp-payer');
+      payerSelect.innerHTML = members.map(m => `<option value="${m}">${m}</option>`).join('');
+
+      const beneList = document.getElementById('exp-beneficiaries-list');
+      beneList.innerHTML = members.map(m => `
+        <label class="flex items-center gap-2 cursor-pointer p-1 hover:bg-slate-100 rounded">
+          <input type="checkbox" name="beneficiary" value="${m}" checked class="rounded text-teal-600 accent-teal-600 w-3.5 h-3.5">
+          <span class="text-slate-800 font-medium">${m}</span>
+        </label>
+      `).join('');
+
+      document.getElementById('expense-form').reset();
+      document.getElementById('expense-modal').classList.remove('hidden');
+    }
+
+    function closeExpenseModal() {
+      document.getElementById('expense-modal').classList.add('hidden');
+    }
+
+    function selectAllBeneficiaries(val) {
+      document.querySelectorAll('input[name="beneficiary"]').forEach(cb => cb.checked = val);
+    }
+
+    function saveExpense(e) {
+      e.preventDefault();
+      const title = document.getElementById('exp-title').value.trim();
+      const amount = parseFloat(document.getElementById('exp-amount').value);
+      const currency = document.getElementById('exp-currency').value;
+      const payer = document.getElementById('exp-payer').value;
+      const category = document.getElementById('exp-category').value;
+
+      const checkedBene = Array.from(document.querySelectorAll('input[name="beneficiary"]:checked')).map(cb => cb.value);
+
+      if (checkedBene.length === 0) {
+        alert('請至少勾選一位分攤成員！');
+        return;
+      }
+
+      const newExpense = {
+        id: Date.now(),
+        title,
+        amount,
+        currency,
+        payer,
+        category,
+        beneficiaries: checkedBene,
+        date: new Date().toLocaleDateString('zh-TW', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+      };
+
+      expenses.unshift(newExpense);
+      syncExpenses();
+      closeExpenseModal();
+      renderExpenseList();
+      calculateAndRenderSettlement();
+      showToast('記帳成功！');
+    }
+
+    function deleteExpense(id) {
+      if (confirm('確定要刪除這筆消費記錄嗎？')) {
+        expenses = expenses.filter(exp => exp.id !== id);
+        syncExpenses();
+        renderExpenseList();
+        calculateAndRenderSettlement();
+        showToast('已刪除帳目');
+      }
+    }
+
+    function clearAllExpenses() {
+      if (confirm('⚠️ 警告：確定要清空所有記帳記錄嗎？此動作無法復原。')) {
+        expenses = [];
+        syncExpenses();
+        renderExpenseList();
+        calculateAndRenderSettlement();
+        showToast('已清空所有帳目');
+      }
+    }
+
+    function renderExpenseList() {
+      const container = document.getElementById('expense-list-container');
+      let totalTHB = 0;
+
+      if (expenses.length === 0) {
+        container.innerHTML = `<div class="text-center py-6 text-slate-400 text-xs">尚無任何消費記錄，點擊上方「新增記帳」開始！</div>`;
+        document.getElementById('acc-total-thb').innerHTML = `0 <span class="text-xs font-normal text-teal-200">THB</span>`;
+        document.getElementById('acc-total-twd').innerText = `≈ NT$ 0`;
+        document.getElementById('acc-total-count').innerText = `0 筆`;
+        return;
+      }
+
+      container.innerHTML = expenses.map(exp => {
+        const thbEquivalent = exp.currency === 'THB' ? exp.amount : exp.amount / exchangeRate;
+        totalTHB += thbEquivalent;
+        const splitPerPerson = exp.amount / exp.beneficiaries.length;
+
+        return `
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="text-[10px] font-bold bg-white text-slate-600 px-1.5 py-0.5 rounded border border-slate-200 mr-1">${exp.category}</span>
+                <strong class="text-xs text-slate-800">${exp.title}</strong>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-slate-900 text-sm">${exp.amount.toLocaleString()} <span class="text-[10px] font-normal">${exp.currency}</span></span>
+                <button onclick="deleteExpense(${exp.id})" class="text-slate-300 hover:text-rose-500 ml-1.5 text-xs">🗑️</button>
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-500 flex justify-between">
+              <span>由 <strong>${exp.payer}</strong> 先代墊</span>
+              <span>${exp.beneficiaries.length} 人分攤（每人 ${Math.round(splitPerPerson).toLocaleString()} ${exp.currency}）</span>
+            </div>
+            <div class="text-[10px] text-slate-400">分攤人：${exp.beneficiaries.join('、')}</div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('acc-total-thb').innerHTML = `${Math.round(totalTHB).toLocaleString()} <span class="text-xs font-normal text-teal-200">THB</span>`;
+      document.getElementById('acc-total-twd').innerText = `≈ NT$ ${Math.round(totalTHB * exchangeRate).toLocaleString()}`;
+      document.getElementById('acc-total-count').innerText = `${expenses.length} 筆`;
+    }
+
+    // ==================== 2. 最小現金流演算法（結算核心） ====================
+    let lastSettlementText = '';
+
+    function calculateAndRenderSettlement() {
+      const settlementContainer = document.getElementById('settlement-list');
+      const spendingCardsContainer = document.getElementById('member-spending-cards-container');
+
+      if (expenses.length === 0 || members.length === 0) {
+        settlementContainer.innerHTML = `<div class="text-slate-400 text-center py-2 text-xs">記帳後自動產生最佳化轉帳方案</div>`;
+        spendingCardsContainer.innerHTML = `<div class="text-slate-400 text-center py-2 text-xs">尚無成員消費數據</div>`;
+        lastSettlementText = '尚無記帳資料';
+        return;
+      }
+
+      const balances = {};
+      const totalConsumed = {};
+      const totalPaid = {};
+
+      members.forEach(m => {
+        balances[m] = 0;
+        totalConsumed[m] = 0;
+        totalPaid[m] = 0;
+      });
+
+      expenses.forEach(exp => {
+        const amountTHB = exp.currency === 'THB' ? exp.amount : exp.amount / exchangeRate;
+        totalPaid[exp.payer] = (totalPaid[exp.payer] || 0) + amountTHB;
+        balances[exp.payer] = (balances[exp.payer] || 0) + amountTHB;
+        
+        const shareTHB = amountTHB / exp.beneficiaries.length;
+        exp.beneficiaries.forEach(b => {
+          totalConsumed[b] = (totalConsumed[b] || 0) + shareTHB;
+          balances[b] = (balances[b] || 0) - shareTHB;
+        });
+      });
+
+      spendingCardsContainer.innerHTML = members.map(m => {
+        const net = balances[m] || 0;
+        const consumed = totalConsumed[m] || 0;
+        const paid = totalPaid[m] || 0;
+
+        let badgeStyle = 'bg-slate-100 text-slate-600';
+        let signText = '收支平衡 0 THB';
+
+        if (net > 1) {
+          badgeStyle = 'bg-emerald-100 text-emerald-800 font-black';
+          signText = `＋應收回 ${Math.round(net).toLocaleString()} THB`;
+        } else if (net < -1) {
+          badgeStyle = 'bg-rose-100 text-rose-800 font-black';
+          signText = `－應補付 ${Math.abs(Math.round(net)).toLocaleString()} THB`;
+        }
+
+        return `
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+            <div class="flex justify-between items-center">
+              <span class="font-black text-slate-800 text-sm flex items-center gap-1">
+                <i data-lucide="user" class="w-3.5 h-3.5 text-teal-600"></i> ${m}
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10.5px] ${badgeStyle}">
+                ${signText}
+              </span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200/60 text-[11px]">
+              <div>
+                <span class="text-slate-400 block text-[10px]">個人總支出 (應攤)</span>
+                <strong class="text-slate-900 text-xs">${Math.round(consumed).toLocaleString()} <span class="text-[9px] font-normal text-slate-500">THB</span></strong>
+                <div class="text-[9.5px] text-slate-400">≈ NT$ ${Math.round(consumed * exchangeRate).toLocaleString()}</div>
+              </div>
+              <div class="text-right">
+                <span class="text-slate-400 block text-[10px]">已先代墊</span>
+                <strong class="text-teal-700 text-xs">${Math.round(paid).toLocaleString()} <span class="text-[9px] font-normal text-slate-500">THB</span></strong>
+                <div class="text-[9.5px] text-slate-400">≈ NT$ ${Math.round(paid * exchangeRate).toLocaleString()}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      let debtors = [];
+      let creditors = [];
+
+      Object.keys(balances).forEach(person => {
+        const val = balances[person];
+        if (val < -1) {
+          debtors.push({ person, amount: -val });
+        } else if (val > 1) {
+          creditors.push({ person, amount: val });
+        }
+      });
+
+      debtors.sort((a, b) => b.amount - a.amount);
+      creditors.sort((a, b) => b.amount - a.amount);
+
+      const transactions = [];
+      let d = 0, c = 0;
+
+      while (d < debtors.length && c < creditors.length) {
+        const debtor = debtors[d];
+        const creditor = creditors[c];
+        const settledAmount = Math.min(debtor.amount, creditor.amount);
+
+        if (settledAmount > 1) {
+          transactions.push({
+            from: debtor.person,
+            to: creditor.person,
+            thb: Math.round(settledAmount),
+            twd: Math.round(settledAmount * exchangeRate)
+          });
+        }
+
+        debtor.amount -= settledAmount;
+        creditor.amount -= settledAmount;
+
+        if (debtor.amount <= 1) d++;
+        if (creditor.amount <= 1) c++;
+      }
+
+      if (transactions.length === 0) {
+        settlementContainer.innerHTML = `<div class="p-3 bg-emerald-50 text-emerald-800 rounded-xl text-center font-bold">🎉 所有帳目已全部平衡，無人需轉帳！</div>`;
+        lastSettlementText = '🎉 曼谷自由行帳目全部結清，無人需補款！';
+        lucide.createIcons();
+        return;
+      }
+
+      let textOutput = '🇹🇭【第一次去曼谷泰好玩旅行團 分帳結算清單】\n\n';
+      textOutput += '📊【每位成員個人總支出】：\n';
+      members.forEach(m => {
+        const consumed = totalConsumed[m] || 0;
+        textOutput += `• ${m} 總消費：${Math.round(consumed).toLocaleString()} THB (約 NT$ ${Math.round(consumed * exchangeRate).toLocaleString()})\n`;
+      });
+
+      textOutput += '\n💸【最少轉帳清算步驟】：\n';
+      settlementContainer.innerHTML = transactions.map((t, idx) => {
+        textOutput += `${idx + 1}. ${t.from} ➔ 轉給 ${t.to}：${t.thb.toLocaleString()} THB (約 NT$ ${t.twd.toLocaleString()})\n`;
+        return `
+          <div class="p-2.5 bg-teal-50/60 border border-teal-200 rounded-xl flex justify-between items-center text-xs">
+            <div class="flex items-center gap-1.5 font-bold text-slate-800">
+              <span class="text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded text-[11px]">${t.from}</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-teal-600"></i>
+              <span class="text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded text-[11px]">${t.to}</span>
+            </div>
+            <div class="text-right">
+              <span class="font-black text-slate-900">${t.thb.toLocaleString()} <span class="text-[10px] font-normal">THB</span></span>
+              <div class="text-[10px] text-slate-500">≈ NT$ ${t.twd.toLocaleString()}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      textOutput += `\n* 匯率參考：1 THB = ${exchangeRate} TWD\n* 請各位依照上方指示轉帳清算！`;
+      lastSettlementText = textOutput;
+      lucide.createIcons();
+    }
+
+    function copySettlementText() {
+      copyText(lastSettlementText);
+    }
+
+    // ==================== 3. 既有彈窗與導覽邏輯 ====================
+    const modalData = {
+      'd1_hotel': { category: '住宿與換匯', title: 'Cross Vibe Bangkok Sukhumvit 寄行李 & K79換匯', map: 'https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit', content: `<p><strong>📍 地址：</strong>10 Sukhumvit 52 Alley, Phra Khanong (BTS On Nut 1號出口)</p><p><strong>💡 換匯指南：</strong>出飯店走至 Sukhumvit 52 巷口即是 <strong>K79 Money Exchange</strong>，匯率與水門市場 SuperRich 相同，帶千元台幣現鈔直接換泰銖即可！</p><p><strong>🏨 飯店電話：</strong>+66-2-331-9091</p>` },
+      'd1_lunch': { category: '美食午餐', title: 'Siam Paragon G 樓美食街 海南雞飯', map: 'https://www.google.com/maps/search/?api=1&query=Siam+Paragon+Food+Hall', content: `<p><strong>📍 位置：</strong>Siam Paragon G 樓 Food Hall（全冷氣舒適環境）</p><p><strong>🍴 推薦必點：</strong>招牌雙拼海南雞飯（滑嫩白切雞 + 酥脆炸雞，搭配清甜雞油飯，完全不辣無蔬菜負擔，約 150 THB）。</p><p><strong>💡 點餐備註：</strong>出示保命卡「Mai Phet（不辣）、Mai Sai Phakchi（不加香菜）」。</p>` },
+      'd1_split': { category: '午後自由分流', title: 'Siam Square 逛街組 vs Nikko 按摩組', map: 'https://www.google.com/maps/search/?api=1&query=Siam+Square+Bangkok', content: `<p><strong>🛍️ 逛街組：</strong>Siam Square Soi 2 逛 <strong>garcon dept</strong> 中性文青選品店、Gentlewoman 旗艦店，並在 <strong>After You</strong> 享用蜜糖吐司與泰奶雪花冰。</p><p><strong>💆 按摩組：</strong>BTS Siam 4 號出口進 Soi 5 巷，前往 <strong>Nikko Thai Massage Signature</strong> 享受 60 分鐘正統足底經絡舒壓（約 450-500 ฿，技師小費 50-100 ฿ 現金）。</p><p><strong>⏰ 集合注意：</strong>兩組請於 <strong>15:40</strong> 準時在 BTS Siam 站 4 號出口閘門處會合！</p>` },
+      'rain_d1_siam': { category: '☔ Day 1 逛街雨備', title: 'Siam Discovery & Siam Center 室內空橋連通商城群', map: 'https://www.google.com/maps/search/?api=1&query=Siam+Discovery', content: `<p><strong>🚶 全程免淋雨：</strong>從 Siam Paragon 美食街經室內空橋直通 <strong>Siam Center</strong> 與 <strong>Siam Discovery</strong>。</p><p><strong>🛍️ 雨天亮點：</strong><br>• <strong>Siam Discovery 3-4F</strong>：全曼谷最大日本 <strong>Loft</strong> 選物旗艦店與泰國設計師專區。<br>• <strong>Siam Center 2F</strong>：集結眾多泰國本土潮流服飾、文創小店與甜點，在全冷氣房悠閒避雨逛街！</p>` },
+      'd1_boat': { category: '交通轉乘節點', title: 'BTS Siam ➔ Saphan Taksin ➔ 免費接駁船', map: 'https://www.google.com/maps/search/?api=1&query=Sathorn+Pier', content: `<p><strong>🚦 轉乘步驟：</strong><br>1. 15:40 BTS Siam 站內同月台換乘「深綠色席隆線（往 Bang Wa）」。<br>2. 搭至 <strong>Saphan Taksin 站（S6）</strong>（車程約 12 分鐘，40 THB）。<br>3. 走 <strong>2 號出口</strong> 直走 1 分鐘到中央碼頭（Sathorn Pier）最左側排隊搭乘 Asiatique 免費接駁船（約 16:15 或 16:30 發船）。</p><p><strong>⚠️ 提醒：</strong>航程約 10 分鐘，15:40 從 Siam 出發正好能從容趕上 17:00 合菜聚餐！</p>` },
+      'd1_dinner': { category: '團體大聚餐', title: 'Asiatique 碼頭夜市 26 人合菜 (Peppery Thai Bistro)', map: 'https://www.google.com/maps/search/?api=1&query=Peppery+Thai+Bistro+Asiatique', content: `<p><strong>📍 位置：</strong>Asiatique 碼頭下船直走進入 <strong>6 號倉庫 (Warehouse 6)</strong>。</p><p><strong>🍽️ 推薦無辣菜色：</strong>香酥蟹肉煎蛋、黃咖哩炒海鮮（甜香滑蛋下飯）、泰式烤豬頸肉（沾醬分開）、金錢蝦餅、蒜香軟殼蟹（人均約 600 THB）。</p>` },
+      'd1_night': { category: '夜市散步', title: 'Asiatique 夜間探索 ✕ Sky Flyer 高空鞦韆', map: 'https://www.google.com/maps/search/?api=1&query=Asiatique+The+Riverfront', content: `<p><strong>🎡 園區亮點：</strong>體驗 36 層樓高 <strong>Sky Flyer 高空旋轉鞦韆</strong>、摩天輪拍照打卡、採買 <strong>NaRaYa 曼谷包</strong> 與泰國特色香氛伴手禮。</p><p><strong>🚕 返程指南：</strong>搭免費接駁船回中央碼頭轉 BTS 回 On Nut，或 26 人分車使用 Grab / Bolt 直達飯店休息。</p>` },
+      'rain_d1_asiatique': { category: '☔ Day 1 碼頭夜市雨備', title: 'Asiatique 1-10 號室內連通倉庫群 ✕ 轉戰 Big C 採買', map: 'https://www.google.com/maps/search/?api=1&query=Asiatique+The+Riverfront', content: `<p><strong>🏢 方案 A（室內連通倉庫）：</strong>園區內擁有 1～10 號室內相連倉庫，下雨可完全轉移至室內廊道，逛室內文創小舖與 <strong>NaRaYa 曼谷包旗艦店</strong>。</p><p><strong>🛒 方案 B（轉戰室內量販店）：</strong>若戶外遊樂設施天雨暫停，可直接從 6 號倉庫搭乘 Grab 直奔鄰近的 <strong>Big C Supercenter</strong> 室內大賣場，提前將零食、果乾與伴手禮掃貨買齊！</p>` },
+      'd2_klook': { category: '文化遺產一日遊', title: 'Klook 曼谷經典地標一日遊（大皇宮/寺廟群）', map: 'https://www.google.com/maps/search/?api=1&query=The+Grand+Palace+Bangkok', content: `<p><strong>📍 景點包含：</strong>大皇宮、玉佛寺、臥佛寺、鄭王廟（冷氣專車接送與中文導遊）。</p><p><strong>⚠️ 嚴格著裝禁忌：</strong>嚴禁穿無袖、背心、短褲、短裙或破洞褲！請務必穿著「有袖上衣 + 過膝長褲/長裙」。</p><p><a href="https://www.klook.com/zh-TW/activity/3021-bangkok-must-visit-landmarks-day-tour/?spm=SearchResult.SearchResult_LIST&clickId=33c6c9a341" target="_blank" class="text-teal-600 font-bold underline">點此開啟 Klook 官方訂單與行程頁面 ↗</a></p>` },
+      'rain_d2_klook': { category: '☔ Day 2 寺廟遊雨備', title: '寺廟室內大殿深度參觀 ✕ 鄭王廟河畔景觀咖啡館', map: 'https://www.google.com/maps/search/?api=1&query=Vivi+The+Coffee+Place', content: `<p><strong>🛕 室內避雨參拜：</strong>曼谷多為短暫陣雨且專車隨行。雨勢較大時，導遊會引導轉入<strong>玉佛寺主殿</strong>與<strong>臥佛寺室內殿堂</strong>參拜避雨。</p><p><strong>☕ 河畔景觀咖啡：</strong>鄭王廟戶外若雨勢過大，可至對岸河畔室內咖啡館（如 <strong>Vivi The Coffee Place</strong>），隔著落地窗一邊喝冰泰奶、一邊遠眺雨中鄭王廟全景！</p>` },
+      'd2_iconsiam': { category: '室內水上市場', title: 'ICONSIAM SOOKSIAM 水上市集 邊逛邊吃 & 2F 河景', map: 'https://www.google.com/maps/search/?api=1&query=SOOKSIAM+ICONSIAM', content: `<p><strong>🍢 無辣無菜小吃推薦：</strong>炭烤椰奶甜豬肉串（Moo Ping 20B/串）、現切水仙芒果糯米飯（120B）、熱騰騰香蕉煎餅（60B）、現剖香水椰子（70B）、酥炸一口蟹肉蝦餅。</p><p><strong>✨ 河景露台：</strong>吃飽後至 <strong>2 樓 Apple Store 戶外空中花園露台</strong> 免費吹晚風，俯瞰昭披耶河畔百萬夜景！</p>` },
+      'rain_d2_iconsiam': { category: '☔ Day 2 ICONSIAM 雨備', title: '4-5F ICONCRAFT 工藝設計館 ✕ 7F 室內瀑布景觀區', map: 'https://www.google.com/maps/search/?api=1&query=ICONSIAM', content: `<p><strong>🏛️ 全程商場室內：</strong>遇雨不需走至 2 樓戶外露台，直接在商場內探索高樓層：</p><p>• <strong>4–5F ICONCRAFT</strong>：全泰國最大室內手工藝與設計選品館，集結泰絲、香氛、珠寶與工藝文創。<br>• <strong>7F Napalai Terrace</strong>：欣賞室內高空巨型落水瀑布與聲光造景！</p>` },
+      'd2_diora': { category: '頂級 SPA', title: 'DIORA Luxe Sukhumvit 120 分鐘全身精油 SPA', map: 'https://www.google.com/maps/search/?api=1&query=DIORA+Luxe+Sukhumvit', content: `<p><strong>📍 位置：</strong>Sukhumvit Soi 22（近 BTS Phrom Phong 站）</p><p><strong>💆 療程亮點：</strong>花瓣淨足 ➔ 120 分鐘客製化全身精油放鬆或草藥球熱敷 ➔ 熱茶甜點（療程約 1,900-2,200 ฿，技師小費約 100-150 ฿ 現金）。</p><p><strong>💡 順路度：</strong>剛好在 ICONSIAM 回 On Nut 飯店的 BTS 順路線上，按完帶著精油香氣直接回飯店睡覺！</p>` },
+      'd2_return': { category: '夜間返程', title: 'DIORA Luxe 返回 Cross Vibe 飯店', map: 'https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit', content: `<p><strong>🚦 交通：</strong>Sukhumvit Soi 22 巷口叫 Grab 10 分鐘直達飯店，或步行至 BTS Phrom Phong 搭 3 站直達 BTS On Nut 站。</p>` },
+      'd3_t21': { category: '商場採買', title: 'Terminal 21 Asok 航站主題百貨 採買 & 午餐', map: 'https://www.google.com/maps/search/?api=1&query=Terminal+21+Asok', content: `<p><strong>🛍️ 必逛推薦：</strong>1-3F 泰國新銳設計師服飾、純銀手作飾品；LG 樓 Gourmet Market 超市免排隊買齊手標茶、芒果乾（單店滿 2,000B 索取退稅單 P.P.10）。</p><p><strong>🍴 午餐推薦：</strong>4 樓 <strong>Have a Zeed</strong> 泰式合菜（香酥蟹肉煎蛋、黃咖哩海鮮、烤豬頸肉），或至頂樓 Pier 21 吃平價小吃。</p>` },
+      'd3_samatha': { category: '肩頸舒壓', title: 'Samatha 按摩（Office Syndrome 專門課程）', map: 'https://www.google.com/maps/search/?api=1&query=Samatha+Thai+Massage+Rong+Mueang', content: `<p><strong>📍 位置：</strong>華藍蓬老城區巷弄（近松瓦路）</p><p><strong>💆 療程特色：</strong>專門針對久坐辦公室肩頸僵硬設計，手法溫和適中不痛（約 1,350 ฿）。</p><p><strong>⚠️ 注意：</strong>全店僅 1 間包廂，需提前透過官方 IG 預約！</p>` },
+      'd3_songwat': { category: '文青老街散策', title: '松瓦路（Song Wat Road）慢活散策與特色小店', map: 'https://www.google.com/maps/search/?api=1&query=Song+Wat+Road+Bangkok', content: `<p><strong>☕ Pista& 開心果甜點：</strong>必點開心果冰淇淋、提拉米蘇、杜拜巧克力軟餅乾（Google 4.8分）。</p><p><strong>🕯️ Copenn. 香氛：</strong>泰國小眾木質調工業風香氛名店，採買室內擴香與精油。</p><p><strong>☕ Song Wat Coffee Roasters：</strong>老街自家烘焙咖啡，必喝極致 Dirty 咖啡。</p><p><strong>📸 拍照亮點：</strong>百年大門（Pratu 100 Pee）、FV 福味老宅茶館、大象塗鴉彩繪牆與 18:15 昭披耶河絕美夕陽。</p>` },
+      'rain_d3_songwat': { category: '☔ Day 3 松瓦路雨備', title: '松瓦路老宅室內點對點 ✕ Warehouse 30 文創倉庫聚落', map: 'https://www.google.com/maps/search/?api=1&query=Warehouse+30', content: `<p><strong>🚕 方案 A（老宅點對點進店）：</strong>松瓦路主要店家（<strong>Pista&</strong>、<strong>Copenn. 香氛</strong>、<strong>FV 玻璃屋茶館</strong>、<strong>SCR 咖啡</strong>）皆為獨立室內老宅，叫車點對點進店，室內吃甜點試香拍照完全不受影響！</p><p><strong>🎨 方案 B（轉戰 Warehouse 30）：</strong>若雨勢較大，搭車 5 分鐘轉往鄰近的 <strong>Warehouse 30</strong>（老倉庫改造之全室內文青藝術聚落）與 TCDC 設計中心，室內逛選品與黑膠展。</p>` },
+      'd3_abar': { category: '高空酒吧', title: 'ABar Rooftop 38 樓 英倫花園露天酒吧', map: 'https://www.google.com/maps/search/?api=1&query=ABar+Rooftop', content: `<p><strong>📍 位置：</strong>Bangkok Marriott Marquis Queen's Park 38 樓（Sukhumvit Soi 22）</p><p><strong>🍸 氛圍亮點：</strong>英倫古典綠意露天花園、寬敞沙發座、擁有全曼谷最齊全琴酒收藏，氛圍極其舒適好聊天（調酒約 600-850 ฿/杯）。</p><p><strong>👔 著裝規定：</strong>Smart Casual（勿穿拖鞋、運動背心）。</p>` },
+      'rain_d3_abar': { category: '☔ Day 3 酒吧雨備', title: 'ABar 37 樓室內英倫復古酒吧（ABar Indoor Lounge）', map: 'https://www.google.com/maps/search/?api=1&query=ABar+Rooftop', content: `<p><strong>🍸 同大樓無縫室內轉移：</strong>ABar 包含 38 樓戶外露台與 <strong>37 樓室內專屬酒吧</strong>。</p><p><strong>✨ 室內特色：</strong>遇雨座位直接移至 37 樓室內區，擁有大片全景落地窗眺望曼谷市景，深色木質皮革沙發極具質感，並享有完全相同的頂級調酒清單，完全免換店家！</p>` },
+      'd4_factory': { category: '外送早餐', title: 'Factory Coffee 冠軍咖啡（Grab 外送直送飯店）', map: 'https://www.google.com/maps/search/?api=1&query=Factory+Coffee+Bangkok', content: `<p><strong>☕ 泰國冠軍咖啡：</strong>曼谷最火紅神級咖啡館！早上直接透過 <strong>Grab App</strong> 外送至 Cross Vibe 飯店大廳，免跨城頂著太陽排隊即可享用神級可頌與特調咖啡（約 300 ฿）。</p>` },
+      'd4_woodland': { category: '森林咖啡館', title: 'The Wood Land 森林系露天咖啡館', map: 'https://www.google.com/maps/search/?api=1&query=The+Wood+Land+Sukhumvit+52', content: `<p><strong>📍 位置：</strong>Sukhumvit 52 巷（飯店步行 5 分鐘）</p><p><strong>🌿 亮點：</strong>隱身住宅巷弄的大片高聳樹蔭與木質庭園，享用手沖黑咖啡、現烤三明治與可頌，從容收尾退房。</p>` },
+      'rain_d4_woodland': { category: '☔ Day 4 咖啡雨備', title: 'Cross Vibe 飯店室內 Lounge ✕ True Digital Park 綠能商場', map: 'https://www.google.com/maps/search/?api=1&query=True+Digital+Park', content: `<p><strong>☕ 方案 A（飯店室內 Lounge）：</strong>直接留在 Cross Vibe 飯店 1 樓挑高室內咖啡廳，吹冷氣品嚐熱拿鐵，從容打包行李退房。</p><p><strong>🌿 方案 B（True Digital Park）：</strong>搭 BTS 2 站至 Punnawithi 站直達大型室內綠建築商場，擁有 4 層樓挑高室內植栽中庭與多家質感咖啡館，防雨且綠意滿滿！</p>` },
+      'd4_airport': { category: '返程與退稅', title: '蘇凡納布機場 (BKK) 退稅 SOP & 搭機', map: 'https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport', content: `<p><strong>🛂 退稅流程：</strong><br>1. 14:30 抵達 4 樓出境大廳 <strong>Customs Inspection for VAT Refund</strong> 先蓋海關章（出示黃色 PP10 退稅單）。<br>2. 前往華航櫃檯託運行李（每人限 1 件 23kg 以內）。<br>3. 過安檢後至管制區內的退稅櫃檯領取泰銖現金。</p><p><strong>✈️ 航班：</strong>中華航空 CI836（17:30 起飛 ➔ 22:05 抵達台北桃園機場）。</p>` }
+    };
+
+    function switchMainTab(tabKey) {
+      document.querySelectorAll('.main-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.main-tab-btn').forEach(el => el.classList.remove('tab-active'));
+
+      const targetView = document.getElementById('view-' + tabKey);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const activeBtn = document.getElementById('main-tab-' + tabKey);
+      if (activeBtn) activeBtn.classList.add('tab-active');
+
+      if (tabKey === 'accounting') {
+        initAccounting();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchDay(dayKey) {
+      document.querySelectorAll('.day-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.day-pill').forEach(el => {
+        el.classList.remove('sub-pill-active');
+        el.classList.add('bg-white', 'text-slate-700');
+      });
+
+      const targetPane = document.getElementById('day-pane-' + dayKey);
+      if (targetPane) targetPane.classList.remove('hidden');
+
+      const targetPill = document.getElementById('sub-day-' + dayKey);
+      if (targetPill) {
+        targetPill.classList.remove('bg-white', 'text-slate-700');
+        targetPill.classList.add('sub-pill-active');
+      }
+    }
+
+    function switchThaiSub(subKey) {
+      document.querySelectorAll('.thai-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.thai-pill').forEach(el => {
+        el.classList.remove('sub-pill-active');
+        el.classList.add('bg-white', 'text-slate-700');
+      });
+
+      const targetPane = document.getElementById('thai-pane-' + subKey);
+      if (targetPane) targetPane.classList.remove('hidden');
+
+      const targetPill = document.getElementById('thai-sub-' + subKey);
+      if (targetPill) {
+        targetPill.classList.remove('bg-white', 'text-slate-700');
+        targetPill.classList.add('sub-pill-active');
+      }
+    }
+
+    function openModal(itemKey) {
+      const data = modalData[itemKey];
+      if (!data) return;
+
+      document.getElementById('modal-category').innerText = data.category;
+      document.getElementById('modal-title').innerText = data.title;
+      document.getElementById('modal-body').innerHTML = data.content;
+      document.getElementById('modal-map-link').href = data.map;
+
+      document.getElementById('info-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('info-modal').classList.add('hidden');
+    }
+
+    function togglePledge(cb) {
+      if (cb.checked) {
+        showToast('🎉 切結成功！保證曼谷之行全程笑嘻嘻、絕不擺臭臉！');
+      }
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast(`已複製文字！`));
+      } else {
+        const input = document.createElement('textarea');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        showToast(`已複製文字！`);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.innerText = msg;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
