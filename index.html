@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>第一次去曼谷泰好玩旅行團 隨身手冊</title>
   <!-- Google Fonts & Tailwind & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,15 +55,16 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex justify-center items-center py-0 md:py-8 antialiased select-none">
+<!-- ✅ 修改點 1：鎖定 body 高度為 100dvh，並設定 overflow-hidden 防止整個網頁上下滑動 -->
+<body class="h-[100dvh] w-full flex justify-center items-center py-0 md:py-8 antialiased select-none overflow-hidden">
 
-  <!-- 手機外框主容器 -->
-  <div class="w-full max-w-md min-h-screen md:min-h-[844px] md:h-[844px] bg-white md:rounded-[40px] overflow-hidden shadow-2xl relative border-0 md:border border-[#E2DFD8] flex flex-col justify-between">
+  <!-- ✅ 修改點 2：外框容器同樣鎖死高度 h-full，並使用 flex-col 排版 -->
+  <div class="w-full h-full max-w-md md:max-h-[844px] bg-white md:rounded-[40px] overflow-hidden shadow-2xl relative border-0 md:border border-[#E2DFD8] flex flex-col justify-between">
 
     <!-- ======================================================= -->
     <!-- 畫面 1：封面首頁 (Cover Screen)                         -->
     <!-- ======================================================= -->
-    <div id="page-cover" class="w-full h-full min-h-screen md:min-h-[844px] bg-[#F4F2EE] flex flex-col justify-between p-7 text-center relative overflow-y-auto hide-scrollbar z-20">
+    <div id="page-cover" class="w-full h-full flex flex-col justify-between p-7 text-center relative overflow-y-auto hide-scrollbar z-20 bg-[#F4F2EE]">
       
       <div class="space-y-3 pt-3">
         <div class="flex flex-col items-center justify-center space-y-1">
@@ -100,7 +101,7 @@
       </div>
 
       <!-- 底部 4 個特點小導覽捷徑 -->
-      <div class="pt-2 border-t border-[#EAE8E4] space-y-3 pb-1">
+      <div class="pt-2 border-t border-[#EAE8E4] space-y-3 pb-[env(safe-area-inset-bottom,0.5rem)]">
         <div class="grid grid-cols-4 gap-1 text-[11px] text-[#555555]">
           <div class="flex flex-col items-center gap-1.5 cursor-pointer hover:text-[#1F1F1F]" onclick="enterApp('itinerary')">
             <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-[#EAE8E4] text-[#C87D55] shadow-2xs">
@@ -137,17 +138,18 @@
     <!-- ======================================================= -->
     <!-- 畫面 2：隨身手冊主頁 (Main App Manual)                   -->
     <!-- ======================================================= -->
-    <div id="page-main" class="w-full h-full flex flex-col justify-between hidden">
+    <!-- ✅ 修改點 3：改為 flex-col h-full，不再依靠父層滾動 -->
+    <div id="page-main" class="w-full h-full flex flex-col hidden bg-[#FBFBFA]" style="display: none;">
 
-      <!-- 手冊頂部 Header -->
-      <header id="app-top-header" class="bg-white sticky top-0 z-30 px-5 pt-4 pb-3 border-b border-[#F2EFEA] flex justify-between items-center">
+      <!-- 手冊頂部 Header (shrink-0 保證高度不被壓縮) -->
+      <header id="app-top-header" class="bg-white shrink-0 px-5 pt-4 pb-3 border-b border-[#F2EFEA] flex justify-between items-center z-30">
         <button onclick="returnToCover()" class="flex items-center gap-0.5 text-xs text-[#777777] hover:text-[#1F1F1F] font-medium transition-colors">
           <i data-lucide="chevron-left" class="w-4 h-4"></i>
           <span>封面</span>
         </button>
         <div class="text-center">
           <h2 id="main-header-title" class="text-base font-bold text-[#1F1F1F] tracking-wide">行程總覽</h2>
-          <div id="main-header-subtitle" class="text-[10px] text-[#8C8C8C] hidden">09.16 (三)</div>
+          <div id="main-header-subtitle" class="text-[10px] text-[#8C8C8C] hidden" style="display: none;">09.16 (三)</div>
         </div>
         <div class="flex items-center gap-2">
           <a id="header-map-link" href="https://maps.app.goo.gl/xNNyJydejehBHnTV9" target="_blank" class="p-1 text-[#1F1F1F] hover:text-[#C87D55] transition-colors" title="開啟我的曼谷標籤清單">
@@ -156,13 +158,12 @@
         </div>
       </header>
 
-      <!-- 主要滾動內容區 (五大分頁完全獨立，不重疊、不丟失) -->
-      <main class="flex-1 p-4 space-y-4 bg-[#FBFBFA] pb-24 overflow-y-auto hide-scrollbar">
+      <!-- ✅ 修改點 4：主要滾動內容區 (flex-1 佔滿剩餘空間，並且只有這裡 overflow-y-auto) -->
+      <main id="app-main-content" class="flex-1 overflow-y-auto p-4 space-y-4 hide-scrollbar">
 
         <!-- ==================== 分頁 1：行程總覽 View ==================== -->
         <section id="view-overview" class="main-view space-y-3.5">
           
-          <!-- Hero 視覺卡片 -->
           <div class="relative rounded-3xl overflow-hidden border border-[#ECEAE4] bg-[#F7F5F0] p-5 shadow-2xs min-h-[145px] flex flex-col justify-center">
             <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80" 
                  alt="Bangkok Serene Temple" 
@@ -183,7 +184,6 @@
             </div>
           </div>
 
-          <!-- 切結書卡片 -->
           <div class="bg-[#F7F6F3] border border-[#ECEAE4] rounded-2xl p-3.5">
             <label class="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" onchange="if(this.checked) showToast('已同意行程切結規範！')" class="mt-0.5 w-4 h-4 rounded-full text-[#C87D55] accent-[#C87D55] border-[#D4D1CA] focus:ring-0">
@@ -193,7 +193,6 @@
             </label>
           </div>
 
-          <!-- 3 欄等寬旅程重點卡 -->
           <div class="bg-white rounded-2xl p-4 border border-[#ECEAE4] shadow-2xs">
             <div class="grid grid-cols-3 divide-x divide-[#F0EEEA] text-center items-center">
               <div class="px-2 space-y-1">
@@ -214,7 +213,6 @@
             </div>
           </div>
 
-          <!-- 區塊 1：行前必備檢查清單 -->
           <div class="bg-white rounded-2xl p-4 border border-[#ECEAE4] shadow-2xs space-y-3">
             <div class="flex justify-between items-center border-b border-[#F5F4F0] pb-2.5">
               <div class="font-bold text-sm text-[#1F1F1F] flex items-center gap-1.5">
@@ -289,7 +287,6 @@
             </div>
           </div>
 
-          <!-- 不可錯過的團體行程 -->
           <div class="space-y-2.5">
             <div class="flex justify-between items-center px-1">
               <div class="font-bold text-sm text-[#1F1F1F]">不可錯過的團體行程</div>
@@ -298,7 +295,6 @@
               </button>
             </div>
 
-            <!-- 卡片 1 (9/16) -->
             <div class="bg-white rounded-2xl p-4 border border-[#ECEAE4] flex items-center justify-between shadow-2xs cursor-pointer hover:border-[#C87D55]/60 transition-all" onclick="openActivityDetail('d1_dinner')">
               <div class="flex items-center gap-4">
                 <div class="text-center w-11 shrink-0 pr-3 border-r border-[#F0EEE9]">
@@ -316,7 +312,6 @@
               </span>
             </div>
 
-            <!-- 卡片 2 (9/17) -->
             <div class="bg-white rounded-2xl p-4 border border-[#ECEAE4] flex items-center justify-between shadow-2xs cursor-pointer hover:border-[#C87D55]/60 transition-all" onclick="openActivityDetail('d2_klook')">
               <div class="flex items-center gap-4">
                 <div class="text-center w-11 shrink-0 pr-3 border-r border-[#F0EEE9]">
@@ -335,7 +330,6 @@
             </div>
           </div>
 
-          <!-- 區塊 2：交通卡與支付準備 -->
           <div class="bg-white rounded-2xl p-4 border border-[#ECEAE4] shadow-2xs space-y-3">
             <div class="font-bold text-sm text-[#1F1F1F] flex items-center gap-1.5 border-b border-[#F5F4F0] pb-2.5">
               <i data-lucide="ticket" class="w-4 h-4 text-[#C87D55]"></i>
@@ -385,7 +379,6 @@
             </div>
           </div>
 
-          <!-- 區塊 3：入住飯店與緊急聯絡 -->
           <div class="bg-white rounded-2xl p-4 border border-[#ECEAE4] shadow-2xs space-y-3">
             <div class="font-bold text-sm text-[#1F1F1F] flex items-center gap-1.5 border-b border-[#F5F4F0] pb-2.5">
               <i data-lucide="building-2" class="w-4 h-4 text-[#C87D55]"></i>
@@ -441,17 +434,12 @@
             </div>
           </div>
 
-          <div class="flex items-center justify-center gap-1.5 text-xs text-[#7A7A7A] py-1">
-            <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-[#C87D55]"></i>
-            <span>建議截圖存下來，離線也能快速查看！</span>
-          </div>
-
         </section>
 
-        <!-- ==================== 分頁 2：每日行程 View (全量資料已恢復，移除了地圖按鈕) ==================== -->
-        <section id="view-itinerary" class="main-view hidden space-y-4">
+        <!-- ==================== 分頁 2：每日行程 View ==================== -->
+        <section id="view-itinerary" class="main-view hidden space-y-4" style="display: none;">
           
-          <!-- 當日沉浸式 Hero 卡片 (已徹底移除右下角的地圖按鈕) -->
+          <!-- 當日沉浸式 Hero 卡片 (已移除地圖按鈕) -->
           <div class="relative rounded-3xl overflow-hidden shadow-sm min-h-[170px] flex flex-col justify-end p-5 text-white">
             <img id="day-hero-img" src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80" alt="Day Cover" class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10"></div>
@@ -520,8 +508,8 @@
 
         </section>
 
-        <!-- ==================== 分頁 3：新功能預留空間 (原保命泰語) ==================== -->
-        <section id="view-thai" class="main-view hidden space-y-4">
+        <!-- ==================== 分頁 3：新功能預留空間 ==================== -->
+        <section id="view-thai" class="main-view hidden space-y-4" style="display: none;">
           
           <div class="relative rounded-3xl overflow-hidden shadow-sm min-h-[160px] flex flex-col justify-center p-6 text-white bg-gradient-to-r from-[#C87D55] to-[#A8613D]">
             <div class="relative z-10 space-y-1">
@@ -546,7 +534,7 @@
         </section>
 
         <!-- ==================== 分頁 4：必買清單 View (依天數推薦景點好物) ==================== -->
-        <section id="view-shopping" class="main-view hidden space-y-4">
+        <section id="view-shopping" class="main-view hidden space-y-4" style="display: none;">
           
           <div class="relative rounded-3xl overflow-hidden shadow-sm min-h-[160px] flex flex-col justify-center p-6 text-white">
             <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80" alt="Shopping Cover" class="absolute inset-0 w-full h-full object-cover">
@@ -597,7 +585,7 @@
         </section>
 
         <!-- ==================== 分頁 5：記帳分帳 View ==================== -->
-        <section id="view-accounting" class="main-view hidden space-y-4">
+        <section id="view-accounting" class="main-view hidden space-y-4" style="display: none;">
           
           <!-- Firebase 連線狀態指示條 -->
           <div id="firebase-status-banner" class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-2 rounded-2xl flex items-center justify-between text-xs">
@@ -662,8 +650,8 @@
 
       </main>
 
-      <!-- 底部常駐導航欄 (Tab Bar) -->
-      <nav class="bg-white/95 backdrop-blur-md border-t border-[#ECEAE4] py-2 px-5 sticky bottom-0 z-40">
+      <!-- ✅ 底部常駐導航欄 (固定在最下方，防呆安全距離) -->
+      <nav class="bg-white/95 backdrop-blur-md border-t border-[#ECEAE4] pt-2 px-5 shrink-0 z-40" style="padding-bottom: max(0.5rem, env(safe-area-inset-bottom));">
         <div class="flex justify-between items-center text-[10px] font-medium text-[#8C8C8C]">
           <button onclick="switchMainTab('overview')" id="bottom-tab-overview" class="nav-item active flex flex-col items-center gap-1">
             <i data-lucide="home" class="w-4 h-4"></i>
@@ -693,7 +681,7 @@
   </div>
 
   <!-- ==================== 彈窗：行前必備檢查清單 ==================== -->
-  <div id="checklist-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 hidden transition-all" onclick="if(event.target===this) closeChecklistModal()">
+  <div id="checklist-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 hidden transition-all" style="display: none;" onclick="if(event.target===this) closeChecklistModal()">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 space-y-4 border border-[#ECEAE4] shadow-2xl relative animate-in zoom-in-95 duration-150">
       <div class="flex justify-between items-start">
         <div>
@@ -733,7 +721,7 @@
   </div>
 
   <!-- ==================== 彈窗：活動詳情 ==================== -->
-  <div id="detail-sheet-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-xs hidden transition-all">
+  <div id="detail-sheet-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-xs hidden transition-all" style="display: none;">
     <div class="bg-white w-full max-w-md max-h-[88vh] sm:rounded-[32px] rounded-t-[32px] overflow-y-auto relative border border-[#ECEAE4] shadow-2xl p-5 space-y-4 animate-in slide-in-from-bottom duration-200">
       <div class="flex flex-col items-center">
         <div class="w-10 h-1 bg-[#E2DFD8] rounded-full mb-2"></div>
@@ -793,7 +781,7 @@
   </div>
 
   <!-- ==================== 彈窗：新增帳目 ==================== -->
-  <div id="expense-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 hidden">
+  <div id="expense-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 hidden" style="display: none;">
     <div class="bg-white rounded-3xl max-w-sm w-full p-5 space-y-3.5 text-xs border border-[#ECEAE4] shadow-2xl">
       <div class="flex justify-between items-center border-b border-[#F0EEEA] pb-2.5">
         <h3 class="font-bold text-sm text-[#1F1F1F]">新增消費款項</h3>
@@ -858,7 +846,7 @@
 
   <!-- ==================== JS 核心邏輯 ==================== -->
   <script>
-    // 安全賦值函式
+    // 安全賦值防呆函式
     function setElText(id, text) {
       const el = document.getElementById(id);
       if (el) el.innerText = text;
@@ -876,18 +864,29 @@
     function enterApp(targetTab) {
       const cover = document.getElementById('page-cover');
       const main = document.getElementById('page-main');
-      if (cover) cover.classList.add('hidden');
-      if (main) main.classList.remove('hidden');
+      if (cover) {
+        cover.style.setProperty('display', 'none', 'important');
+      }
+      if (main) {
+        main.style.setProperty('display', 'flex', 'important');
+      }
       switchMainTab(targetTab || 'overview');
-      window.scrollTo(0, 0);
+      
+      // ✅ 針對原生 App 體驗修正的捲動控制
+      const scrollArea = document.getElementById('app-main-content');
+      if (scrollArea) scrollArea.scrollTop = 0;
     }
 
     function returnToCover() {
       const cover = document.getElementById('page-cover');
       const main = document.getElementById('page-main');
-      if (main) main.classList.add('hidden');
-      if (cover) cover.classList.remove('hidden');
-      window.scrollTo(0, 0);
+      if (main) {
+        main.style.setProperty('display', 'none', 'important');
+      }
+      if (cover) {
+        cover.style.setProperty('display', 'flex', 'important');
+        cover.scrollTop = 0;
+      }
     }
 
     const tabTitleMap = {
@@ -899,11 +898,15 @@
     };
 
     function switchMainTab(tabKey) {
-      document.querySelectorAll('.main-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.main-view').forEach(el => {
+        el.style.setProperty('display', 'none', 'important');
+      });
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
       const targetView = document.getElementById('view-' + tabKey);
-      if (targetView) targetView.classList.remove('hidden');
+      if (targetView) {
+        targetView.style.setProperty('display', 'block', 'important');
+      }
 
       const bottomBtn = document.getElementById('bottom-tab-' + tabKey);
       if (bottomBtn) bottomBtn.classList.add('active');
@@ -915,9 +918,9 @@
         if (tabKey === 'itinerary') {
           const dayData = tripDaysData[currentActiveDay];
           subEl.innerText = dayData ? dayData.dateStr : '';
-          subEl.classList.remove('hidden');
+          subEl.style.setProperty('display', 'block', 'important');
         } else {
-          subEl.classList.add('hidden');
+          subEl.style.setProperty('display', 'none', 'important');
         }
       }
 
@@ -930,8 +933,10 @@
       }
       
       refreshIcons();
-      const mainEl = document.querySelector('main');
-      if (mainEl) mainEl.scrollTop = 0;
+      
+      // ✅ 對齊 <main id="app-main-content"> 解決無法滑動的問題
+      const scrollArea = document.getElementById('app-main-content');
+      if (scrollArea) scrollArea.scrollTop = 0;
     }
 
     function refreshIcons() {
@@ -942,16 +947,19 @@
 
     function openChecklistModal() {
       const modal = document.getElementById('checklist-modal');
-      if (modal) modal.classList.remove('hidden');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.style.setProperty('display', 'flex', 'important');
+      }
       refreshIcons();
     }
 
     function closeChecklistModal() {
       const modal = document.getElementById('checklist-modal');
-      if (modal) modal.classList.add('hidden');
+      if (modal) modal.style.setProperty('display', 'none', 'important');
     }
 
-    // 1. 每日行程資料庫
+    // 1. 每日行程資料庫 (全量資料)
     const tripDaysData = {
       1: {
         dateStr: "09.16 (三)",
@@ -1333,6 +1341,7 @@
       if (subEl) {
         subEl.innerText = dayData.dateStr;
         subEl.classList.remove('hidden');
+        subEl.style.setProperty('display', 'block', 'important');
       }
 
       setElSrc('day-hero-img', dayData.heroImg);
@@ -1450,8 +1459,10 @@
         if (data.rain) {
           setElText('detail-rain-text', data.rain);
           rainCard.classList.remove('hidden');
+          rainCard.style.setProperty('display', 'flex', 'important');
         } else {
           rainCard.classList.add('hidden');
+          rainCard.style.setProperty('display', 'none', 'important');
         }
       }
 
@@ -1483,6 +1494,7 @@
       const modal = document.getElementById('detail-sheet-modal');
       if (modal) {
         modal.classList.remove('hidden');
+        modal.style.setProperty('display', 'flex', 'important');
       }
       refreshIcons();
     }
@@ -1491,6 +1503,7 @@
       const modal = document.getElementById('detail-sheet-modal');
       if (modal) {
         modal.classList.add('hidden');
+        modal.style.setProperty('display', 'none', 'important');
       }
     }
 
@@ -1690,6 +1703,7 @@
       const modal = document.getElementById('expense-modal');
       if (modal) {
         modal.classList.remove('hidden');
+        modal.style.setProperty('display', 'flex', 'important');
       }
     }
 
@@ -1697,6 +1711,7 @@
       const modal = document.getElementById('expense-modal');
       if (modal) {
         modal.classList.add('hidden');
+        modal.style.setProperty('display', 'none', 'important');
       }
     }
 
