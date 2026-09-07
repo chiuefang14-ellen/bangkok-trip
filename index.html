@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>第一次去曼谷泰好玩旅行團 隨身手冊</title>
-  <!-- Google Fonts & Tailwind & Lucide Icons -->
+  <!-- Google Fonts & Tailwind CSS & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Firebase SDK (v8 Compat 版本) -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <style>
@@ -55,123 +55,47 @@
       height: 2px;
       background-color: #1F1F1F;
     }
-    .day-filter-btn.active, .shop-day-btn.active {
+    .day-filter-btn.active, .shop-day-btn.active, .thai-sub-tab.active {
       background-color: #C87D55 !important;
       color: #FFFFFF !important;
       border-color: #C87D55 !important;
     }
 
-    /* TRAVELIFE — 小探索 Quest Feature 樣式整合 */
+    /* TRAVELIFE — 小探索 Quest Feature 樣式 */
     #detail-quest-box {
       background: #FAF3EF;
       border: 1px solid #F2DDD1;
       padding: 14px;
       border-radius: 16px;
     }
-    .quest-detail-inner {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
+    .quest-detail-inner { display: flex; align-items: flex-start; gap: 12px; }
     .quest-icon-wrap {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: #fff;
-      color: #C87D55;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
-      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+      width: 32px; height: 32px; border-radius: 999px; background: #fff;
+      color: #C87D55; display: flex; align-items: center; justify-content: center;
+      flex: 0 0 auto; box-shadow: 0 1px 2px rgba(0,0,0,.04);
     }
     .quest-content { min-width: 0; }
-    .quest-eyebrow {
-      font-size: 10px;
-      line-height: 1.2;
-      font-weight: 900;
-      letter-spacing: .08em;
-      color: #C87D55;
-      text-transform: uppercase;
-    }
-    .quest-title {
-      margin-top: 2px;
-      font-size: 14px;
-      line-height: 1.4;
-      font-weight: 700;
-      color: #1F1F1F;
-    }
-    .quest-desc, .quest-complete-copy {
-      margin-top: 4px;
-      font-size: 11px;
-      line-height: 1.65;
-      color: #666;
-    }
-    .quest-question {
-      margin-top: 10px;
-      font-size: 11px;
-      line-height: 1.5;
-      font-weight: 700;
-      color: #1F1F1F;
-    }
-    .quest-options {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 8px;
-    }
+    .quest-eyebrow { font-size: 10px; line-height: 1.2; font-weight: 900; letter-spacing: .08em; color: #C87D55; text-transform: uppercase; }
+    .quest-title { margin-top: 2px; font-size: 14px; line-height: 1.4; font-weight: 700; color: #1F1F1F; }
+    .quest-desc, .quest-complete-copy { margin-top: 4px; font-size: 11px; line-height: 1.65; color: #666; }
+    .quest-question { margin-top: 10px; font-size: 11px; line-height: 1.5; font-weight: 700; color: #1F1F1F; }
+    .quest-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px; }
     .quest-option {
-      text-align: left;
-      padding: 8px 12px;
-      border-radius: 12px;
-      border: 1px solid #ECEAE4;
-      background: #fff;
-      color: #555;
-      font-size: 11px;
-      line-height: 1.45;
-      font-weight: 500;
-      cursor: pointer;
-      transition: .18s ease;
+      text-align: left; padding: 8px 12px; border-radius: 12px; border: 1px solid #ECEAE4;
+      background: #fff; color: #555; font-size: 11px; line-height: 1.45; font-weight: 500; cursor: pointer; transition: .18s ease;
     }
-    .quest-option:hover, .quest-option-selected {
-      border-color: #C87D55;
-      background: #FAF3EF;
-      color: #C87D55;
-    }
+    .quest-option:hover, .quest-option-selected { border-color: #C87D55; background: #FAF3EF; color: #C87D55; }
     .quest-complete-btn {
-      width: 100%;
-      margin-top: 10px;
-      border: 0;
-      border-radius: 999px;
-      background: #C87D55;
-      color: #fff;
-      padding: 10px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .18s ease;
+      width: 100%; margin-top: 10px; border: 0; border-radius: 999px; background: #C87D55;
+      color: #fff; padding: 10px 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: .18s ease;
     }
     .quest-complete-btn:hover { filter: brightness(.96); }
-    .quest-complete-disabled {
-      opacity: .4;
-      cursor: not-allowed;
-    }
+    .quest-complete-disabled { opacity: .4; cursor: not-allowed; }
     .quest-timeline-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #FAF3EF;
-      color: #C87D55;
-      font-size: 9px;
-      line-height: 1.4;
-      font-weight: 700;
+      display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px;
+      background: #FAF3EF; color: #C87D55; font-size: 9px; line-height: 1.4; font-weight: 700;
     }
-    .quest-timeline-badge-done {
-      background: #F3F1ED;
-      color: #777;
-    }
+    .quest-timeline-badge-done { background: #F3F1ED; color: #777; }
   </style>
 </head>
 <body class="h-[100dvh] w-full flex justify-center items-center py-0 md:py-8 antialiased select-none overflow-hidden">
@@ -180,10 +104,9 @@
   <div class="w-full h-full max-w-md md:max-h-[844px] bg-white md:rounded-[40px] overflow-hidden shadow-2xl relative border-0 md:border border-[#E2DFD8] flex flex-col justify-between">
 
     <!-- ======================================================= -->
-    <!-- 畫面 1：封面首頁 (無圖版)                               -->
+    <!-- 畫面 1：封面首頁 -->
     <!-- ======================================================= -->
     <div id="page-cover" class="w-full h-full flex flex-col justify-between p-8 text-center relative overflow-y-auto hide-scrollbar z-20 bg-[#F4F2EE]">
-      
       <div class="space-y-4 pt-12">
         <div class="flex flex-col items-center justify-center space-y-2">
           <div class="w-16 h-16 bg-[#FAF3EF] border border-[#F2DDD1] rounded-full flex items-center justify-center shadow-xs">
@@ -204,7 +127,8 @@
         </div>
 
         <div class="pt-6 text-sm text-[#7A7A7A] space-y-1.5 flex flex-col items-center">
-          <div class="bg-white border border-[#EAE8E4] px-4 py-1.5 rounded-full font-bold shadow-xs">2026.09.16 — 09.19</div>
+          <!-- 已移除背景圓框，改為純文字 -->
+          <div class="font-bold tracking-widest text-[#555555]">2026.09.16 — 09.19</div>
           <div class="text-[#C87D55] font-semibold tracking-wider pt-1">26 人團體自由行</div>
         </div>
       </div>
@@ -232,9 +156,9 @@
           </div>
           <div class="flex flex-col items-center gap-1.5 cursor-pointer hover:text-[#1F1F1F]" onclick="enterApp('thai')">
             <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-[#EAE8E4] text-[#C87D55] shadow-2xs">
-              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <i data-lucide="languages" class="w-4 h-4"></i>
             </div>
-            <span>新功能</span>
+            <span>保命泰語</span>
           </div>
           <div class="flex flex-col items-center gap-1.5 cursor-pointer hover:text-[#1F1F1F]" onclick="enterApp('shopping')">
             <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-[#EAE8E4] text-[#C87D55] shadow-2xs">
@@ -247,11 +171,10 @@
           一起創造屬於我們的曼谷回憶 🧡
         </div>
       </div>
-
     </div>
 
     <!-- ======================================================= -->
-    <!-- 畫面 2：隨身手冊主頁 (Main App Manual)                   -->
+    <!-- 畫面 2：隨身手冊主頁 (Main App Manual) -->
     <!-- ======================================================= -->
     <div id="page-main" class="w-full h-full flex flex-col hidden bg-[#FBFBFA]" style="display: none;">
 
@@ -259,27 +182,35 @@
       <header id="app-top-header" class="bg-[#F7F6F3] shrink-0 pt-4 flex flex-col z-30 relative shadow-sm">
         <div class="px-5 flex items-start justify-between mb-4">
           <div class="space-y-2">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5">
               <button onclick="returnToCover()" class="text-[#8C8C8C] hover:text-[#1F1F1F] transition-colors -ml-1.5 p-1">
                 <i data-lucide="chevron-left" class="w-5 h-5"></i>
               </button>
-              <span class="bg-white border border-[#EAE8E4] px-2.5 py-0.5 rounded-full text-[10px] text-[#555555] font-bold shadow-xs">2026.09.16 — 09.19</span>
-              <span class="bg-white border border-[#EAE8E4] px-2.5 py-0.5 rounded-full text-[10px] text-[#555555] font-bold shadow-xs">26人自由行</span>
+              <!-- 已移除背景圓框，改為純文字 -->
+              <span class="text-xs text-[#555555] font-bold tracking-wider">2026.09.16 — 09.19</span>
             </div>
             <h2 class="text-[19px] font-black text-[#1F1F1F] tracking-wide leading-tight">第一次去曼谷泰好玩旅行團</h2>
           </div>
-          <div class="flex gap-2 shrink-0 pt-0.5">
-            <!-- aA 字體放大按鈕 -->
+          
+          <!-- 右上角功能按鈕 -->
+          <div class="flex gap-1.5 shrink-0 pt-0.5">
+            <a href="https://maps.app.goo.gl/3XZQvsCTmTS3ZJMU6" target="_blank" class="w-8 h-8 bg-white border border-[#EAE8E4] rounded-full flex items-center justify-center text-[#1F1F1F] shadow-xs hover:bg-[#EAE8E4] transition-colors" title="開啟總行程地圖">
+              <i data-lucide="map" class="w-4 h-4 text-[#C87D55]"></i>
+            </a>
+            <button onclick="resetQuestState()" class="w-8 h-8 bg-white border border-[#EAE8E4] rounded-full flex items-center justify-center text-[#1F1F1F] shadow-xs hover:bg-[#EAE8E4] transition-colors" title="重置小探索紀錄">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#C87D55]"></i>
+            </button>
             <button onclick="toggleFontSize()" class="w-8 h-8 bg-white border border-[#EAE8E4] rounded-full flex items-center justify-center text-[#1F1F1F] shadow-xs hover:bg-[#EAE8E4] transition-colors" title="調整字體大小">
-              <span class="text-xs font-black">aA</span>
+              <span class="text-xs font-black text-[#C87D55]">aA</span>
             </button>
           </div>
         </div>
 
+        <!-- 頂部水平滾動導航列 -->
         <div class="flex px-5 gap-6 overflow-x-auto hide-scrollbar border-b border-[#E2DFD8]">
           <button onclick="switchMainTab('overview')" id="top-tab-overview" class="top-nav-item active relative pb-2.5 text-[13px] font-medium text-[#8C8C8C] whitespace-nowrap transition-colors">行程總覽</button>
           <button onclick="switchMainTab('itinerary')" id="top-tab-itinerary" class="top-nav-item relative pb-2.5 text-[13px] font-medium text-[#8C8C8C] whitespace-nowrap transition-colors">每日行程</button>
-          <button onclick="switchMainTab('thai')" id="top-tab-thai" class="top-nav-item relative pb-2.5 text-[13px] font-medium text-[#8C8C8C] whitespace-nowrap transition-colors">新功能</button>
+          <button onclick="switchMainTab('thai')" id="top-tab-thai" class="top-nav-item relative pb-2.5 text-[13px] font-medium text-[#8C8C8C] whitespace-nowrap transition-colors">保命泰語</button>
           <button onclick="switchMainTab('shopping')" id="top-tab-shopping" class="top-nav-item relative pb-2.5 text-[13px] font-medium text-[#8C8C8C] whitespace-nowrap transition-colors">必買清單</button>
           <button onclick="switchMainTab('accounting')" id="top-tab-accounting" class="top-nav-item relative pb-2.5 text-[13px] font-medium text-[#8C8C8C] whitespace-nowrap transition-colors">記帳分帳</button>
         </div>
@@ -292,18 +223,13 @@
         <section id="view-overview" class="main-view space-y-3.5">
           
           <div class="relative rounded-3xl overflow-hidden border border-[#ECEAE4] bg-[#F7F5F0] p-5 shadow-2xs min-h-[145px] flex flex-col justify-center">
-            <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80" 
-                 alt="Bangkok Serene Temple" 
-                 class="absolute right-0 top-0 h-full w-[70%] object-cover object-right pointer-events-none"
-                 style="-webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 20%, rgba(0,0,0,0.85) 65%, black 100%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 20%, rgba(0,0,0,0.85) 65%, black 100%);">
+            <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80" alt="Bangkok Serene Temple" class="absolute right-0 top-0 h-full w-[70%] object-cover object-right pointer-events-none" style="-webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 20%, rgba(0,0,0,0.85) 65%, black 100%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 20%, rgba(0,0,0,0.85) 65%, black 100%);">
             <div class="absolute inset-0 bg-gradient-to-r from-[#F7F5F0] via-[#F7F5F0]/85 via-40% to-transparent pointer-events-none"></div>
             <div class="relative z-10 space-y-1.5 max-w-[210px]">
               <div class="flex items-center gap-1 text-[11px] font-bold text-[#C87D55] tracking-wider uppercase">
                 <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> BANGKOK
               </div>
-              <h1 class="font-serif-title text-2xl font-black text-[#1F1F1F] leading-tight">
-                第一次去曼谷<br>泰好玩旅行團
-              </h1>
+              <h1 class="font-serif-title text-2xl font-black text-[#1F1F1F] leading-tight">第一次去曼谷<br>泰好玩旅行團</h1>
               <div class="flex items-center gap-1.5 text-[11px] text-[#7A7A7A] pt-0.5">
                 <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#C87D55]"></i>
                 <span class="font-medium">2026.09.16 — 09.19</span>
@@ -329,7 +255,7 @@
               </div>
               <div class="px-2 space-y-1">
                 <i data-lucide="wallet" class="w-4 h-4 text-[#C87D55] mx-auto"></i>
-                <div class="text-[13px] font-black text-[#1F1F1F] whitespace-nowrap">10,780 THB</div>
+                <div class="text-[13px] font-black text-[#1F1F1F] whitespace-nowrap">12,000 THB</div>
                 <div class="text-[10px] text-[#8C8C8C]">預估團費/人</div>
               </div>
               <div class="px-2 space-y-1">
@@ -337,6 +263,16 @@
                 <div class="text-[13px] font-black text-[#1F1F1F] whitespace-nowrap">Cross Vibe</div>
                 <div class="text-[10px] text-[#8C8C8C]">住宿飯店</div>
               </div>
+            </div>
+          </div>
+
+          <div class="bg-[#FAF8F5] border border-[#F2DDD1] rounded-2xl p-4 flex items-center gap-3 shadow-2xs">
+            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#C87D55] shrink-0 border border-[#ECEAE4]">
+              <i data-lucide="gift" class="w-5 h-5"></i>
+            </div>
+            <div class="text-xs text-[#555555] leading-relaxed flex-1">
+              <strong class="text-[#1F1F1F] block text-sm mb-0.5">特別任務提醒</strong>
+              <span>出門玩得開心，但也別忘了要 <strong class="text-[#C87D55]">買伴手禮給行政們</strong> 喔！</span>
             </div>
           </div>
 
@@ -351,64 +287,41 @@
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
-
             <div class="grid grid-cols-2 gap-x-3 gap-y-2.5 text-xs text-[#333333]">
               <div class="space-y-2.5">
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">投保個人海外旅平險</div>
-                    <div class="text-[9.5px] text-[#8C8C8C] leading-snug">(含突發疾病醫療＋不便險)</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">投保個人海外旅平險</div><div class="text-[9.5px] text-[#8C8C8C] leading-snug">(含突發疾病醫療＋不便險)</div></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">購買安裝好 5G eSIM</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">購買安裝好 5G eSIM</div></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">護照效期6個月以上</div>
-                    <div class="text-[9.5px] text-[#8C8C8C] leading-snug">＋ 電子機票列印</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">護照效期6個月以上</div><div class="text-[9.5px] text-[#8C8C8C] leading-snug">＋ 電子機票列印</div></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">填妥 TDAC 電子入境卡</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">填妥 TDAC 電子入境卡</div></div>
                 </label>
               </div>
               <div class="space-y-2.5">
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">台幣千元現鈔</div>
-                    <div class="text-[9.5px] text-[#8C8C8C] leading-snug">(備查 2 萬銖等值外幣)</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">台幣千元現鈔</div><div class="text-[9.5px] text-[#8C8C8C] leading-snug">(備查 2 萬銖等值外幣)</div></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">下載 Grab & Bolt App</div>
-                    <div class="text-[9.5px] text-[#8C8C8C] leading-snug">綁定好信用卡</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">下載 Grab & Bolt App</div><div class="text-[9.5px] text-[#8C8C8C] leading-snug">綁定好信用卡</div></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">Day 2 寺廟服裝</div>
-                    <div class="text-[9.5px] text-[#8C8C8C] leading-snug">(有袖上衣＋過膝下著)</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">Day 2 寺廟服裝</div><div class="text-[9.5px] text-[#8C8C8C] leading-snug">(有袖上衣＋過膝下著)</div></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer">
                   <input type="checkbox" class="mt-0.5 w-3.5 h-3.5 rounded text-[#C87D55] accent-[#C87D55] shrink-0">
-                  <div>
-                    <div class="font-bold text-[11px] leading-snug">常備個人藥品</div>
-                    <div class="text-[9.5px] text-[#8C8C8C] leading-snug">(腸胃藥、防蚊液)</div>
-                  </div>
+                  <div><div class="font-bold text-[11px] leading-snug">常備個人藥品</div><div class="text-[9.5px] text-[#8C8C8C] leading-snug">(腸胃藥、防蚊液)</div></div>
                 </label>
               </div>
             </div>
@@ -560,10 +473,9 @@
 
         </section>
 
-        <!-- ==================== 分頁 2：每日行程 View (無圖純文字排版) ==================== -->
+        <!-- ==================== 分頁 2：每日行程 View ==================== -->
         <section id="view-itinerary" class="main-view hidden space-y-4" style="display: none;">
           
-          <!-- Day 導航膠囊列 -->
           <div class="bg-[#F0EEEA] p-1 rounded-full flex gap-1 mb-2">
             <button onclick="stepDayTo(1)" id="day-pill-1" class="day-tab-pill active flex-1 py-2 rounded-full text-xs font-bold text-white bg-[#1F1F1F] text-center transition-all">Day 1 (三)</button>
             <button onclick="stepDayTo(2)" id="day-pill-2" class="day-tab-pill flex-1 py-2 rounded-full text-xs font-bold text-[#555] text-center transition-all">Day 2 (四)</button>
@@ -571,7 +483,6 @@
             <button onclick="stepDayTo(4)" id="day-pill-4" class="day-tab-pill flex-1 py-2 rounded-full text-xs font-bold text-[#555] text-center transition-all">Day 4 (六)</button>
           </div>
 
-          <!-- 每日標題區域 (文字版) -->
           <div class="space-y-1.5 px-1 bg-white rounded-3xl p-5 border border-[#ECEAE4] shadow-2xs text-center">
             <div class="inline-flex items-center gap-1 bg-[#FAF3EF] text-[#C87D55] text-[10px] font-bold px-3 py-1 rounded-full shadow-xs mb-1" id="day-hero-badge">
               第一站曼谷
@@ -580,7 +491,6 @@
             <div id="day-hero-tags" class="text-xs text-[#8C8C8C] font-medium pt-0.5">大皇宮 / Siam商圈 / 碼頭夜市</div>
           </div>
 
-          <!-- 類別篩選器 -->
           <div class="flex gap-2 overflow-x-auto hide-scrollbar py-0.5 text-xs">
             <button onclick="filterActivities('all')" class="day-filter-btn active shrink-0 px-4 py-1.5 rounded-full border border-[#C87D55] bg-[#C87D55] text-white font-medium transition-all" data-category="all">全部</button>
             <button onclick="filterActivities('景點')" class="day-filter-btn shrink-0 px-3.5 py-1.5 rounded-full border border-[#ECEAE4] bg-white text-[#555555] hover:text-[#1F1F1F] font-medium flex items-center gap-1.5 transition-all" data-category="景點">
@@ -597,10 +507,8 @@
             </button>
           </div>
 
-          <!-- 每日點狀垂直時間軸列表 -->
           <div id="itinerary-timeline-container" class="space-y-0 relative py-1"></div>
 
-          <!-- 今日亮點 (無圖文字版) -->
           <div class="space-y-2 pt-1 border-t border-[#F0EEEA] mt-2 pt-4">
             <div class="font-bold text-xs text-[#1F1F1F] flex items-center gap-1">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#C87D55]"></i>
@@ -609,7 +517,6 @@
             <div id="day-highlights-container" class="flex gap-2.5 overflow-x-auto hide-scrollbar py-0.5"></div>
           </div>
 
-          <!-- 小提醒卡片 -->
           <div class="bg-[#FAF3EF] border border-[#F2DDD1] rounded-2xl p-3.5 flex items-center gap-3">
             <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#C87D55] shrink-0 shadow-2xs">
               <i data-lucide="lightbulb" class="w-4 h-4"></i>
@@ -622,26 +529,133 @@
 
         </section>
 
-        <!-- ==================== 分頁 3：新功能預留空間 ==================== -->
+        <!-- ==================== 分頁 3：保命泰語 View ==================== -->
         <section id="view-thai" class="main-view hidden space-y-4" style="display: none;">
           
-          <div class="relative rounded-3xl overflow-hidden shadow-sm min-h-[160px] flex flex-col justify-center p-6 text-white bg-[#1F1F1F]">
-            <div class="relative z-10 space-y-1 text-center">
-              <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-2">
-                <i data-lucide="sparkles" class="w-6 h-6 text-[#C87D55]"></i>
+          <div class="bg-white rounded-3xl p-6 border border-[#ECEAE4] shadow-2xs text-center space-y-2">
+            <div class="inline-flex items-center gap-1 bg-[#FAF3EF] text-[#C87D55] text-[10px] font-bold px-3 py-1 rounded-full border border-[#F2DDD1]">
+              <i data-lucide="languages" class="w-3 h-3"></i> SURVIVAL THAI
+            </div>
+            <h2 class="text-xl font-black tracking-wide text-[#1F1F1F] leading-snug">保命泰語字卡</h2>
+            <p class="text-[11px] text-[#8C8C8C] leading-relaxed">點擊泰文即可一鍵複製，出示給司機或店員看！</p>
+          </div>
+
+          <div class="bg-[#ECEAE4] p-1 rounded-2xl flex gap-1">
+            <button onclick="switchThaiSub('drivers')" id="thai-sub-drivers" class="thai-sub-tab active flex-1 py-2.5 rounded-xl text-xs font-bold text-[#555555] transition-all flex items-center justify-center gap-1.5 bg-transparent">
+              <i data-lucide="car" class="w-4 h-4"></i> 司機專用
+            </button>
+            <button onclick="switchThaiSub('foodwords')" id="thai-sub-foodwords" class="thai-sub-tab flex-1 py-2.5 rounded-xl text-xs font-bold text-[#555555] transition-all flex items-center justify-center gap-1.5 bg-transparent">
+              <i data-lucide="utensils" class="w-4 h-4"></i> 點餐保命
+            </button>
+          </div>
+
+          <!-- 司機用字卡 -->
+          <div id="thai-pane-drivers" class="thai-pane space-y-3">
+            <div class="text-[11px] text-[#8C8C8C] px-1">搭乘計程車 / Grab 時很實用：</div>
+            <div class="space-y-2.5">
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('พาไปที่นี่ครับ/ค่ะ')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">請帶我去這個地方</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">พาไปที่นี่ครับ/ค่ะ</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(pâa bpai tîi nîi kráp/ká)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
               </div>
-              <span class="text-[10px] font-bold tracking-wider text-[#C87D55] uppercase">Coming Soon</span>
-              <h2 class="text-xl font-black tracking-wide text-white">新功能準備中</h2>
-              <p class="text-[11px] text-white/70">此分頁已清空，為您的全新想法保留位置！</p>
+
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('พาไปโรงแรมนี้ครับ/ค่ะ')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="hotel" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">請帶我去飯店</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">พาไปโรงแรมนี้ครับ/ค่ะ</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(pâa bpai rong raem nîi kráp/ká)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('พาไปห้างนี้ครับ/ค่ะ')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">請帶我去購物中心</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">พาไปห้างนี้ครับ/ค่ะ</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(pâa bpai hǎang nîi kráp/ká)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('พาไปสนามบินครับ/ค่ะ')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="plane" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">請帶我去機場</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">พาไปสนามบินครับ/ค่ะ</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(pâa bpai sânam bin kráp/ká)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="bg-white rounded-3xl p-6 border border-[#ECEAE4] shadow-2xs text-center space-y-3">
-            <div class="space-y-1">
-              <h3 class="font-bold text-sm text-[#1F1F1F]">等待下一步指示</h3>
-              <p class="text-xs text-[#8C8C8C] leading-relaxed">
-                原有的「保命泰語」卡片已依據需求移除。您可以在對話中告訴我，接下來想在這裡加入什麼好玩或實用的功能！
-              </p>
+          <!-- 點餐用字卡 -->
+          <div id="thai-pane-foodwords" class="thai-pane space-y-3 hidden" style="display: none;">
+            <div class="text-[11px] text-[#8C8C8C] px-1">在餐廳點餐時很實用：</div>
+            <div class="space-y-2.5">
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('ไม่เผ็ดครับ/ค่ะ')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="flame" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">不要太辣</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">ไม่เผ็ดครับ/ค่ะ</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(mâi pèt kráp/ká)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('ไม่ใส่ผักชี')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="leaf" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">不要香菜</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">ไม่ใส่ผักชี</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(mâi sài phàk-chii)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
+              </div>
+
+              <div class="bg-white p-4 rounded-2xl border border-[#ECEAE4] flex items-center justify-between gap-3 shadow-2xs cursor-pointer hover:border-[#C87D55] transition-all" onclick="copyText('เช็คบิลด้วย')">
+                <div class="w-10 h-10 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0 border border-[#F2DDD1]">
+                  <i data-lucide="receipt" class="w-5 h-5"></i>
+                </div>
+                <div class="flex-1 min-w-0 space-y-0.5">
+                  <div class="text-[11px] text-[#8C8C8C]">買單結帳</div>
+                  <div class="text-sm font-black text-[#1F1F1F] tracking-wide">เช็คบิลด้วย</div>
+                  <div class="text-[10px] text-[#8C8C8C] font-mono">(chék bin dûay)</div>
+                </div>
+                <div class="flex flex-col items-center text-[#8C8C8C] p-1">
+                  <i data-lucide="copy" class="w-4 h-4"></i><span class="text-[9px] mt-0.5">複製</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -658,7 +672,6 @@
             <p class="text-[11px] text-[#8C8C8C] leading-relaxed">跟著行程走，走到哪買到哪～</p>
           </div>
 
-          <!-- 依天數分類標籤 -->
           <div class="flex gap-2 overflow-x-auto hide-scrollbar py-0.5 text-xs">
             <button onclick="filterShoppingDay(1)" class="shop-day-btn active shrink-0 px-4 py-1.5 rounded-full border border-[#C87D55] bg-[#C87D55] text-white font-medium transition-all" data-shop-day="1">Day 1 碼頭夜市</button>
             <button onclick="filterShoppingDay(2)" class="shop-day-btn shrink-0 px-3.5 py-1.5 rounded-full border border-[#ECEAE4] bg-white text-[#555555] font-medium transition-all" data-shop-day="2">Day 2 水上市集</button>
@@ -675,9 +688,7 @@
               <span class="text-[10px] text-[#8C8C8C]" id="shop-day-subtitle">Asiatique 碼頭夜市</span>
             </div>
 
-            <!-- 純展示清單，無圖片 -->
-            <div id="shopping-day-items-container" class="space-y-3">
-            </div>
+            <div id="shopping-day-items-container" class="space-y-3"></div>
           </div>
 
           <div class="bg-[#FAF3EF] border border-[#F2DDD1] rounded-2xl p-4 space-y-1.5 text-xs text-[#555555]">
@@ -696,7 +707,6 @@
         <!-- ==================== 分頁 5：記帳分帳 View ==================== -->
         <section id="view-accounting" class="main-view hidden space-y-4" style="display: none;">
           
-          <!-- Firebase 連線狀態指示條 -->
           <div id="firebase-status-banner" class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-2 rounded-2xl flex items-center justify-between text-xs">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -705,20 +715,23 @@
             <span class="text-[10px] text-emerald-600 font-medium">即時同步中</span>
           </div>
 
-          <!-- 成員財務面板 -->
           <div class="bg-white rounded-3xl p-4 border border-[#ECEAE4] shadow-2xs space-y-3">
             <div class="flex justify-between items-center border-b border-[#F5F4F0] pb-2.5">
               <div class="font-bold text-xs text-[#1F1F1F] flex items-center gap-1.5">
                 <i data-lucide="users" class="w-4 h-4 text-[#C87D55]"></i>
                 <span>成員財務與結算狀態</span>
               </div>
-              <button onclick="openAddExpenseModal()" class="text-xs bg-[#C87D55] hover:bg-[#b56c45] text-white font-bold px-3.5 py-1.5 rounded-full flex items-center gap-1 shadow-xs transition-colors">
-                <i data-lucide="plus" class="w-3.5 h-3.5"></i> 新增帳目
-              </button>
+              <div class="flex gap-1.5">
+                <button onclick="addNewMember()" class="text-xs bg-[#FAF3EF] text-[#C87D55] font-bold px-2.5 py-1.5 rounded-full flex items-center gap-1 transition-colors">
+                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                </button>
+                <button onclick="openAddExpenseModal()" class="text-xs bg-[#C87D55] hover:bg-[#b56c45] text-white font-bold px-3.5 py-1.5 rounded-full flex items-center gap-1 shadow-xs transition-colors">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i> 新增帳目
+                </button>
+              </div>
             </div>
 
-            <div id="members-balance-container" class="space-y-2.5">
-            </div>
+            <div id="members-balance-container" class="space-y-2.5"></div>
 
             <div class="pt-1 flex justify-between items-center text-[11px] text-[#8C8C8C] px-1 border-t border-[#F5F4F0] pt-2">
               <span>匯率設定：1 THB = <input type="number" id="acc-rate-input" step="0.01" value="0.92" onchange="updateRate()" class="w-12 bg-[#F7F6F3] border border-[#ECEAE4] text-[#1F1F1F] rounded px-1 text-center font-bold"> TWD</span>
@@ -726,7 +739,6 @@
             </div>
           </div>
 
-          <!-- 最佳結算方案 -->
           <div class="bg-white rounded-3xl p-4 border border-[#ECEAE4] shadow-2xs space-y-3">
             <div class="flex justify-between items-center border-b border-[#F5F4F0] pb-2">
               <span class="font-bold text-xs text-[#1F1F1F] flex items-center gap-1.5">
@@ -735,13 +747,11 @@
               </span>
               <span id="settlement-count-badge" class="text-[10px] bg-[#FAF3EF] text-[#C87D55] px-2 py-0.5 rounded-full font-bold">0 筆轉帳</span>
             </div>
-
             <div id="settlement-list" class="space-y-2 text-xs">
               <span class="text-xs text-[#8C8C8C] italic">目前無須轉帳結算</span>
             </div>
           </div>
 
-          <!-- 每筆消費明細記錄 -->
           <div class="bg-white rounded-3xl p-4 border border-[#ECEAE4] shadow-2xs space-y-2.5">
             <div class="flex justify-between items-center border-b border-[#F5F4F0] pb-2">
               <span class="font-bold text-xs text-[#1F1F1F] flex items-center gap-1.5">
@@ -763,8 +773,71 @@
 
   </div>
 
-  <!-- ==================== 小探索 功能專屬容器 ==================== -->
+  <!-- ==================== 小探索 專屬容器 ==================== -->
   <div id="detail-quest-box" class="hidden"></div>
+
+  <!-- ==================== 彈窗：活動詳情 ==================== -->
+  <div id="detail-sheet-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-xs hidden transition-all" style="display: none;">
+    <div class="bg-white w-full max-w-md max-h-[88vh] sm:rounded-[32px] rounded-t-[32px] overflow-y-auto relative border border-[#ECEAE4] shadow-2xl p-5 space-y-4 animate-in slide-in-from-bottom duration-200">
+      
+      <div class="flex justify-between items-start pt-2">
+        <div class="space-y-1">
+          <div id="detail-time" class="text-xs font-black text-[#C87D55]">13:00</div>
+          <div class="flex items-center gap-2">
+            <div id="detail-icon-box" class="w-8 h-8 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0">
+              <i data-lucide="landmark" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 id="detail-title" class="text-base font-black text-[#1F1F1F]">活動名稱</h3>
+              <div id="detail-subhead" class="text-[11px] text-[#8C8C8C]">副標題</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="detail-category-tag" class="text-[10px] font-bold text-[#C87D55] bg-[#FAF3EF] px-2.5 py-0.5 rounded-full">類別</span>
+          <button onclick="closeDetailModal()" class="text-[#8C8C8C] hover:text-[#1F1F1F] p-1"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+      </div>
+      
+      <div class="space-y-1 bg-[#FBFBFA] p-3.5 rounded-2xl border border-[#ECEAE4]">
+        <h4 class="font-bold text-xs text-[#1F1F1F]">行程簡介</h4>
+        <div id="detail-desc" class="text-xs text-[#555555] leading-relaxed"></div>
+      </div>
+      
+      <div class="bg-[#FAF8F5] p-3.5 rounded-2xl border border-[#ECEAE4] flex items-start gap-2.5">
+        <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-[#C87D55] shrink-0 mt-0.5 shadow-2xs">
+          <i data-lucide="car" class="w-3.5 h-3.5"></i>
+        </div>
+        <div class="text-xs space-y-0.5 flex-1">
+          <div class="font-bold text-[#1F1F1F]">交通方式</div>
+          <div class="text-[11px] text-[#777777]" id="detail-transit-desc">交通指示</div>
+        </div>
+      </div>
+      
+      <!-- 任務模組專屬容器將被 inject 到這 -->
+      <div id="detail-quest-container"></div>
+      
+      <div class="space-y-1.5 p-3.5 bg-[#FBFBFA] rounded-2xl border border-[#ECEAE4]">
+        <h4 class="font-bold text-xs text-[#1F1F1F]">注意事項</h4>
+        <ul id="detail-notes" class="text-[11.5px] text-[#555555] space-y-1 list-disc list-inside leading-relaxed pl-1"></ul>
+      </div>
+      
+      <div id="detail-rain-card" class="bg-[#FAF3EF] border border-[#F2DDD1] p-3.5 rounded-2xl flex items-start gap-2.5">
+        <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-[#C87D55] shrink-0 mt-0.5 shadow-2xs">
+          <i data-lucide="cloud-rain" class="w-3.5 h-3.5"></i>
+        </div>
+        <div class="text-xs space-y-0.5 flex-1">
+          <div class="font-bold text-[#C87D55]">雨備方案</div>
+          <div class="text-[11px] text-[#666666]" id="detail-rain-text">雨備說明</div>
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <h4 class="font-bold text-xs text-[#1F1F1F]" id="detail-loc-title">地理位置</h4>
+        <div id="detail-locations-container" class="space-y-2"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================== 彈窗：行前必備檢查清單 ==================== -->
   <div id="checklist-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 hidden transition-all" style="display: none;" onclick="if(event.target===this) closeChecklistModal()">
@@ -802,71 +875,6 @@
             <span>前往填寫 TDAC 入境卡 ↗</span>
           </a>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== 彈窗：活動詳情 (無圖片版) ==================== -->
-  <div id="detail-sheet-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-xs hidden transition-all" style="display: none;">
-    <div class="bg-white w-full max-w-md max-h-[88vh] sm:rounded-[32px] rounded-t-[32px] overflow-y-auto relative border border-[#ECEAE4] shadow-2xl p-5 space-y-4 animate-in slide-in-from-bottom duration-200">
-      
-      <!-- 已移除頂部灰色拖曳線 (Drag Handle) -->
-
-      <div class="flex justify-between items-start pt-2">
-        <div class="space-y-1">
-          <div id="detail-time" class="text-xs font-black text-[#C87D55]">13:00</div>
-          <div class="flex items-center gap-2">
-            <div id="detail-icon-box" class="w-8 h-8 rounded-full bg-[#FAF3EF] flex items-center justify-center text-[#C87D55] shrink-0">
-              <i data-lucide="landmark" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <h3 id="detail-title" class="text-base font-black text-[#1F1F1F]">活動名稱</h3>
-              <div id="detail-subhead" class="text-[11px] text-[#8C8C8C]">副標題</div>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <span id="detail-category-tag" class="text-[10px] font-bold text-[#C87D55] bg-[#FAF3EF] px-2.5 py-0.5 rounded-full">類別</span>
-          <button onclick="closeDetailModal()" class="text-[#8C8C8C] hover:text-[#1F1F1F] p-1"><i data-lucide="x" class="w-4 h-4"></i></button>
-        </div>
-      </div>
-      
-      <div class="space-y-1 bg-[#FBFBFA] p-3.5 rounded-2xl border border-[#ECEAE4]">
-        <h4 class="font-bold text-xs text-[#1F1F1F]">行程簡介</h4>
-        <div id="detail-desc" class="text-xs text-[#555555] leading-relaxed"></div>
-      </div>
-      
-      <div class="bg-[#FAF8F5] p-3.5 rounded-2xl border border-[#ECEAE4] flex items-start gap-2.5">
-        <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-[#C87D55] shrink-0 mt-0.5 shadow-2xs">
-          <i data-lucide="car" class="w-3.5 h-3.5"></i>
-        </div>
-        <div class="text-xs space-y-0.5 flex-1">
-          <div class="font-bold text-[#1F1F1F]">交通方式</div>
-          <div class="text-[11px] text-[#777777]" id="detail-transit-desc">交通指示</div>
-        </div>
-      </div>
-      
-      <!-- ✅ 任務模組專屬容器將會被注入到這裡 -->
-      <div id="detail-quest-container"></div>
-      
-      <div class="space-y-1.5 p-3.5 bg-[#FBFBFA] rounded-2xl border border-[#ECEAE4]">
-        <h4 class="font-bold text-xs text-[#1F1F1F]">注意事項</h4>
-        <ul id="detail-notes" class="text-[11.5px] text-[#555555] space-y-1 list-disc list-inside leading-relaxed pl-1"></ul>
-      </div>
-      
-      <div id="detail-rain-card" class="bg-[#FAF3EF] border border-[#F2DDD1] p-3.5 rounded-2xl flex items-start gap-2.5">
-        <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-[#C87D55] shrink-0 mt-0.5 shadow-2xs">
-          <i data-lucide="cloud-rain" class="w-3.5 h-3.5"></i>
-        </div>
-        <div class="text-xs space-y-0.5 flex-1">
-          <div class="font-bold text-[#C87D55]">雨備方案</div>
-          <div class="text-[11px] text-[#666666]" id="detail-rain-text">雨備說明</div>
-        </div>
-      </div>
-      
-      <div class="space-y-2">
-        <h4 class="font-bold text-xs text-[#1F1F1F]" id="detail-loc-title">地理位置</h4>
-        <div id="detail-locations-container" class="space-y-2"></div>
       </div>
     </div>
   </div>
@@ -939,101 +947,48 @@
   <script>
     /*
      * TRAVELIFE — 小探索 Quest Feature
-     * Standalone add-on logic.
      */
     const questData = {
-      d1_dinner: {
-        title: '夜市小探索', icon: 'sparkles',
-        desc: '在 Asiatique 散步時，找一個最有「曼谷感」的畫面。',
-        question: '你最想把哪個畫面留在這趟旅行裡？',
-        options: ['河畔夜景', '摩天輪與夜市', '老倉庫街景', '我自己發現的地方'],
-        reward: '曼谷初見者'
-      },
-      d1_night: {
-        title: '你的第一份戰利品', icon: 'shopping-bag',
-        desc: '逛夜市時，挑一樣你真的會想帶回台灣的東西。',
-        question: '完成後，把它加入你的旅行記憶。',
-        options: ['NaRaYa 曼谷包', '經典大象褲', '手標泰茶', '其他想買的東西'],
-        reward: '曼谷採集者'
-      },
-      d2_klook: {
-        title: '寺廟細節獵人', icon: 'search',
-        desc: '今天不要只看大景點，試著注意一個你原本可能忽略的細節。',
-        question: '你今天最想留意哪一種細節？',
-        options: ['建築與屋頂', '金色裝飾', '壁畫與雕刻', '導遊提到的小故事'],
-        reward: '文化觀察家'
-      },
-      d2_iconsiam: {
-        title: 'SOOKSIAM 泰味探索', icon: 'utensils',
-        desc: '在水上市集挑一樣平常不會主動點的泰國小吃。',
-        question: '今天想挑戰哪一種？',
-        options: ['炭烤椰奶甜肉串', '芒果糯米飯', '香蕉煎餅', '現場看到的新口味'],
-        reward: '泰味探險家'
-      },
-      d3_songwat: {
-        title: '老街尋寶', icon: 'map-pin',
-        desc: '在 Song Wat 散步時，找到一個讓你停下腳步的招牌、店面或角落。',
-        question: '你找到的是？',
-        options: ['老店招牌', '特色店面', '街角風景', '一個說不出名字的驚喜'],
-        reward: '城市漫遊者'
-      },
-      d3_abar: {
-        title: '曼谷夜景收藏', icon: 'moon-star',
-        desc: '在 ABar 看一次曼谷夜景，替今天選一個關鍵字。',
-        question: '今晚的曼谷是哪一種感覺？',
-        options: ['浪漫', '熱鬧', '自由', '有點捨不得回家'],
-        reward: '夜色收藏家'
-      },
-      d4_woodland: {
-        title: '最後一個探索', icon: 'leaf',
-        desc: '在 The Wood Land 慢慢走一圈，找一個你想記住的畫面。',
-        question: '如果要替這趟旅行留一個畫面，你會選？',
-        options: ['森林與綠意', '一杯咖啡', '旅伴的笑容', '我自己最喜歡的角落'],
-        reward: '曼谷旅人'
-      },
-      d4_airport: {
-        title: '帶著故事回家', icon: 'heart',
-        desc: '旅行結束前，替這四天選一句話。',
-        question: '這趟曼谷旅行最像哪一句？',
-        options: ['吃得很滿足', '走了好多地方', '和大家留下很多回憶', '下次還想再來'],
-        reward: '曼谷故事收藏者'
-      }
+      d1_dinner: { title: '夜市小探索', icon: 'sparkles', desc: '在 Asiatique 散步時，找一個最有「曼谷感」的畫面。', question: '你最想把哪個畫面留在這趟旅行裡？', options: ['河畔夜景', '摩天輪與夜市', '老倉庫街景', '我自己發現的地方'], reward: '曼谷初見者' },
+      d1_night: { title: '你的第一份戰利品', icon: 'shopping-bag', desc: '逛夜市時，挑一樣你真的會想帶回台灣的東西。', question: '完成後，把它加入你的旅行記憶。', options: ['NaRaYa 曼谷包', '經典大象褲', '手標泰茶', '其他想買的東西'], reward: '曼谷採集者' },
+      d2_klook: { title: '寺廟細節獵人', icon: 'search', desc: '今天不要只看大景點，試著注意一個你原本可能忽略的細節。', question: '你今天最想留意哪一種細節？', options: ['建築與屋頂', '金色裝飾', '壁畫與雕刻', '導遊提到的小故事'], reward: '文化觀察家' },
+      d2_iconsiam: { title: 'SOOKSIAM 泰味探索', icon: 'utensils', desc: '在水上市集挑一樣平常不會主動點的泰國小吃。', question: '今天想挑戰哪一種？', options: ['炭烤椰奶甜肉串', '芒果糯米飯', '香蕉煎餅', '現場看到的新口味'], reward: '泰味探險家' },
+      d3_songwat: { title: '老街尋寶', icon: 'map-pin', desc: '在 Song Wat 散步時，找到一個讓你停下腳步的招牌、店面或角落。', question: '你找到的是？', options: ['老店招牌', '特色店面', '街角風景', '一個說不出名字的驚喜'], reward: '城市漫遊者' },
+      d3_abar: { title: '曼谷夜景收藏', icon: 'moon-star', desc: '在 ABar 看一次曼谷夜景，替今天選一個關鍵字。', question: '今晚的曼谷是哪一種感覺？', options: ['浪漫', '熱鬧', '自由', '有點捨不得回家'], reward: '夜色收藏家' },
+      d4_woodland: { title: '最後一個探索', icon: 'leaf', desc: '在 The Wood Land 慢慢走一圈，找一個你想記住的畫面。', question: '如果要替這趟旅行留一個畫面，你會選？', options: ['森林與綠意', '一杯咖啡', '旅伴的笑容', '我自己最喜歡的角落'], reward: '曼谷旅人' },
+      d4_airport: { title: '帶著故事回家', icon: 'heart', desc: '旅行結束前，替這四天選一句話。', question: '這趟曼谷旅行最像哪一句？', options: ['吃得很滿足', '走了好多地方', '和大家留下很多回憶', '下次還想再來'], reward: '曼谷故事收藏者' }
     };
 
     const QUEST_STORAGE_KEY = 'travelifeQuestState';
 
     function getQuestState() {
-      try {
-        return JSON.parse(localStorage.getItem(QUEST_STORAGE_KEY) || '{}');
-      } catch (e) {
-        return {};
-      }
+      try { return JSON.parse(localStorage.getItem(QUEST_STORAGE_KEY) || '{}'); } catch (e) { return {}; }
     }
 
-    function isQuestCompleted(key) {
-      return !!getQuestState()[key];
-    }
+    function isQuestCompleted(key) { return !!getQuestState()[key]; }
 
     function completeQuest(key, selectedOption) {
       const state = getQuestState();
-      state[key] = {
-        completedAt: new Date().toISOString(),
-        selectedOption: selectedOption
-      };
+      state[key] = { completedAt: new Date().toISOString(), selectedOption: selectedOption };
       localStorage.setItem(QUEST_STORAGE_KEY, JSON.stringify(state));
-
       if (typeof renderDayTimeline === 'function') renderDayTimeline();
       if (typeof openActivityDetail === 'function') openActivityDetail(key);
     }
 
-    function selectQuestOption(key, optionIndex) {
-      document.querySelectorAll('[data-quest-option]').forEach(el => {
-        el.classList.remove('quest-option-selected');
-      });
+    function resetQuestState() {
+      if (confirm('確定要重置所有小探索的紀錄嗎？')) {
+        localStorage.removeItem(QUEST_STORAGE_KEY);
+        showToast('小探索已重置！');
+        if (!document.getElementById('view-itinerary').classList.contains('hidden')) {
+          renderDayTimeline();
+        }
+      }
+    }
 
+    function selectQuestOption(key, optionIndex) {
+      document.querySelectorAll('[data-quest-option]').forEach(el => el.classList.remove('quest-option-selected'));
       const selected = document.querySelector(`[data-quest-option="${optionIndex}"]`);
       if (selected) selected.classList.add('quest-option-selected');
-
       const btn = document.getElementById('quest-complete-btn');
       if (btn) {
         btn.disabled = false;
@@ -1046,21 +1001,16 @@
       const quest = questData[key];
       const box = document.getElementById('detail-quest-box');
       if (!box) return;
-
       if (!quest) {
         box.classList.add('hidden');
         box.innerHTML = '';
         return;
       }
-
       const done = isQuestCompleted(key);
       box.classList.remove('hidden');
-
       box.innerHTML = done ? `
         <div class="quest-detail-inner">
-          <div class="quest-icon-wrap">
-            <i data-lucide="check" class="w-4 h-4"></i>
-          </div>
+          <div class="quest-icon-wrap"><i data-lucide="check" class="w-4 h-4"></i></div>
           <div class="flex-1">
             <div class="quest-eyebrow">探索完成</div>
             <div class="quest-title">${quest.title}</div>
@@ -1069,44 +1019,24 @@
         </div>
       ` : `
         <div class="quest-detail-inner">
-          <div class="quest-icon-wrap">
-            <i data-lucide="${quest.icon}" class="w-4 h-4"></i>
-          </div>
+          <div class="quest-icon-wrap"><i data-lucide="${quest.icon}" class="w-4 h-4"></i></div>
           <div class="flex-1 quest-content">
-            <div>
-              <div class="quest-eyebrow">✦ 小探索</div>
-              <div class="quest-title">${quest.title}</div>
-              <div class="quest-desc">${quest.desc}</div>
-            </div>
+            <div><div class="quest-eyebrow">✦ 小探索</div><div class="quest-title">${quest.title}</div><div class="quest-desc">${quest.desc}</div></div>
             <div class="quest-question">${quest.question}</div>
             <div class="quest-options">
-              ${quest.options.map((opt, idx) => `
-                <button type="button" data-quest-option="${idx}"
-                  onclick="selectQuestOption('${key}', ${idx})"
-                  class="quest-option">
-                  ${opt}
-                </button>
-              `).join('')}
+              ${quest.options.map((opt, idx) => `<button type="button" data-quest-option="${idx}" onclick="selectQuestOption('${key}', ${idx})" class="quest-option">${opt}</button>`).join('')}
             </div>
-            <button id="quest-complete-btn" type="button" disabled
-              class="quest-complete-btn quest-complete-disabled">
-              完成探索
-            </button>
+            <button id="quest-complete-btn" type="button" disabled class="quest-complete-btn quest-complete-disabled">完成探索</button>
           </div>
         </div>
       `;
-
       if (typeof refreshIcons === 'function') refreshIcons();
     }
 
     function injectQuestIntoActivityDetail(key) {
       const targetContainer = document.getElementById('detail-quest-container');
       const box = document.getElementById('detail-quest-box');
-      
-      if (targetContainer && box && targetContainer !== box.parentNode) {
-         targetContainer.appendChild(box);
-      }
-      
+      if (targetContainer && box && targetContainer !== box.parentNode) targetContainer.appendChild(box);
       renderQuestInDetail(key);
     }
 
@@ -1121,7 +1051,6 @@
       `;
     }
 
-    // ✅ aA 字體放大功能邏輯
     let currentFontLevel = 0;
     const fontSizes = ['16px', '18px', '20px'];
     function toggleFontSize() {
@@ -1130,26 +1059,15 @@
       showToast(`字體大小：${['標準', '放大', '特大'][currentFontLevel]}`);
     }
 
-    function setElText(id, text) {
-      const el = document.getElementById(id);
-      if (el) el.innerText = text;
-    }
-    function setElHTML(id, html) {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
-    }
+    function setElText(id, text) { const el = document.getElementById(id); if (el) el.innerText = text; }
+    function setElHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
 
     function enterApp(targetTab) {
       const cover = document.getElementById('page-cover');
       const main = document.getElementById('page-main');
-      if (cover) {
-        cover.style.setProperty('display', 'none', 'important');
-      }
-      if (main) {
-        main.style.setProperty('display', 'flex', 'important');
-      }
+      if (cover) cover.style.setProperty('display', 'none', 'important');
+      if (main) main.style.setProperty('display', 'flex', 'important');
       switchMainTab(targetTab || 'overview');
-      
       const scrollArea = document.getElementById('app-main-content');
       if (scrollArea) scrollArea.scrollTop = 0;
     }
@@ -1157,49 +1075,32 @@
     function returnToCover() {
       const cover = document.getElementById('page-cover');
       const main = document.getElementById('page-main');
-      if (main) {
-        main.style.setProperty('display', 'none', 'important');
-      }
-      if (cover) {
-        cover.style.setProperty('display', 'flex', 'important');
-        cover.scrollTop = 0;
-      }
+      if (main) main.style.setProperty('display', 'none', 'important');
+      if (cover) { cover.style.setProperty('display', 'flex', 'important'); cover.scrollTop = 0; }
     }
 
     const tabTitleMap = {
       'overview': { title: '行程總覽' },
       'itinerary': { title: 'Day 1' },
-      'thai': { title: '新功能預留' },
+      'thai': { title: '保命泰語' },
       'shopping': { title: '必買清單' },
       'accounting': { title: '分帳 / 結算' }
     };
 
     function switchMainTab(tabKey) {
-      document.querySelectorAll('.main-view').forEach(el => {
-        el.style.setProperty('display', 'none', 'important');
-      });
+      document.querySelectorAll('.main-view').forEach(el => el.style.setProperty('display', 'none', 'important'));
       document.querySelectorAll('.top-nav-item').forEach(el => el.classList.remove('active'));
-
       const targetView = document.getElementById('view-' + tabKey);
-      if (targetView) {
-        targetView.style.setProperty('display', 'block', 'important');
-      }
-
+      if (targetView) targetView.style.setProperty('display', 'block', 'important');
       const topBtn = document.getElementById('top-tab-' + tabKey);
       if (topBtn) topBtn.classList.add('active');
-
       setElText('main-header-title', tabTitleMap[tabKey] ? tabTitleMap[tabKey].title : '');
 
-      if (tabKey === 'itinerary') {
-        renderDayTimeline();
-      } else if (tabKey === 'shopping') {
-        filterShoppingDay(currentShoppingDay || 1);
-      } else if (tabKey === 'accounting') {
-        initAccounting();
-      }
+      if (tabKey === 'itinerary') renderDayTimeline();
+      else if (tabKey === 'shopping') filterShoppingDay(currentShoppingDay || 1);
+      else if (tabKey === 'accounting') initAccounting();
       
       refreshIcons();
-      
       const scrollArea = document.getElementById('app-main-content');
       if (scrollArea) scrollArea.scrollTop = 0;
     }
@@ -1212,10 +1113,7 @@
 
     function openChecklistModal() {
       const modal = document.getElementById('checklist-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.style.setProperty('display', 'flex', 'important');
-      }
+      if (modal) { modal.classList.remove('hidden'); modal.style.setProperty('display', 'flex', 'important'); }
       refreshIcons();
     }
 
@@ -1224,311 +1122,46 @@
       if (modal) modal.style.setProperty('display', 'none', 'important');
     }
 
+    function switchThaiSub(subKey) {
+      document.querySelectorAll('.thai-pane').forEach(el => { el.style.setProperty('display', 'none', 'important'); el.classList.add('hidden'); });
+      document.querySelectorAll('.thai-sub-tab').forEach(el => el.classList.remove('active'));
+      const targetPane = document.getElementById('thai-pane-' + subKey);
+      if (targetPane) { targetPane.style.setProperty('display', 'block', 'important'); targetPane.classList.remove('hidden'); }
+      const targetTab = document.getElementById('thai-sub-' + subKey);
+      if (targetTab) targetTab.classList.add('active');
+    }
+
     const tripDaysData = {
-      1: {
-        dateStr: "09.16 (三)",
-        desc: "9/16 (三) 抵達 · Siam分流逛街按摩 · 碼頭夜市聚餐",
-        highlights: [
-          { title: "海南雞飯", sub: "Paragon必吃", key: "d1_lunch" },
-          { title: "Siam 商圈", sub: "自由分流逛街", key: "d1_split" },
-          { title: "Asiatique", sub: "26人大聚餐", key: "d1_dinner" }
-        ],
-        activities: [
-          { key: "d1_flight", time: "09:45", icon: "plane", title: "抵達素萬那普機場 (BKK)", sub: "入境、領行李、上網測試", category: "交通" },
-          { key: "d1_hotel", time: "10:30", icon: "building-2", title: "Cross Vibe 飯店寄行李", sub: "專車直達、巷口 K79 換泰銖", category: "交通" },
-          { key: "d1_lunch", time: "12:00", icon: "utensils", title: "Siam Paragon 海南雞飯午餐", sub: "美食街招牌雙拼白切+炸雞", category: "餐飲" },
-          { key: "d1_split", time: "13:00", icon: "shopping-bag", title: "午後自由分流：逛街組 vs 按摩組", sub: "garcon dept 選品 / Nikko 泰式舒壓", category: "購物" },
-          { key: "d1_boat", time: "15:40", icon: "anchor", title: "BTS Siam 集合 ➔ 免費接駁船", sub: "轉深綠線至中央碼頭趕船", category: "交通" },
-          { key: "d1_dinner", time: "17:00", icon: "utensils", title: "Asiatique 碼頭夜市 26人合菜", sub: "6號倉庫 Peppery Thai Bistro", category: "餐飲" },
-          { key: "d1_night", time: "19:00", icon: "landmark", title: "碼頭夜市自由散策 ✕ 高空鞦韆", sub: "NaRaYa 採買、Sky Flyer 體驗", category: "景點" },
-          { key: "d1_rest", time: "21:30", icon: "building-2", title: "返回 Cross Vibe 飯店休息", sub: "分車叫 Grab 或搭 BTS 回 On Nut", category: "交通" }
-        ]
-      },
-      2: {
-        dateStr: "09.17 (四)",
-        desc: "9/17 (四) 經典地標導覽 · 水上夜市 · 頂級SPA",
-        highlights: [
-          { title: "大皇宮玉佛寺", sub: "必訪經典地標", key: "d2_klook" },
-          { title: "ICONSIAM", sub: "室內水上市集", key: "d2_iconsiam" },
-          { title: "DIORA SPA", sub: "120分精油舒壓", key: "d2_diora" }
-        ],
-        activities: [
-          { key: "d2_klook", time: "09:00", icon: "landmark", title: "Klook 曼谷經典地標一日遊", sub: "大皇宮、玉佛寺、臥佛寺、鄭王廟", category: "景點" },
-          { key: "d2_iconsiam", time: "16:00", icon: "shopping-bag", title: "渡輪直達 ICONSIAM 水上市集", sub: "SOOKSIAM 傳統小吃 & 2F 河景露台", category: "景點" },
-          { key: "d2_diora", time: "19:45", icon: "sparkles", title: "DIORA Luxe 120 分鐘全身 SPA", sub: "頂級客製化草藥精油全身舒壓", category: "景點" },
-          { key: "d2_return", time: "22:15", icon: "building-2", title: "返回飯店休息就寢", sub: "叫車 10 分鐘直達飯店，帶著香氣入眠", category: "交通" }
-        ]
-      },
-      3: {
-        dateStr: "09.18 (五)",
-        desc: "9/18 (五) 航站百貨 · 松瓦路散策 · 高空酒吧",
-        highlights: [
-          { title: "Terminal 21", sub: "航站主題百貨", key: "d3_t21" },
-          { title: "松瓦路老街", sub: "文青咖啡散策", key: "d3_songwat" },
-          { title: "ABar 酒吧", sub: "38F英倫花園", key: "d3_abar" }
-        ],
-        activities: [
-          { key: "d3_t21", time: "10:30", icon: "shopping-bag", title: "Terminal 21 採買 ＋ 午餐", sub: "吹冷氣選品、Have a Zeed 泰式合菜", category: "購物" },
-          { key: "d3_samatha", time: "14:30", icon: "sparkles", title: "Samatha 泰式按摩舒壓", sub: "Office Syndrome 久坐肩頸放鬆專門", category: "景點" },
-          { key: "d3_songwat", time: "16:30", icon: "landmark", title: "松瓦路（Song Wat Road）老街散策", sub: "Pista& 開心果冰淇淋、Copenn. 香氛", category: "景點" },
-          { key: "d3_abar", time: "21:00", icon: "utensils", title: "ABar Rooftop 38 樓高空酒吧", sub: "萬豪侯爵英倫花園沙發座小酌", category: "餐飲" }
-        ]
-      },
-      4: {
-        dateStr: "09.19 (六)",
-        desc: "9/19 (六) 冠軍咖啡 · 森林秘境 · 退稅返台",
-        highlights: [
-          { title: "Factory 咖啡", sub: "神級特調外送", key: "d4_factory" },
-          { title: "The Wood Land", sub: "秘境森林咖啡", key: "d4_woodland" },
-          { title: "華航返台", sub: "退稅託運CI836", key: "d4_airport" }
-        ],
-        activities: [
-          { key: "d4_factory", time: "08:30", icon: "utensils", title: "Factory Coffee 冠軍咖啡外送", sub: "Grab App 直送飯店大廳，免排隊", category: "餐飲" },
-          { key: "d4_woodland", time: "09:30", icon: "landmark", title: "The Wood Land 森林系露天散步", sub: "飯店巷弄步行 5 分鐘享受樹蔭手沖", category: "景點" },
-          { key: "d4_checkout", time: "12:00", icon: "building-2", title: "飯店退房 & 行李清點", sub: "辦理退房手續、準備出發前往機場", category: "交通" },
-          { key: "d4_airport", time: "13:30", icon: "plane", title: "前往 BKK 機場 ➔ 退稅託運返台", sub: "搭廂型車直達機場，搭乘 CI836", category: "交通" }
-        ]
-      }
+      1: { dateStr: "09.16 (三)", desc: "9/16 (三) 抵達 · Siam分流逛街按摩 · 碼頭夜市聚餐", highlights: [{ title: "海南雞飯", sub: "Paragon必吃", key: "d1_lunch" }, { title: "Siam 商圈", sub: "自由分流逛街", key: "d1_split" }, { title: "Asiatique", sub: "26人大聚餐", key: "d1_dinner" }], activities: [{ key: "d1_flight", time: "09:45", icon: "plane", title: "抵達素萬那普機場 (BKK)", sub: "入境、領行李、上網測試", category: "交通" }, { key: "d1_hotel", time: "10:30", icon: "building-2", title: "Cross Vibe 飯店寄行李", sub: "專車直達、巷口 K79 換泰銖", category: "交通" }, { key: "d1_lunch", time: "12:00", icon: "utensils", title: "Siam Paragon 海南雞飯午餐", sub: "美食街招牌雙拼白切+炸雞", category: "餐飲" }, { key: "d1_split", time: "13:00", icon: "shopping-bag", title: "午後自由分流：逛街組 vs 按摩組", sub: "garcon dept 選品 / Nikko 泰式舒壓", category: "購物" }, { key: "d1_boat", time: "15:40", icon: "anchor", title: "BTS Siam 集合 ➔ 免費接駁船", sub: "轉深綠線至中央碼頭趕船", category: "交通" }, { key: "d1_dinner", time: "17:00", icon: "utensils", title: "Asiatique 碼頭夜市 26人合菜", sub: "6號倉庫 Peppery Thai Bistro", category: "餐飲" }, { key: "d1_night", time: "19:00", icon: "landmark", title: "碼頭夜市自由散策 ✕ 高空鞦韆", sub: "NaRaYa 採買、Sky Flyer 體驗", category: "景點" }, { key: "d1_rest", time: "21:30", icon: "building-2", title: "返回 Cross Vibe 飯店休息", sub: "分車叫 Grab 或搭 BTS 回 On Nut", category: "交通" }] },
+      2: { dateStr: "09.17 (四)", desc: "9/17 (四) 經典地標導覽 · 水上夜市 · 頂級SPA", highlights: [{ title: "大皇宮玉佛寺", sub: "必訪經典地標", key: "d2_klook" }, { title: "ICONSIAM", sub: "室內水上市集", key: "d2_iconsiam" }, { title: "DIORA SPA", sub: "120分精油舒壓", key: "d2_diora" }], activities: [{ key: "d2_klook", time: "09:00", icon: "landmark", title: "Klook 曼谷經典地標一日遊", sub: "大皇宮、玉佛寺、臥佛寺、鄭王廟", category: "景點" }, { key: "d2_iconsiam", time: "16:00", icon: "shopping-bag", title: "渡輪直達 ICONSIAM 水上市集", sub: "SOOKSIAM 傳統小吃 & 2F 河景露台", category: "景點" }, { key: "d2_diora", time: "19:45", icon: "sparkles", title: "DIORA Luxe 120 分鐘全身 SPA", sub: "頂級客製化草藥精油全身舒壓", category: "景點" }, { key: "d2_return", time: "22:15", icon: "building-2", title: "返回飯店休息就寢", sub: "叫車 10 分鐘直達飯店，帶著香氣入眠", category: "交通" }] },
+      3: { dateStr: "09.18 (五)", desc: "9/18 (五) 航站百貨 · 松瓦路散策 · 高空酒吧", highlights: [{ title: "Terminal 21", sub: "航站主題百貨", key: "d3_t21" }, { title: "松瓦路老街", sub: "文青咖啡散策", key: "d3_songwat" }, { title: "ABar 酒吧", sub: "38F英倫花園", key: "d3_abar" }], activities: [{ key: "d3_t21", time: "10:30", icon: "shopping-bag", title: "Terminal 21 採買 ＋ 午餐", sub: "吹冷氣選品、Have a Zeed 泰式合菜", category: "購物" }, { key: "d3_samatha", time: "14:30", icon: "sparkles", title: "Samatha 泰式按摩舒壓", sub: "Office Syndrome 久坐肩頸放鬆專門", category: "景點" }, { key: "d3_songwat", time: "16:30", icon: "landmark", title: "松瓦路（Song Wat Road）老街散策", sub: "Pista& 開心果冰淇淋、Copenn. 香氛", category: "景點" }, { key: "d3_abar", time: "21:00", icon: "utensils", title: "ABar Rooftop 38 樓高空酒吧", sub: "萬豪侯爵英倫花園沙發座小酌", category: "餐飲" }] },
+      4: { dateStr: "09.19 (六)", desc: "9/19 (六) 冠軍咖啡 · 森林秘境 · 退稅返台", highlights: [{ title: "Factory 咖啡", sub: "神級特調外送", key: "d4_factory" }, { title: "The Wood Land", sub: "秘境森林咖啡", key: "d4_woodland" }, { title: "華航返台", sub: "退稅託運CI836", key: "d4_airport" }], activities: [{ key: "d4_factory", time: "08:30", icon: "utensils", title: "Factory Coffee 冠軍咖啡外送", sub: "Grab App 直送飯店大廳，免排隊", category: "餐飲" }, { key: "d4_woodland", time: "09:30", icon: "landmark", title: "The Wood Land 森林系露天散步", sub: "飯店巷弄步行 5 分鐘享受樹蔭手沖", category: "景點" }, { key: "d4_checkout", time: "12:00", icon: "building-2", title: "飯店退房 & 行李清點", sub: "辦理退房手續、準備出發前往機場", category: "交通" }, { key: "d4_airport", time: "13:30", icon: "plane", title: "前往 BKK 機場 ➔ 退稅託運返台", sub: "搭廂型車直達機場，搭乘 CI836", category: "交通" }] }
     };
 
     const activitiesDetailData = {
-      'd1_flight': {
-        time: "09:45",
-        category: "交通",
-        title: "抵達素萬那普機場 (BKK)",
-        subhead: "入境泰國、領取行李、開啟 eSIM",
-        desc: "搭乘華航 CI833 順利降落曼谷。出境大廳領取行李後，開啟 5G eSIM 數據漫遊確認連線，隨後至 B 號門綠色通道與專車司機會合直達飯店。",
-        transitDesc: "B 號門綠色通道集合，直達 Cross Vibe 飯店（約 35 分鐘）",
-        notes: ["出關前請確認手機數據漫遊已開啟。", "台幣現鈔 1.5 萬備查使用。", "隨身行李請妥善保管護照。"],
-        rain: null,
-        locations: [{ name: "素萬那普機場 (BKK)", address: "Suvarnabhumi Airport, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport" }]
-      },
-      'd1_hotel': {
-        time: "10:30",
-        category: "交通",
-        title: "Cross Vibe Bangkok Sukhumvit",
-        subhead: "寄放行李 & K79 換匯所",
-        desc: "專車抵達飯店後先於櫃檯寄放大件行李。出飯店走至 Sukhumvit 52 巷口即是 K79 換匯所，匯率與市區 SuperRich 相當，持台幣千元現鈔直接換泰銖超划算。",
-        transitDesc: "Sukhumvit 52 巷，鄰近 BTS On Nut 站 1 號出口步行 5 分鐘",
-        notes: ["持護照及台幣千元鈔於 K79 換匯。", "寄放行李記得索取行李領取號牌。", "飯店電話：+66-2-331-9091。"],
-        rain: null,
-        locations: [{ name: "Cross Vibe Bangkok 飯店", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }]
-      },
-      'd1_lunch': {
-        time: "12:00",
-        category: "餐飲",
-        title: "Siam Paragon 海南雞飯午餐",
-        subhead: "G 樓美食街超人氣排隊名店",
-        desc: "前往全冷氣舒適的 Siam Paragon G 樓 Food Hall。必點招牌雙拼海南雞飯（滑嫩白切雞搭配香脆炸雞），米飯吸飽雞油甘甜可口，完全無辣無青菜負擔。",
-        transitDesc: "從 BTS On Nut 站搭淺綠線直達 BTS Siam 站（約 15 分鐘免轉車）",
-        notes: ["點餐出示保命字卡：Mai Phet（不要辣）、Mai Sai Phakchi（不加香菜）。", "美食街採感應卡先儲值點餐，餘額全額退現。"],
-        rain: null,
-        locations: [{ name: "Siam Paragon Food Hall (G 樓)", address: "991 Rama I Rd, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Siam+Paragon+Food+Hall" }]
-      },
-      'd1_split': {
-        time: "13:00",
-        category: "購物",
-        title: "午後自由分流：逛街組 vs 按摩組",
-        subhead: "Siam Square 潮流文創與經絡舒壓",
-        desc: `
-          <div class="space-y-2">
-            <div class="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#ECEAE4]">
-              <strong class="text-[#1F1F1F] block text-xs">🛍️【逛街組】</strong>
-              <span class="text-[11.5px] text-[#555555]">前往 Siam Square Soi 2 探索 <strong>garcon dept</strong> 中性文青選物與 Gentlewoman 旗艦店，也可至 After You 品嚐泰奶雪花冰。</span>
-            </div>
-            <div class="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#ECEAE4]">
-              <strong class="text-[#1F1F1F] block text-xs">💆【按摩組】</strong>
-              <span class="text-[11.5px] text-[#555555]">至 Soi 5 巷 <strong>Nikko Thai Massage Signature</strong> 享受 60 分鐘專業足底經絡舒壓放鬆。</span>
-            </div>
-          </div>
-        `,
-        transitDesc: "從 Siam Paragon 經室內連通空橋步行 2 分鐘即達 Siam Square",
-        notes: ["兩組成員請務必於 15:40 在 BTS Siam 站 4 號出口集合趕船！", "按摩技師小費約 50–100 ฿ 現金。"],
-        rain: "若遇大雨，直接走室內空橋逛 Siam Center 與 Siam Discovery 旗艦店，全程免淋雨！",
-        locations: [
-          { name: "🛍️ 逛街組：Siam Square", address: "Siam Square Soi 2, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Siam+Square+Bangkok" },
-          { name: "💆 按摩組：Nikko Thai Massage", address: "Siam Square Soi 5, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Nikko+Thai+Massage+Siam+Square+Soi+5" }
-        ]
-      },
-      'd1_boat': {
-        time: "15:40",
-        category: "交通",
-        title: "BTS Siam 集合 ➔ 免費接駁船",
-        subhead: "轉深綠線至中央碼頭搭船前往 Asiatique",
-        desc: "全員於 BTS Siam 站閘門會合，同月台換乘深綠色席隆線至 Saphan Taksin 站（S6），出 2 號出口至中央碼頭最左側搭乘免費接駁渡輪前往碼頭夜市。",
-        transitDesc: "BTS 車程約 12 分鐘 ➔ 碼頭渡輪約 10 分鐘直達夜市碼頭",
-        notes: ["認明最左側標註 Asiatique 的免費排隊隊伍。", "航程可吹微風遠眺昭披耶河黃昏美景。"],
-        rain: null,
-        locations: [{ name: "中央碼頭 Sathorn Pier (2號出口)", address: "Sathorn Pier, Yan Nawa, Sathon, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Sathorn+Pier" }]
-      },
-      'd1_dinner': {
-        time: "17:00",
-        category: "餐飲",
-        title: "Asiatique 碼頭夜市 26 人合菜",
-        subhead: "6 號倉庫 Peppery Thai Bistro 大聚餐",
-        desc: "下船直走進入 6 號倉庫。豐盛合菜包含香酥蟹肉煎蛋、黃咖哩炒海鮮、原味烤豬頸肉（醬料分開裝）與蒜香軟殼蟹，滿足無辣、無青菜的美味蛋白質盛宴。",
-        transitDesc: "Asiatique 碼頭下船沿著中央大街直走 2 分鐘進入 6 號倉庫",
-        notes: ["已預約 26 人合菜大桌，全員準時入席開動。", "人均預算約 600 THB，由記帳組統一結帳分攤。"],
-        rain: "Asiatique 擁有 1–10 號室內連通倉庫，下雨可完全於室內廊道穿梭。",
-        locations: [{ name: "Peppery Thai Bistro (6號倉庫)", address: "Warehouse 6, Asiatique The Riverfront, Bangkok", map: "https://maps.app.goo.gl/HzgJuzk2fcd8fexDA" }]
-      },
-      'd1_night': {
-        time: "19:00",
-        category: "景點",
-        title: "碼頭夜市自由散策 ✕ 高空鞦韆",
-        subhead: "Sky Flyer、NaRaYa 旗艦店與河畔夜景",
-        desc: "飯後在園區自由散步，可體驗 36 層樓高刺激又浪漫的 Sky Flyer 高空旋轉鞦韆或巨型摩天輪，並至 NaRaYa 旗艦店採買曼谷包伴手禮。",
-        transitDesc: "夜市各倉庫彼此相連，步行即可抵達各設施與商店",
-        notes: ["高空鞦韆體驗票價約 250–300 ฿。", "園區伴手禮店支援信用卡或現金支付。"],
-        rain: "遇雨可轉移至 1-10 號室內倉庫，或叫車前往鄰近 Big C 賣場採買零食伴手禮。",
-        locations: [{ name: "Sky Flyer Asiatique 高空鞦韆", address: "Asiatique The Riverfront, Bang Kho Laem, Bangkok", map: "https://maps.app.goo.gl/ji7t9ygMKGeBFLK68" }]
-      },
-      'd1_rest': {
-        time: "21:30",
-        category: "交通",
-        title: "返回 Cross Vibe 飯店休息",
-        subhead: "養精蓄銳，準備明日文化行",
-        desc: "可搭免費接駁船回中央碼頭轉 BTS 回 On Nut 站，或 26 人分車使用 Grab / Bolt 叫車直達飯店大廳，準備明日充沛體力。",
-        transitDesc: "車程約 25 分鐘回到 Sukhumvit 52 巷飯店",
-        notes: ["回房後請確認明早出發著裝合規（有袖過膝）。", "早點洗澡休息放鬆！"],
-        rain: null,
-        locations: [{ name: "Cross Vibe Bangkok Sukhumvit", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }]
-      },
+      'd1_flight': { time: "09:45", category: "交通", title: "抵達素萬那普機場 (BKK)", subhead: "入境泰國、領取行李、開啟 eSIM", desc: "搭乘華航 CI833 順利降落曼谷。出境大廳領取行李後，開啟 5G eSIM 數據漫遊確認連線，隨後至 B 號門綠色通道與專車司機會合直達飯店。", transitDesc: "B 號門綠色通道集合，直達 Cross Vibe 飯店（約 35 分鐘）", notes: ["出關前請確認手機數據漫遊已開啟。", "台幣現鈔 1.5 萬備查使用。", "隨身行李請妥善保管護照。"], rain: null, locations: [{ name: "素萬那普機場 (BKK)", address: "Suvarnabhumi Airport, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport" }] },
+      'd1_hotel': { time: "10:30", category: "交通", title: "Cross Vibe Bangkok Sukhumvit", subhead: "寄放行李 & K79 換匯所", desc: "專車抵達飯店後先於櫃檯寄放大件行李。出飯店走至 Sukhumvit 52 巷口即是 K79 換匯所，匯率與市區 SuperRich 相當，持台幣千元現鈔直接換泰銖超划算。", transitDesc: "Sukhumvit 52 巷，鄰近 BTS On Nut 站 1 號出口步行 5 分鐘", notes: ["持護照及台幣千元鈔於 K79 換匯。", "寄放行李記得索取行李領取號牌。", "飯店電話：+66-2-331-9091。"], rain: null, locations: [{ name: "Cross Vibe Bangkok 飯店", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }] },
+      'd1_lunch': { time: "12:00", category: "餐飲", title: "Siam Paragon 海南雞飯午餐", subhead: "G 樓美食街超人氣排隊名店", desc: "前往全冷氣舒適的 Siam Paragon G 樓 Food Hall。必點招牌雙拼海南雞飯（滑嫩白切雞搭配香脆炸雞），米飯吸飽雞油甘甜可口，完全無辣無青菜負擔。", transitDesc: "從 BTS On Nut 站搭淺綠線直達 BTS Siam 站（約 15 分鐘免轉車）", notes: ["點餐出示保命字卡：Mai Phet（不要辣）、Mai Sai Phakchi（不加香菜）。", "美食街採感應卡先儲值點餐，餘額全額退現。"], rain: null, locations: [{ name: "Siam Paragon Food Hall (G 樓)", address: "991 Rama I Rd, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Siam+Paragon+Food+Hall" }] },
+      'd1_split': { time: "13:00", category: "購物", title: "午後自由分流：逛街組 vs 按摩組", subhead: "Siam Square 潮流文創與經絡舒壓", desc: `<div class="space-y-2"><div class="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#ECEAE4]"><strong class="text-[#1F1F1F] block text-xs">🛍️【逛街組】</strong><span class="text-[11.5px] text-[#555555]">前往 Siam Square Soi 2 探索 <strong>garcon dept</strong> 中性文青選物與 Gentlewoman 旗艦店，也可至 After You 品嚐泰奶雪花冰。</span></div><div class="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#ECEAE4]"><strong class="text-[#1F1F1F] block text-xs">💆【按摩組】</strong><span class="text-[11.5px] text-[#555555]">至 Soi 5 巷 <strong>Nikko Thai Massage Signature</strong> 享受 60 分鐘專業足底經絡舒壓放鬆。</span></div></div>`, transitDesc: "從 Siam Paragon 經室內連通空橋步行 2 分鐘即達 Siam Square", notes: ["兩組成員請務必於 15:40 在 BTS Siam 站 4 號出口集合趕船！", "按摩技師小費約 50–100 ฿ 現金。"], rain: "若遇大雨，直接走室內空橋逛 Siam Center 與 Siam Discovery 旗艦店，全程免淋雨！", locations: [{ name: "🛍️ 逛街組：Siam Square", address: "Siam Square Soi 2, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Siam+Square+Bangkok" }, { name: "💆 按摩組：Nikko Thai Massage", address: "Siam Square Soi 5, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Nikko+Thai+Massage+Siam+Square+Soi+5" }] },
+      'd1_boat': { time: "15:40", category: "交通", title: "BTS Siam 集合 ➔ 免費接駁船", subhead: "轉深綠線至中央碼頭搭船前往 Asiatique", desc: "全員於 BTS Siam 站閘門會合，同月台換乘深綠色席隆線至 Saphan Taksin 站（S6），出 2 號出口至中央碼頭最左側搭乘免費接駁渡輪前往碼頭夜市。", transitDesc: "BTS 車程約 12 分鐘 ➔ 碼頭渡輪約 10 分鐘直達夜市碼頭", notes: ["認明最左側標註 Asiatique 的免費排隊隊伍。", "航程可吹微風遠眺昭披耶河黃昏美景。"], rain: null, locations: [{ name: "中央碼頭 Sathorn Pier (2號出口)", address: "Sathorn Pier, Yan Nawa, Sathon, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Sathorn+Pier" }] },
+      'd1_dinner': { time: "17:00", category: "餐飲", title: "Asiatique 碼頭夜市 26 人合菜", subhead: "6 號倉庫 Peppery Thai Bistro 大聚餐", desc: "下船直走進入 6 號倉庫。豐盛合菜包含香酥蟹肉煎蛋、黃咖哩炒海鮮、原味烤豬頸肉（醬料分開裝）與蒜香軟殼蟹，滿足無辣、無青菜的美味蛋白質盛宴。", transitDesc: "Asiatique 碼頭下船沿著中央大街直走 2 分鐘進入 6 號倉庫", notes: ["已預約 26 人合菜大桌，全員準時入席開動。", "人均預算約 600 THB，由記帳組統一結帳分攤。"], rain: "Asiatique 擁有 1–10 號室內連通倉庫，下雨可完全於室內廊道穿梭。", locations: [{ name: "Peppery Thai Bistro (6號倉庫)", address: "Warehouse 6, Asiatique The Riverfront, Bangkok", map: "https://maps.app.goo.gl/HzgJuzk2fcd8fexDA" }] },
+      'd1_night': { time: "19:00", category: "景點", title: "碼頭夜市自由散策 ✕ 高空鞦韆", subhead: "Sky Flyer、NaRaYa 旗艦店與河畔夜景", desc: "飯後在園區自由散步，可體驗 36 層樓高刺激又浪漫的 Sky Flyer 高空旋轉鞦韆或巨型摩天輪，並至 NaRaYa 旗艦店採買曼谷包伴手禮。", transitDesc: "夜市各倉庫彼此相連，步行即可抵達各設施與商店", notes: ["高空鞦韆體驗票價約 250–300 ฿。", "園區伴手禮店支援信用卡或現金支付。"], rain: "遇雨可轉移至 1-10 號室內倉庫，或叫車前往鄰近 Big C 賣場採買零食伴手禮。", locations: [{ name: "Sky Flyer Asiatique 高空鞦韆", address: "Asiatique The Riverfront, Bang Kho Laem, Bangkok", map: "https://maps.app.goo.gl/ji7t9ygMKGeBFLK68" }] },
+      'd1_rest': { time: "21:30", category: "交通", title: "返回 Cross Vibe 飯店休息", subhead: "養精蓄銳，準備明日文化行", desc: "可搭免費接駁船回中央碼頭轉 BTS 回 On Nut 站，或 26 人分車使用 Grab / Bolt 叫車直達飯店大廳，準備明日充沛體力。", transitDesc: "車程約 25 分鐘回到 Sukhumvit 52 巷飯店", notes: ["回房後請確認明早出發著裝合規（有袖過膝）。", "早點洗澡休息放鬆！"], rain: null, locations: [{ name: "Cross Vibe Bangkok Sukhumvit", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }] },
       // Day 2
-      'd2_klook': {
-        time: "09:00",
-        category: "景點",
-        title: "Klook 曼谷經典地標一日遊",
-        subhead: "大皇宮、玉佛寺、臥佛寺、鄭王廟",
-        desc: "09:00 集合出發！專業中文導遊帶領探索曼谷最璀璨的文化遺產。參拜金碧輝煌的玉佛寺主殿、臥佛寺巨大臥佛，並乘船渡河前往鄭王廟欣賞純白細緻的瓷雕塔尖。行程尾聲由導遊帶領搭乘渡輪直達 ICONSIAM 解散。",
-        transitDesc: "09:00 於 Siam Paragon 1 號門集合出發，冷氣專車全程接送，最後一段乘船直達 ICONSIAM",
-        notes: ["嚴格著裝：嚴禁無袖背心、短褲短裙、破洞褲，需穿有袖上衣與過膝下裝！", "已預先訂妥門票與中文導覽。"],
-        rain: "若遇短暫陣雨，導遊會引領轉入玉佛寺與臥佛寺之挑高室內主殿避雨參拜。",
-        locations: [{ name: "暹羅宮 1 號門（Siam Paragon Gate 1）", address: "Siam Paragon 1F Gate 1 (近 BTS Siam 站出口)", map: "https://www.google.com/maps/search/?api=1&query=Siam+Paragon+Gate+1" }]
-      },
-      'd2_iconsiam': {
-        time: "16:00",
-        category: "景點",
-        title: "ICONSIAM SOOKSIAM 水上市集",
-        subhead: "室內泰國道地小吃與 2F 河景露台",
-        desc: "Klook 一日遊專船直達 ICONSIAM 專屬碼頭解散。G 樓水上市集搜刮炭烤椰奶甜肉串 (20B)、現切水仙芒果糯米飯、香蕉煎餅；隨後至 2 樓 Apple Store 戶外空中花園俯瞰河畔百萬夕陽夜景。",
-        transitDesc: "Klook 寺廟遊行程最後一段直接由渡輪送抵 ICONSIAM 碼頭解散",
-        notes: ["水上市集小吃推薦付現或使用支付。", "2 樓戶外花園免費進入，拍照視野極佳。"],
-        rain: "ICONSIAM 為全室內商場，遇雨可直通 4-5 樓 ICONCRAFT 工藝設計館與 7 樓室內瀑布。",
-        locations: [{ name: "ICONSIAM SOOKSIAM 水上市集", address: "299 Charoen Nakhon Rd, Khlong San, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=ICONSIAM" }]
-      },
-      'd2_diora': {
-        time: "19:45",
-        category: "景點",
-        title: "DIORA Luxe 120 分鐘全身 SPA",
-        subhead: "Sukhumvit Soi 22 頂級精油草藥舒壓",
-        desc: "從 ICONSIAM 搭車至 BTS Phrom Phong 附近的 DIORA Luxe。花瓣淨足儀式後，享受 120 分鐘客製化溫熱香氛精油推拿，徹底卸下一整天行走的肌肉疲憊。",
-        transitDesc: "從 ICONSIAM 叫 Grab 直達 Soi 22 巷（約 20 分鐘）",
-        notes: ["療程費用約 1,900–2,200 ฿，技師小費約 100–150 ฿ 現金。", "按完直接帶著天然精油香氣回飯店入睡。"],
-        rain: null,
-        locations: [{ name: "DIORA Luxe Sukhumvit (Soi 22)", address: "Sukhumvit Soi 22, Khlong Toei, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=DIORA+Luxe+Sukhumvit" }]
-      },
-      'd2_return': {
-        time: "22:15",
-        category: "交通",
-        title: "輕鬆返回 Cross Vibe 飯店",
-        subhead: "結束充實文化放鬆日",
-        desc: "DIORA 按摩結束後，於巷口使用 Grab 叫車 10 分鐘直達 Cross Vibe 飯店，或步行至 BTS Phrom Phong 搭乘 3 站回 On Nut 站。",
-        transitDesc: "短程叫車約 10 分鐘即可安全抵達飯店",
-        notes: ["深夜叫車請認明車牌號碼。", "房內準備就緒迎接明日購物採買！"],
-        rain: null,
-        locations: [{ name: "Cross Vibe Bangkok 飯店", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }]
-      },
+      'd2_klook': { time: "09:00", category: "景點", title: "Klook 曼谷經典地標一日遊", subhead: "大皇宮、玉佛寺、臥佛寺、鄭王廟", desc: "09:00 集合出發！專業中文導遊帶領探索曼谷最璀璨的文化遺產。參拜金碧輝煌的玉佛寺主殿、臥佛寺巨大臥佛，並乘船渡河前往鄭王廟欣賞純白細緻的瓷雕塔尖。行程尾聲由導遊帶領搭乘渡輪直達 ICONSIAM 解散。", transitDesc: "09:00 於 Siam Paragon 1 號門集合出發，冷氣專車全程接送，最後一段乘船直達 ICONSIAM", notes: ["嚴格著裝：嚴禁無袖背心、短褲短裙、破洞褲，需穿有袖上衣與過膝下裝！", "已預先訂妥門票與中文導覽。"], rain: "若遇短暫陣雨，導遊會引領轉入玉佛寺與臥佛寺之挑高室內主殿避雨參拜。", locations: [{ name: "暹羅宮 1 號門（Siam Paragon Gate 1）", address: "Siam Paragon 1F Gate 1 (近 BTS Siam 站出口)", map: "https://www.google.com/maps/search/?api=1&query=Siam+Paragon+Gate+1" }] },
+      'd2_iconsiam': { time: "16:00", category: "景點", title: "ICONSIAM SOOKSIAM 水上市集", subhead: "室內泰國道地小吃與 2F 河景露台", desc: "Klook 一日遊專船直達 ICONSIAM 專屬碼頭解散。G 樓水上市集搜刮炭烤椰奶甜肉串 (20B)、現切水仙芒果糯米飯、香蕉煎餅；隨後至 2 樓 Apple Store 戶外空中花園俯瞰河畔百萬夕陽夜景。", transitDesc: "Klook 寺廟遊行程最後一段直接由渡輪送抵 ICONSIAM 碼頭解散", notes: ["水上市集小吃推薦付現或使用支付。", "2 樓戶外花園免費進入，拍照視野極佳。"], rain: "ICONSIAM 為全室內商場，遇雨可直通 4-5 樓 ICONCRAFT 工藝設計館與 7 樓室內瀑布。", locations: [{ name: "ICONSIAM SOOKSIAM 水上市集", address: "299 Charoen Nakhon Rd, Khlong San, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=ICONSIAM" }] },
+      'd2_diora': { time: "19:45", category: "景點", title: "DIORA Luxe 120 分鐘全身 SPA", subhead: "Sukhumvit Soi 22 頂級精油草藥舒壓", desc: "從 ICONSIAM 搭車至 BTS Phrom Phong 附近的 DIORA Luxe。花瓣淨足儀式後，享受 120 分鐘客製化溫熱香氛精油推拿，徹底卸下一整天行走的肌肉疲憊。", transitDesc: "從 ICONSIAM 叫 Grab 直達 Soi 22 巷（約 20 分鐘）", notes: ["療程費用約 1,900–2,200 ฿，技師小費約 100–150 ฿ 現金。", "按完直接帶著天然精油香氣回飯店入睡。"], rain: null, locations: [{ name: "DIORA Luxe Sukhumvit (Soi 22)", address: "Sukhumvit Soi 22, Khlong Toei, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=DIORA+Luxe+Sukhumvit" }] },
+      'd2_return': { time: "22:15", category: "交通", title: "輕鬆返回 Cross Vibe 飯店", subhead: "結束充實文化放鬆日", desc: "DIORA 按摩結束後，於巷口使用 Grab 叫車 10 分鐘直達 Cross Vibe 飯店，或步行至 BTS Phrom Phong 搭乘 3 站回 On Nut 站。", transitDesc: "短程叫車約 10 分鐘即可安全抵達飯店", notes: ["深夜叫車請認明車牌號碼。", "房內準備就緒迎接明日購物採買！"], rain: null, locations: [{ name: "Cross Vibe Bangkok 飯店", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }] },
       // Day 3
-      'd3_t21': {
-        time: "10:30",
-        category: "購物",
-        title: "Terminal 21 Asok 採買 ＋ 午餐",
-        subhead: "航站主題百貨吹冷氣 & Have a Zeed",
-        desc: "停留 3.5 小時超悠閒！在 1-3 樓逛泰國新銳設計師小眾服飾，LG 樓 Gourmet Market 超市免排隊買齊手標茶與芒果乾；4 樓 Have a Zeed 享用香酥蟹肉煎蛋與黃咖哩海鮮。",
-        transitDesc: "BTS On Nut 站直達 BTS Asok 站，空橋直接進入商場",
-        notes: ["單店消費滿 2,000 ฿ 記得向店家索取退稅單 (P.P.10)。", "頂樓 Pier 21 美食街亦有平價泰式甜點。"],
-        rain: "全室內大型空調商場，雨天完全無憂。",
-        locations: [{ name: "Terminal 21 Asok 百貨", address: "88 Sukhumvit Soi 19, Khlong Toei Nuea, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Terminal+21+Asok" }]
-      },
-      'd3_samatha': {
-        time: "14:30",
-        category: "景點",
-        title: "Samatha 泰式肩頸舒壓按摩",
-        subhead: "專為辦公室久坐族設計的深層無痛放鬆",
-        desc: "前往華藍蓬老城區附近的 Samatha。手法溫和沉穩不暴力，針對長時間低頭看手機與久坐造成的肩頸背僵硬進行 90 分鐘專門調理，舒適無痛。",
-        transitDesc: "由 Asok 搭乘 MRT 或叫車直達華藍蓬站附近（約 20 分鐘）",
-        notes: ["需提前確認預約包廂席次。", "療程費用約 1,350 ฿。"],
-        rain: null,
-        locations: [{ name: "Samatha Thai Massage", address: "Rong Mueang, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Samatha+Thai+Massage+Rong+Mueang" }]
-      },
-      'd3_songwat': {
-        time: "16:30",
-        category: "景點",
-        title: "松瓦路（Song Wat Road）老街散策",
-        subhead: "百年老宅、特色咖啡與日落河畔",
-        desc: "曼谷最熱門文青老街！品嚐 Google 4.8 星 Pista& 開心果提拉米蘇與杜拜巧克力軟餅乾、在 Copenn. 體驗工業風木質調擴香，並在河畔旁欣賞 18:15 昭披耶河黃金夕陽。",
-        transitDesc: "按摩後步行或短程車程 3 分鐘即可到達松瓦路石龍軍街區",
-        notes: ["老宅咖啡店內多適合拍照與小額現金支付。", "夕陽約在 18:15–18:30 落下，請把握光線。"],
-        rain: "松瓦路主要店家皆為獨立老宅室內空間，叫車點對點進店拍照完全不受影響。",
-        locations: [{ name: "松瓦路 Song Wat 文青老街", address: "Song Wat Rd, Samphanthawong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Song+Wat+Road+Bangkok" }]
-      },
-      'd3_abar': {
-        time: "21:00",
-        category: "餐飲",
-        title: "ABar Rooftop 38 樓英倫花園酒吧",
-        subhead: "萬豪侯爵酒店高空景觀微醺夜",
-        desc: "隱身萬豪侯爵飯店 38 樓的露天英倫綠意空中花園。擁有全曼谷最豐富的琴酒庫藏，坐在舒適寬敞的沙發座上微風輕拂，飽覽曼谷繁華無邊的璀璨天際線夜景。",
-        transitDesc: "搭乘 Grab 直達 Sukhumvit Soi 22 萬豪侯爵酒店搭梯至 38 樓",
-        notes: ["著裝規範：Smart Casual（嚴禁拖鞋、運動背心）。", "調酒均價約 600–850 ฿ / 杯。"],
-        rain: "若遇下雨，服務人員會直接將座位無縫移至 37 樓室內英倫復古酒吧，享受完全相同酒單！",
-        locations: [{ name: "ABar Rooftop (萬豪侯爵 38F)", address: "199 Sukhumvit Soi 22, Khlong Toei, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=ABar+Rooftop" }]
-      },
+      'd3_t21': { time: "10:30", category: "購物", title: "Terminal 21 Asok 採買 ＋ 午餐", subhead: "航站主題百貨吹冷氣 & Have a Zeed", desc: "停留 3.5 小時超悠閒！在 1-3 樓逛泰國新銳設計師小眾服飾，LG 樓 Gourmet Market 超市免排隊買齊手標茶與芒果乾；4 樓 Have a Zeed 享用香酥蟹肉煎蛋與黃咖哩海鮮。", transitDesc: "BTS On Nut 站直達 BTS Asok 站，空橋直接進入商場", notes: ["單店消費滿 2,000 ฿ 記得向店家索取退稅單 (P.P.10)。", "頂樓 Pier 21 美食街亦有平價泰式甜點。"], rain: "全室內大型空調商場，雨天完全無憂。", locations: [{ name: "Terminal 21 Asok 百貨", address: "88 Sukhumvit Soi 19, Khlong Toei Nuea, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Terminal+21+Asok" }] },
+      'd3_samatha': { time: "14:30", category: "景點", title: "Samatha 泰式肩頸舒壓按摩", subhead: "專為辦公室久坐族設計的深層無痛放鬆", desc: "前往華藍蓬老城區附近的 Samatha。手法溫和沉穩不暴力，針對長時間低頭看手機與久坐造成的肩頸背僵硬進行 90 分鐘專門調理，舒適無痛。", transitDesc: "由 Asok 搭乘 MRT 或叫車直達華藍蓬站附近（約 20 分鐘）", notes: ["需提前確認預約包廂席次。", "療程費用約 1,350 ฿。"], rain: null, locations: [{ name: "Samatha Thai Massage", address: "Rong Mueang, Pathum Wan, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Samatha+Thai+Massage+Rong+Mueang" }] },
+      'd3_songwat': { time: "16:30", category: "景點", title: "松瓦路（Song Wat Road）老街散策", subhead: "百年老宅、特色咖啡與日落河畔", desc: "曼谷最熱門文青老街！品嚐 Google 4.8 星 Pista& 開心果提拉米蘇與杜拜巧克力軟餅乾、在 Copenn. 體驗工業風木質調擴香，並在河畔旁欣賞 18:15 昭披耶河黃金夕陽。", transitDesc: "按摩後步行或短程車程 3 分鐘即可到達松瓦路石龍軍街區", notes: ["老宅咖啡店內多適合拍照與小額現金支付。", "夕陽約在 18:15–18:30 落下，請把握光線。"], rain: "松瓦路主要店家皆為獨立老宅室內空間，叫車點對點進店拍照完全不受影響。", locations: [{ name: "松瓦路 Song Wat 文青老街", address: "Song Wat Rd, Samphanthawong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Song+Wat+Road+Bangkok" }] },
+      'd3_abar': { time: "21:00", category: "餐飲", title: "ABar Rooftop 38 樓英倫花園酒吧", subhead: "萬豪侯爵酒店高空景觀微醺夜", desc: "隱身萬豪侯爵飯店 38 樓的露天英倫綠意空中花園。擁有全曼谷最豐富的琴酒庫藏，坐在舒適寬敞的沙發座上微風輕拂，飽覽曼谷繁華無邊的璀璨天際線夜景。", transitDesc: "搭乘 Grab 直達 Sukhumvit Soi 22 萬豪侯爵酒店搭梯至 38 樓", notes: ["著裝規範：Smart Casual（嚴禁拖鞋、運動背心）。", "調酒均價約 600–850 ฿ / 杯。"], rain: "若遇下雨，服務人員會直接將座位無縫移至 37 樓室內英倫復古酒吧，享受完全相同酒單！", locations: [{ name: "ABar Rooftop (萬豪侯爵 38F)", address: "199 Sukhumvit Soi 22, Khlong Toei, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=ABar+Rooftop" }] },
       // Day 4
-      'd4_factory': {
-        time: "08:30",
-        category: "餐飲",
-        title: "Factory Coffee 冠軍咖啡外送",
-        subhead: "Grab 外送直送飯店大廳",
-        desc: "泰國咖啡大賽冠軍神級名店！免去跨城排隊一小時，早上直接使用 Grab App 叫外送至 Cross Vibe 大廳，享受招牌 Dirty 咖啡、特調冷萃與現烤可頌。",
-        transitDesc: "打開手機 Grab 點餐，30 分鐘內直送大廳櫃台",
-        notes: ["可由記帳組統一代表訂餐後分攤。", "推薦招牌 Supreme 特調與杏仁可頌。"],
-        rain: null,
-        locations: [{ name: "Factory Coffee 實體門市", address: "49 Phayathai Rd, Ratchathewi, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Factory+Coffee+Bangkok" }]
-      },
-      'd4_woodland': {
-        time: "09:30",
-        category: "景點",
-        title: "The Wood Land 森林系露天散步",
-        subhead: "飯店巷弄秘境咖啡木質庭院",
-        desc: "位於 Cross Vibe 飯店同一條 Sukhumvit 52 巷。隱身住宅巷弄的綠蔭木質莊園，在繁茂綠意中散步喝手沖黑咖啡、拍照留念，替泰國假期劃下悠閒句點。",
-        transitDesc: "出飯店左轉沿 Sukhumvit 52 巷步行 300 公尺即達",
-        notes: ["室外庭園蚊蟲較多，建議噴抹防蚊液。", "悠閒放鬆拍照，11:45 前返回飯店打包收拾。"],
-        rain: "若遇天雨可留在 Cross Vibe 1 樓挑高室內咖啡 Lounge 或搭 BTS 2 站至 True Digital Park 室內綠建築商場。",
-        locations: [{ name: "The Wood Land 森林咖啡", address: "Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=The+Wood+Land+Sukhumvit+52" }]
-      },
-      'd4_checkout': {
-        time: "12:00",
-        category: "交通",
-        title: "飯店辦理退房 ＆ 行李清點",
-        subhead: "集合整理伴手禮與戰利品",
-        desc: "於飯店大廳辦理 Check-out 手續，將行李箱完整上鎖秤重（華航限額 23kg），護照與黃色退稅單獨立放在隨身包內方便海關查驗。",
-        transitDesc: "大廳沙發區集合，等候預約廂型車直達機場",
-        notes: ["請再次確認房內保險箱、充電線有無遺漏。", "退稅單請隨身攜帶，切勿放入託運行李內！"],
-        rain: null,
-        locations: [{ name: "Cross Vibe Bangkok 大廳", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }]
-      },
-      'd4_airport': {
-        time: "13:30",
-        category: "交通",
-        title: "前往 BKK 機場 ➔ 退稅託運返台",
-        subhead: "中華航空 CI836 (17:30起飛)",
-        desc: "搭乘專屬遊覽車或 Grab 廂型車直達素萬那普機場。14:30 抵達 4 樓出境大廳先蓋海關查驗章，再至華航櫃檯託運行李，通關後至退稅櫃台領回泰銖現金。",
-        transitDesc: "飯店直達蘇凡納布機場出境大廳（車程約 35 分鐘）",
-        notes: ["航班時刻：CI836 (17:30 起飛 ➔ 22:05 抵達桃園 T2)。", "託運限額每人 1 件 23kg 以內。"],
-        rain: null,
-        locations: [{ name: "素萬那普機場出境大廳 (4F)", address: "Suvarnabhumi Airport, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport" }]
-      }
+      'd4_factory': { time: "08:30", category: "餐飲", title: "Factory Coffee 冠軍咖啡外送", subhead: "Grab 外送直送飯店大廳", desc: "泰國咖啡大賽冠軍神級名店！免去跨城排隊一小時，早上直接使用 Grab App 叫外送至 Cross Vibe 大廳，享受招牌 Dirty 咖啡、特調冷萃與現烤可頌。", transitDesc: "打開手機 Grab 點餐，30 分鐘內直送大廳櫃台", notes: ["可由記帳組統一代表訂餐後分攤。", "推薦招牌 Supreme 特調與杏仁可頌。"], rain: null, locations: [{ name: "Factory Coffee 實體門市", address: "49 Phayathai Rd, Ratchathewi, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Factory+Coffee+Bangkok" }] },
+      'd4_woodland': { time: "09:30", category: "景點", title: "The Wood Land 森林系露天散步", subhead: "飯店巷弄秘境咖啡木質庭院", desc: "位於 Cross Vibe 飯店同一條 Sukhumvit 52 巷。隱身住宅巷弄的綠蔭木質莊園，在繁茂綠意中散步喝手沖黑咖啡、拍照留念，替泰國假期劃下悠閒句點。", transitDesc: "出飯店左轉沿 Sukhumvit 52 巷步行 300 公尺即達", notes: ["室外庭園蚊蟲較多，建議噴抹防蚊液。", "悠閒放鬆拍照，11:45 前返回飯店打包收拾。"], rain: "若遇天雨可留在 Cross Vibe 1 樓挑高室內咖啡 Lounge 或搭 BTS 2 站至 True Digital Park 室內綠建築商場。", locations: [{ name: "The Wood Land 森林咖啡", address: "Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=The+Wood+Land+Sukhumvit+52" }] },
+      'd4_checkout': { time: "12:00", category: "交通", title: "飯店辦理退房 ＆ 行李清點", subhead: "集合整理伴手禮與戰利品", desc: "於飯店大廳辦理 Check-out 手續，將行李箱完整上鎖秤重（華航限額 23kg），護照與黃色退稅單獨立放在隨身包內方便海關查驗。", transitDesc: "大廳沙發區集合，等候預約廂型車直達機場", notes: ["請再次確認房內保險箱、充電線有無遺漏。", "退稅單請隨身攜帶，切勿放入託運行李內！"], rain: null, locations: [{ name: "Cross Vibe Bangkok 大廳", address: "10 Sukhumvit 52 Alley, Phra Khanong, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Cross+Vibe+Bangkok+Sukhumvit" }] },
+      'd4_airport': { time: "13:30", category: "交通", title: "前往 BKK 機場 ➔ 退稅託運返台", subhead: "中華航空 CI836 (17:30起飛)", desc: "搭乘專屬遊覽車或 Grab 廂型車直達素萬那普機場。14:30 抵達 4 樓出境大廳先蓋海關查驗章，再至華航櫃檯託運行李，通關後至退稅櫃台領回泰銖現金。", transitDesc: "飯店直達蘇凡納布機場出境大廳（車程約 35 分鐘）", notes: ["航班時刻：CI836 (17:30 起飛 ➔ 22:05 抵達桃園 T2)。", "託運限額每人 1 件 23kg 以內。"], rain: null, locations: [{ name: "素萬那普機場出境大廳 (4F)", address: "Suvarnabhumi Airport, Bangkok", map: "https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport" }] }
     };
 
     function stepDayTo(dayNum) {
@@ -1548,8 +1181,6 @@
     function renderDayTimeline() {
       const dayData = tripDaysData[currentActiveDay];
       if (!dayData) return;
-
-      setElText('day-hero-desc', dayData.desc);
 
       const hlContainer = document.getElementById('day-highlights-container');
       if (hlContainer) {
@@ -1611,28 +1242,19 @@
         if (isTarget) {
           btn.className = "day-filter-btn active shrink-0 px-3.5 py-1.5 rounded-full border border-[#C87D55] bg-[#C87D55] text-white font-medium flex items-center gap-1.5 transition-all";
           if(category === 'all') btn.classList.add('px-4');
-          if (iconSvg) {
-            iconSvg.classList.remove('text-[#C87D55]');
-            iconSvg.classList.add('text-white');
-          }
+          if (iconSvg) { iconSvg.classList.remove('text-[#C87D55]'); iconSvg.classList.add('text-white'); }
         } else {
           btn.className = "day-filter-btn shrink-0 px-3.5 py-1.5 rounded-full border border-[#ECEAE4] bg-white text-[#555555] hover:text-[#1F1F1F] font-medium flex items-center gap-1.5 transition-all";
           if(category === 'all') btn.classList.add('px-4');
-          if (iconSvg) {
-            iconSvg.classList.remove('text-white');
-            iconSvg.classList.add('text-[#C87D55]');
-          }
+          if (iconSvg) { iconSvg.classList.remove('text-white'); iconSvg.classList.add('text-[#C87D55]'); }
         }
       });
       renderDayTimeline();
     }
 
     function stepDay(delta) {
-      if (delta === 1) {
-        currentActiveDay = currentActiveDay === 4 ? 1 : currentActiveDay + 1;
-      } else if (delta === -1 && currentActiveDay > 1) {
-        currentActiveDay = currentActiveDay - 1;
-      }
+      if (delta === 1) { currentActiveDay = currentActiveDay === 4 ? 1 : currentActiveDay + 1; } 
+      else if (delta === -1 && currentActiveDay > 1) { currentActiveDay = currentActiveDay - 1; }
       stepDayTo(currentActiveDay);
       const mainEl = document.querySelector('main');
       if (mainEl) mainEl.scrollTop = 0;
@@ -1711,48 +1333,13 @@
       }
     }
 
-    // 3. 必買清單依天數推薦資料
+    // 3. 必買清單依天數分類資料
     let currentShoppingDay = 1;
     const shoppingByDayData = {
-      1: {
-        title: "Day 1 推薦好物",
-        subtitle: "Asiatique 碼頭夜市與 Siam 商圈",
-        items: [
-          { title: "NaRaYa 曼谷包", cat: "服飾配件", desc: "經典泰國包，送禮自用兩相宜", price: "150 – 450", loc: "Asiatique 碼頭夜市" },
-          { title: "經典大象褲", cat: "服飾配件", desc: "夜市必買包色款，超涼爽舒適", price: "100 – 150", loc: "Asiatique 碼頭夜市" },
-          { title: "GoodGoods 編織網袋", cat: "服飾配件", desc: "泰國爆紅結合在地工藝設計包", price: "200 – 800", loc: "Siam 商圈" },
-          { title: "手標泰茶 (ChaTraMue)", cat: "伴手禮", desc: "正宗泰奶茶葉金罐/紅罐裝", price: "130 – 160", loc: "Siam Paragon / 夜市" }
-        ]
-      },
-      2: {
-        title: "Day 2 推薦好物",
-        subtitle: "ICONSIAM 水上市集與 SPA",
-        items: [
-          { title: "THANN 植萃保養品", cat: "美妝保養", desc: "泰國頂級香氛，天然精油沐浴", price: "500 – 1,500", loc: "ICONSIAM 專櫃" },
-          { title: "泰式手工香氛皂", cat: "美妝保養", desc: "天然植物精油手工雕花香皂", price: "80 – 150", loc: "ICONSIAM SOOKSIAM" },
-          { title: "泰國限定版 Pocky", cat: "零食", desc: "芒果、香蕉巧克力口味必掃", price: "15 – 25", loc: "ICONSIAM 超市" }
-        ]
-      },
-      3: {
-        title: "Day 3 推薦好物",
-        subtitle: "Terminal 21 與松瓦路文青老街",
-        items: [
-          { title: "Boots 維他命C提亮", cat: "美妝保養", desc: "泰國平價超強維他命C保養品", price: "150 – 300", loc: "Terminal 21 Boots" },
-          { title: "興太太草本手工皂", cat: "美妝保養", desc: "泰國老字號草本皂，洗後清爽", price: "40 – 60", loc: "Terminal 21 超市" },
-          { title: "Copenn. 質感擴香", cat: "生活雜貨", desc: "松瓦路小眾木質工業風室內香氛", price: "890 – 1,490", loc: "松瓦路 Song Wat" },
-          { title: "小老闆厚切海苔", cat: "零食", desc: "經典原味/辣味厚切海苔捲", price: "40 – 60", loc: "Terminal 21 超市" }
-        ]
-      },
-      4: {
-        title: "Day 4 推薦好物",
-        subtitle: "超市最後衝刺與機場免稅店",
-        items: [
-          { title: "Doi Kham 皇家芒果乾", cat: "伴手禮", desc: "皇室計畫低糖天然芒果乾", price: "110 – 140", loc: "Gourmet Market / 超市" },
-          { title: "皇家農場蜂蜜膏", cat: "伴手禮", desc: "軟管包裝超方便，香醇百分百", price: "40 – 50", loc: "超市 / 7-11" },
-          { title: "FITWHEY 低脂雞胸片", cat: "零食", desc: "高蛋白低酯無負擔的刷嘴神物", price: "35 – 50", loc: "各大超市 / 7-11" },
-          { title: "臥佛牌青草膏", cat: "生活雜貨", desc: "泰國家戶必備提神醒腦藥膏", price: "50 – 100", loc: "藥妝店 / 機場免稅" }
-        ]
-      }
+      1: { title: "Day 1 推薦好物", subtitle: "Asiatique 碼頭夜市與 Siam 商圈", items: [{ title: "NaRaYa 曼谷包", cat: "服飾配件", desc: "經典泰國包，送禮自用兩相宜", price: "150 – 450", loc: "Asiatique 碼頭夜市" }, { title: "經典大象褲", cat: "服飾配件", desc: "夜市必買包色款，超涼爽舒適", price: "100 – 150", loc: "Asiatique 碼頭夜市" }, { title: "GoodGoods 編織網袋", cat: "服飾配件", desc: "泰國爆紅結合在地工藝設計包", price: "200 – 800", loc: "Siam 商圈" }, { title: "手標泰茶 (ChaTraMue)", cat: "伴手禮", desc: "正宗泰奶茶葉金罐/紅罐裝", price: "130 – 160", loc: "Siam Paragon / 夜市" }] },
+      2: { title: "Day 2 推薦好物", subtitle: "ICONSIAM 水上市集與 SPA", items: [{ title: "THANN 植萃保養品", cat: "美妝保養", desc: "泰國頂級香氛，天然精油沐浴", price: "500 – 1,500", loc: "ICONSIAM 專櫃" }, { title: "泰式手工香氛皂", cat: "美妝保養", desc: "天然植物精油手工雕花香皂", price: "80 – 150", loc: "ICONSIAM SOOKSIAM" }, { title: "泰國限定版 Pocky", cat: "零食", desc: "芒果、香蕉巧克力口味必掃", price: "15 – 25", loc: "ICONSIAM 超市" }] },
+      3: { title: "Day 3 推薦好物", subtitle: "Terminal 21 與松瓦路文青老街", items: [{ title: "Boots 維他命C提亮", cat: "美妝保養", desc: "泰國平價超強維他命C保養品", price: "150 – 300", loc: "Terminal 21 Boots" }, { title: "興太太草本手工皂", cat: "美妝保養", desc: "泰國老字號草本皂，洗後清爽", price: "40 – 60", loc: "Terminal 21 超市" }, { title: "Copenn. 質感擴香", cat: "生活雜貨", desc: "松瓦路小眾木質工業風室內香氛", price: "890 – 1,490", loc: "松瓦路 Song Wat" }, { title: "小老闆厚切海苔", cat: "零食", desc: "經典原味/辣味厚切海苔捲", price: "40 – 60", loc: "Terminal 21 超市" }] },
+      4: { title: "Day 4 推薦好物", subtitle: "超市最後衝刺與機場免稅店", items: [{ title: "Doi Kham 皇家芒果乾", cat: "伴手禮", desc: "皇室計畫低糖天然芒果乾", price: "110 – 140", loc: "Gourmet Market / 超市" }, { title: "皇家農場蜂蜜膏", cat: "伴手禮", desc: "軟管包裝超方便，香醇百分百", price: "40 – 50", loc: "超市 / 7-11" }, { title: "FITWHEY 低脂雞胸片", cat: "零食", desc: "高蛋白低酯無負擔的刷嘴神物", price: "35 – 50", loc: "各大超市 / 7-11" }, { title: "臥佛牌青草膏", cat: "生活雜貨", desc: "泰國家戶必備提神醒腦藥膏", price: "50 – 100", loc: "藥妝店 / 機場免稅" }] }
     };
 
     function filterShoppingDay(dayNum) {
@@ -1866,6 +1453,26 @@
       }
     }
 
+    function syncMembers() {
+      if (isFirebaseReady && db) db.ref('bkk_members').set(members);
+      else localStorage.setItem('bkk_members', JSON.stringify(members));
+    }
+
+    function addNewMember() {
+      const name = prompt('請輸入新成員名稱 (例如：小明)：');
+      if (name && name.trim() !== '') {
+        const trimmedName = name.trim();
+        if (!members.includes(trimmedName)) {
+          members.push(trimmedName);
+          syncMembers();
+          calculateAndRenderAccounting();
+          showToast(`已新增成員：${trimmedName}`);
+        } else {
+          alert('此成員名稱已存在，請使用不同的名稱！');
+        }
+      }
+    }
+
     function syncExpenses() {
       if (isFirebaseReady && db) db.ref('bkk_expenses').set(expenses);
       else localStorage.setItem('bkk_expenses', JSON.stringify(expenses));
@@ -1935,15 +1542,7 @@
         return;
       }
 
-      const newExpense = {
-        id: Date.now(),
-        title,
-        amount,
-        currency,
-        payer,
-        category,
-        beneficiaries: checkedBene
-      };
+      const newExpense = { id: Date.now(), title, amount, currency, payer, category, beneficiaries: checkedBene };
 
       expenses.unshift(newExpense);
       syncExpenses();
@@ -2152,37 +1751,18 @@
       refreshIcons();
     }
 
-    function copyText(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => showToast(`已複製文字`));
-      } else {
-        const input = document.createElement('textarea');
-        input.value = text;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
-        showToast(`已複製文字`);
-      }
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toast-text');
-      if (toast && toastText) {
-        toastText.innerText = msg;
-        toast.classList.remove('opacity-0', 'translate-y-3');
-        setTimeout(() => {
-          toast.classList.add('opacity-0', 'translate-y-3');
-        }, 2200);
-      }
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       refreshIcons();
       stepDayTo(1);
       filterShoppingDay(1);
       initAccounting();
+      
+      const allDays = [1, 2, 3, 4];
+      allDays.forEach(d => {
+        tripDaysData[d].activities.forEach(a => {
+          if (questData[a.key]) {}
+        });
+      });
     });
   </script>
 </body>
